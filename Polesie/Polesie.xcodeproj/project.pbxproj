@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2692BDAE2D882AA1000CA996 /* Polecie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polecie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2692BDAE2D882AA1000CA996 /* Polesie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polesie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		26B6BE4A2D8876080060439F /* Exceptions for "Polecie" folder in "Polecie" target */ = {
+		2656E3822D888C8D0061E26A /* Exceptions for "Polesie" folder in "Polesie" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Info.plist,
 			);
-			target = 2692BDAD2D882AA1000CA996 /* Polecie */;
+			target = 2692BDAD2D882AA1000CA996 /* Polesie */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2692BDB02D882AA1000CA996 /* Polecie */ = {
+		2692BDB02D882AA1000CA996 /* Polesie */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				26B6BE4A2D8876080060439F /* Exceptions for "Polecie" folder in "Polecie" target */,
+				2656E3822D888C8D0061E26A /* Exceptions for "Polesie" folder in "Polesie" target */,
 			);
-			path = Polecie;
+			path = Polesie;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -45,7 +45,7 @@
 		2692BDA52D882AA1000CA996 = {
 			isa = PBXGroup;
 			children = (
-				2692BDB02D882AA1000CA996 /* Polecie */,
+				2692BDB02D882AA1000CA996 /* Polesie */,
 				2692BDAF2D882AA1000CA996 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		2692BDAF2D882AA1000CA996 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2692BDAE2D882AA1000CA996 /* Polecie.app */,
+				2692BDAE2D882AA1000CA996 /* Polesie.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2692BDAD2D882AA1000CA996 /* Polecie */ = {
+		2692BDAD2D882AA1000CA996 /* Polesie */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2692BDBC2D882AA3000CA996 /* Build configuration list for PBXNativeTarget "Polecie" */;
+			buildConfigurationList = 2692BDBC2D882AA3000CA996 /* Build configuration list for PBXNativeTarget "Polesie" */;
 			buildPhases = (
 				2692BDAA2D882AA1000CA996 /* Sources */,
 				2692BDAB2D882AA1000CA996 /* Frameworks */,
@@ -74,13 +74,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2692BDB02D882AA1000CA996 /* Polecie */,
+				2692BDB02D882AA1000CA996 /* Polesie */,
 			);
-			name = Polecie;
+			name = Polesie;
 			packageProductDependencies = (
 			);
 			productName = Polecie;
-			productReference = 2692BDAE2D882AA1000CA996 /* Polecie.app */;
+			productReference = 2692BDAE2D882AA1000CA996 /* Polesie.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2692BDA92D882AA1000CA996 /* Build configuration list for PBXProject "Polecie" */;
+			buildConfigurationList = 2692BDA92D882AA1000CA996 /* Build configuration list for PBXProject "Polesie" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2692BDAD2D882AA1000CA996 /* Polecie */,
+				2692BDAD2D882AA1000CA996 /* Polesie */,
 			);
 		};
 /* End PBXProject section */
@@ -264,11 +264,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Polecie/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Polesie/Preview Content\"";
 				DEVELOPMENT_TEAM = D6YY79Y7VV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Polecie/Resources/Info.plist;
+				INFOPLIST_FILE = Polesie/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -279,7 +279,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.Polecie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.Polesie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -298,11 +298,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Polecie/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Polesie/Preview Content\"";
 				DEVELOPMENT_TEAM = D6YY79Y7VV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Polecie/Resources/Info.plist;
+				INFOPLIST_FILE = Polesie/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,7 +313,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.Polecie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.Polesie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -328,7 +328,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2692BDA92D882AA1000CA996 /* Build configuration list for PBXProject "Polecie" */ = {
+		2692BDA92D882AA1000CA996 /* Build configuration list for PBXProject "Polesie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2692BDBA2D882AA3000CA996 /* Debug */,
@@ -337,7 +337,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2692BDBC2D882AA3000CA996 /* Build configuration list for PBXNativeTarget "Polecie" */ = {
+		2692BDBC2D882AA3000CA996 /* Build configuration list for PBXNativeTarget "Polesie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2692BDBD2D882AA3000CA996 /* Debug */,

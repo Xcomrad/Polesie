@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  Polecie
+//  Polesie
 //
 //  Created by Владислав Бут-Гусаим on 17.03.25.
 //
