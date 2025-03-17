@@ -19,9 +19,9 @@ PolesieApp — это iOS-приложение, посвящённое исто�
 
 ## Автор
 Бут-Гусаим Владислав
-email: butgus.dallas@gmail.com
-GitHub: XComrad
-tg: @holy_baker
+- **email**: butgus.dallas@gmail.com
+- **GitHub**: XComrad
+- **tg**: @holy_baker
 
 ## Установка и запуск
 1. Клонируйте репозиторий: https://github.com/XComrad/PolesieApp.git
