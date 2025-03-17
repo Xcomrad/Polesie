@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
-//  Polecie
+//  SplashView.swift
+//  Polesie
 //
 //  Created by Владислав Бут-Гусаим on 17.03.25.
 //
 
 import SwiftUI
 
-struct GreetingView: View {
+struct SplashView: View {
     
     @State private var isTextVisible = false
     
@@ -72,6 +72,6 @@ struct GreetingView: View {
 }
 
 #Preview {
-    GreetingView()
+    SplashView()
 }
 

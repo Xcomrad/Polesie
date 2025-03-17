@@ -1,6 +1,6 @@
 //
-//  PolecieApp.swift
-//  Polecie
+//  PolesieApp.swift
+//  Polesie
 //
 //  Created by Владислав Бут-Гусаим on 17.03.25.
 //
@@ -8,10 +8,10 @@
 import SwiftUI
 
 @main
-struct PolecieApp: App {
+struct PolesieApp: App {
     var body: some Scene {
         WindowGroup {
-            GreetingView()
+            SplashView()
         }
     }
 }
