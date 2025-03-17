@@ -13,34 +13,34 @@ struct GreetingView: View {
     
     var body: some View {
         ZStack {
-            Image("main.background")
+            Image(Constants.Images.splashImage)
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             
-            Color.black.opacity(0.3)
-                .edgesIgnoringSafeArea(.all)
+            Constants.Colors.background
+                .ignoresSafeArea(.all)
+                .opacity(0.5)
             
-            VStack(alignment: .center, spacing: 24) {
+            VStack(alignment: .center, spacing: Constants.Sizes.middlePadding) {
                 Spacer()
                 if isTextVisible {
                     Text("Добро пожаловать в Полесье!")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.7), radius: 10, x: 0, y: 5)
+                        .font(Constants.Fonts.h1Bold)
+                        .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding()
                         .transition(.move(edge: .top))
                     
                     Text("Погрузитесь в уникальный мир Полесья — края лесов, болот и богатой культуры.")
-                        .font(.system(size: 20, weight: .medium, design: .rounded))
-                        .foregroundColor(.white)
+                        .font(Constants.Fonts.secondaryBold)
+                        .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
                     Text("Узнайте о традициях, истории и достопримечательностях этого удивительного региона.")
-                        .font(.system(size: 20, weight: .medium, design: .rounded))
-                        .foregroundColor(.white)
+                        .font(Constants.Fonts.secondaryBold)
+                        .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
@@ -48,20 +48,20 @@ struct GreetingView: View {
                         //
                     }) {
                         Text("Начать путешествие")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                            .foregroundColor(.white)
+                            .font(Constants.Fonts.button)
+                            .foregroundColor(Constants.Colors.button)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(
                                 Rectangle()
-                                    .fill(Color.green.opacity(0.5))
+                                    .fill(Constants.Colors.darkGreen)
                             )
-                            .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 5)
+                          
                     }
-                    .padding(.top, 24)
+                    .padding(.top, Constants.Sizes.middlePadding)
                 }
             }
-            .padding(50)
+            .padding(Constants.Sizes.largePadding)
             .onAppear {
                 withAnimation(.easeInOut(duration: 1)) {
                     isTextVisible = true
