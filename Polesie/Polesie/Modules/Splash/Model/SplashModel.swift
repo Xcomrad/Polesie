@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GreetingModel: Codable {
+struct SplashModel: Codable {
     let title: String
     let description: String
 }
