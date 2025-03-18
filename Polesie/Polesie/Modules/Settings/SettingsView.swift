@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var darkModeManager: DarkModeManager
+    
     var body: some View {
-        Constants.Colors.background
-            .edgesIgnoringSafeArea(.all)
+        
+            Form {
+                Section(header: Text("Настройка темы")
+                    .font(Constants.Fonts.secondaryBold)) {
+                        Toggle("Сменить тему", isOn: $darkModeManager.isDarkMode)
+                            .font(Constants.Fonts.button)
+                    }
+        }
     }
 }
 
 #Preview {
     SettingsView()
+        .environmentObject(DarkModeManager())
 }
+
+
