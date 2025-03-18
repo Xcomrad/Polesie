@@ -17,32 +17,32 @@ struct TabBar: View {
                 title: "История",
                 icon: "books.vertical.fill",
                 selectedIcon: Image(systemName: "books.vertical.fill"),
-                isSelected: selectedTab == 1,
-                action: { selectedTab = 1 }
+                isSelected: selectedTab == 0,
+                action: { selectedTab = 0 }
             )
             
             TabBarButton(
                 title: "Традиции",
                 icon: "person.2.fill",
                 selectedIcon: Image(systemName: "person.2.fill"),
-                isSelected: selectedTab == 2,
-                action: { selectedTab = 2 }
+                isSelected: selectedTab == 1,
+                action: { selectedTab = 1 }
             )
             
             TabBarButton(
                 title: "Квизы",
                 icon:"questionmark.square.fill",
                 selectedIcon: Image(systemName: "questionmark.square.fill"),
-                isSelected: selectedTab == 3,
-                action: { selectedTab = 3 }
+                isSelected: selectedTab == 2,
+                action: { selectedTab = 2 }
             )
             
             TabBarButton(
                 title: "Настройки",
                 icon: "gearshape.fill",
                 selectedIcon: Image(systemName: "gearshape.fill"),
-                isSelected: selectedTab == 4,
-                action: { selectedTab = 4 }
+                isSelected: selectedTab == 3,
+                action: { selectedTab = 3 }
             )
         }
         .padding()

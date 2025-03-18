@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SplashView: View {
-    
     @State private var isTextVisible = false
+    @State private var showMainView = false
+    @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore: Bool = false
+    @EnvironmentObject var darkModeManager: DarkModeManager
     
     var body: some View {
         ZStack {
@@ -24,6 +26,7 @@ struct SplashView: View {
             
             VStack(alignment: .center, spacing: Constants.Sizes.middlePadding) {
                 Spacer()
+                
                 if isTextVisible {
                     Text("Добро пожаловать в Полесье!")
                         .font(Constants.Fonts.h1Bold)
@@ -45,7 +48,8 @@ struct SplashView: View {
                         .padding(.horizontal)
                     
                     Button(action: {
-                        //
+                        hasLaunchedBefore = true
+                        showMainView = true
                     }) {
                         Text("Начать путешествие")
                             .font(Constants.Fonts.button)
@@ -56,7 +60,6 @@ struct SplashView: View {
                                 Rectangle()
                                     .fill(Constants.Colors.darkGreen)
                             )
-                          
                     }
                     .padding(.top, Constants.Sizes.middlePadding)
                 }
@@ -68,10 +71,19 @@ struct SplashView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showMainView) {
+            MainView()
+                .environmentObject(darkModeManager)
+        }
+        .onAppear {
+            if hasLaunchedBefore {
+               // showMainView = true
+            }
+        }
     }
 }
 
 #Preview {
     SplashView()
+        .environmentObject(DarkModeManager())
 }
-

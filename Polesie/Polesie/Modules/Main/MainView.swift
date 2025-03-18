@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab = 0
+    @EnvironmentObject var darkModeManager: DarkModeManager
     
     var body: some View {
         VStack {
@@ -22,9 +23,11 @@ struct MainView: View {
             
             TabBar(selectedTab: $selectedTab)
         }
+        .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
     }
 }
 
 #Preview {
     MainView()
+        .environmentObject(DarkModeManager())
 }
