@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SplashView: View {
     @State private var isTextVisible = false
-    @State private var showMainView = false
+    @State private var showOnboardingView = false
+    
     @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore: Bool = false
     @EnvironmentObject var darkModeManager: DarkModeManager
     
@@ -47,9 +48,15 @@ struct SplashView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
+                    Text("Перед началом, мы рекомендуем пройти небольшой онбординг, чтобы в дальшейшем было проще ориентироваться в приложении.")
+                        .font(Constants.Fonts.small)
+                        .foregroundColor(Constants.Colors.text)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    
                     Button(action: {
-                        hasLaunchedBefore = true
-                        showMainView = true
+                        //hasLaunchedBefore = true
+                        showOnboardingView = true
                     }) {
                         Text("Начать путешествие")
                             .font(Constants.Fonts.button)
@@ -66,19 +73,28 @@ struct SplashView: View {
             }
             .padding(Constants.Sizes.largePadding)
             .onAppear {
-                withAnimation(.easeInOut(duration: 1)) {
+                withAnimation(.easeInOut(duration: 2)) {
                     isTextVisible = true
                 }
             }
         }
-        .fullScreenCover(isPresented: $showMainView) {
-            MainView()
-                .environmentObject(darkModeManager)
-        }
-        .onAppear {
-            if hasLaunchedBefore {
-               // showMainView = true
-            }
+        .fullScreenCover(isPresented: $showOnboardingView) {
+            OnboardingView(steps: [OnboardingModel(image: nil,
+                                                   title: "Приветствуем на онбординге!",
+                                                   description: "Это краткий экскурс по основным механизмам приложения. Вы вольны пропустить его сейчас, но потом можете вернуться в любой момент, через 'Настройки'."),
+                                   OnboardingModel(image: "books.vertical.fill",
+                                                   title: "История",
+                                                   description: "Нажав на нее вы сможете перейти во вкладку истории Полесья."),
+                                   OnboardingModel(image: "scroll.fill",
+                                                   title: "Традиции",
+                                                   description: "Здесь предоставлена информация о трациях, праздниках и культуре Полесья."),
+                                   OnboardingModel(image: "questionmark.bubble.fill",
+                                                   title: "Квизы!",
+                                                   description: "A тут вы сможете проверить свои знания! \nНе беспокойтесь, мы никому не скажем, если ошибетёсь..."),
+                                   OnboardingModel(image: "gearshape.fill",
+                                                   title: "Настройки",
+                                                   description: "Помогут вам настроить приложение по вашему усмотрению.")])
+            //.environmentObject(darkModeManager)
         }
     }
 }

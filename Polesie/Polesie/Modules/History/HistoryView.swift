@@ -9,8 +9,8 @@ import SwiftUI
 
 struct HistoryView: View {
     var body: some View {
-        Constants.Colors.background
-            .edgesIgnoringSafeArea(.all)
+        Text("HistoryView")
+        Spacer()
     }
 }
 

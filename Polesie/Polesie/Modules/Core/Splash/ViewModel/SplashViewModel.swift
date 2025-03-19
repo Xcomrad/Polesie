@@ -8,9 +8,9 @@
 import Foundation
 
 class SplashViewModel: ObservableObject {
-    @Published var navigateToMainView: Bool = false
+    @Published var navigateToOnboardingView: Bool = false
         
-        func startJourney() {
-            navigateToMainView = true
+        func startOnboarding() {
+            navigateToOnboardingView = true
         }
 }
