@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TraditionsView: View {
     var body: some View {
-        Constants.Colors.background
-            .edgesIgnoringSafeArea(.all)
+        Text("TraditionsView")
+        Spacer()
     }
 }
 

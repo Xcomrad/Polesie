@@ -9,8 +9,8 @@ import SwiftUI
 
 struct QuizzesView: View {
     var body: some View {
-        Constants.Colors.background
-            .edgesIgnoringSafeArea(.all)
+        Text("QuizzesView")
+        Spacer()
     }
 }
 
