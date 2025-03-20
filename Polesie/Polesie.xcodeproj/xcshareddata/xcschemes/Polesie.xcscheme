@@ -35,7 +35,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "26F56C772D8C2ACF002A1C5F"
+               BlueprintIdentifier = "26F56D122D8C3BAB002A1C5F"
                BuildableName = "PolesieTests.xctest"
                BlueprintName = "PolesieTests"
                ReferencedContainer = "container:Polesie.xcodeproj">
