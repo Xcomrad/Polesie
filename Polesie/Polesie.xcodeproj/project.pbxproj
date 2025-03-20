@@ -6,8 +6,39 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		26F56CB42D8C32C7002A1C5F /* Testing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F56CB32D8C32C7002A1C5F /* Testing.framework */; };
+		26F56CB52D8C32C7002A1C5F /* Testing.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F56CB32D8C32C7002A1C5F /* Testing.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26F56CAD2D8C3259002A1C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2692BDA62D882AA1000CA996 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2692BDAD2D882AA1000CA996;
+			remoteInfo = Polesie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		26F56CB62D8C32C7002A1C5F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				26F56CB52D8C32C7002A1C5F /* Testing.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2692BDAE2D882AA1000CA996 /* Polesie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polesie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F56CA92D8C3259002A1C5F /* PolesieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolesieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F56CB32D8C32C7002A1C5F /* Testing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Testing.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/Testing.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -39,6 +70,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26F56CA62D8C3259002A1C5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26F56CB42D8C32C7002A1C5F /* Testing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				2692BDB02D882AA1000CA996 /* Polesie */,
+				26F56CB22D8C32C7002A1C5F /* Frameworks */,
 				2692BDAF2D882AA1000CA996 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +94,17 @@
 			isa = PBXGroup;
 			children = (
 				2692BDAE2D882AA1000CA996 /* Polesie.app */,
+				26F56CA92D8C3259002A1C5F /* PolesieTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		26F56CB22D8C32C7002A1C5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26F56CB32D8C32C7002A1C5F /* Testing.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +132,27 @@
 			productReference = 2692BDAE2D882AA1000CA996 /* Polesie.app */;
 			productType = "com.apple.product-type.application";
 		};
+		26F56CA82D8C3259002A1C5F /* PolesieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26F56CAF2D8C3259002A1C5F /* Build configuration list for PBXNativeTarget "PolesieTests" */;
+			buildPhases = (
+				26F56CA52D8C3259002A1C5F /* Sources */,
+				26F56CA62D8C3259002A1C5F /* Frameworks */,
+				26F56CA72D8C3259002A1C5F /* Resources */,
+				26F56CB62D8C32C7002A1C5F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				26F56CAE2D8C3259002A1C5F /* PBXTargetDependency */,
+			);
+			name = PolesieTests;
+			packageProductDependencies = (
+			);
+			productName = PolesieTests;
+			productReference = 26F56CA92D8C3259002A1C5F /* PolesieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +165,10 @@
 				TargetAttributes = {
 					2692BDAD2D882AA1000CA996 = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					26F56CA82D8C3259002A1C5F = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2692BDAD2D882AA1000CA996;
 					};
 				};
 			};
@@ -113,12 +187,20 @@
 			projectRoot = "";
 			targets = (
 				2692BDAD2D882AA1000CA996 /* Polesie */,
+				26F56CA82D8C3259002A1C5F /* PolesieTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2692BDAC2D882AA1000CA996 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26F56CA72D8C3259002A1C5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +217,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26F56CA52D8C3259002A1C5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		26F56CAE2D8C3259002A1C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2692BDAD2D882AA1000CA996 /* Polesie */;
+			targetProxy = 26F56CAD2D8C3259002A1C5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2692BDBA2D882AA3000CA996 /* Debug */ = {
@@ -325,6 +422,50 @@
 			};
 			name = Release;
 		};
+		26F56CB02D8C3259002A1C5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D6YY79Y7VV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.PolesieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Polesie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Polesie";
+			};
+			name = Debug;
+		};
+		26F56CB12D8C3259002A1C5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D6YY79Y7VV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.butgus.PolesieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Polesie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Polesie";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -342,6 +483,15 @@
 			buildConfigurations = (
 				2692BDBD2D882AA3000CA996 /* Debug */,
 				2692BDBE2D882AA3000CA996 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26F56CAF2D8C3259002A1C5F /* Build configuration list for PBXNativeTarget "PolesieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26F56CB02D8C3259002A1C5F /* Debug */,
+				26F56CB12D8C3259002A1C5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
