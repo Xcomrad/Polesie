@@ -13,9 +13,9 @@ struct SettingsView: View {
     var body: some View {
         
             Form {
-                Section(header: Text("Настройка темы")
+                Section(header: Text(Constants.Strings.settingsThemeTitle)
                     .font(Constants.Fonts.secondaryBold)) {
-                        Toggle("Сменить тему", isOn: $darkModeManager.isDarkMode)
+                        Toggle(Constants.Strings.settingsThemeToggle, isOn: $darkModeManager.isDarkMode)
                             .font(Constants.Fonts.button)
                     }
         }

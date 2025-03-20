@@ -7,10 +7,30 @@
 
 import SwiftUI
 
-class OnboardingViewModel: ObservableObject {
+final class OnboardingViewModel: ObservableObject {
+    let steps: [OnboardingModel]
+    @Published var currentStep: Int = 0
+    @Published var isOnboardingCompleted: Bool = false
     @Published var navigateToMainView: Bool = false
-    
-    func startMain() {
+
+    init(steps: [OnboardingModel]) {
+        self.steps = steps
+    }
+
+    func moveToNextStep() {
+        if currentStep < steps.count - 1 {
+            currentStep += 1
+        } else {
+            completeOnboarding()
+        }
+    }
+
+    func completeOnboarding() {
+        isOnboardingCompleted = true
+        navigateToMainView = true
+    }
+
+    func skipOnboarding() {
         navigateToMainView = true
     }
 }
