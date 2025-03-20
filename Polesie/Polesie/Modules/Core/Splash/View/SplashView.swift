@@ -79,22 +79,8 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $showOnboardingView) {
-            OnboardingView(steps: [OnboardingModel(image: nil,
-                                                   title: "Приветствуем на онбординге!",
-                                                   description: "Это краткий экскурс по основным механизмам приложения. Вы вольны пропустить его сейчас, но потом можете вернуться в любой момент, через 'Настройки'."),
-                                   OnboardingModel(image: "books.vertical.fill",
-                                                   title: "История",
-                                                   description: "Нажав на нее вы сможете перейти во вкладку истории Полесья."),
-                                   OnboardingModel(image: "scroll.fill",
-                                                   title: "Традиции",
-                                                   description: "Здесь предоставлена информация о трациях, праздниках и культуре Полесья."),
-                                   OnboardingModel(image: "questionmark.bubble.fill",
-                                                   title: "Квизы!",
-                                                   description: "A тут вы сможете проверить свои знания! \nНе беспокойтесь, мы никому не скажем, если ошибетёсь..."),
-                                   OnboardingModel(image: "gearshape.fill",
-                                                   title: "Настройки",
-                                                   description: "Помогут вам настроить приложение по вашему усмотрению.")])
-            //.environmentObject(darkModeManager)
+            OnboardingView(steps: OnboardingStep.allCases.map { $0.model })
+            .environmentObject(DarkModeManager())
         }
     }
 }
