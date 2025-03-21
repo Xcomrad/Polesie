@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @StateObject private var viewModel: OnboardingViewModel
+    @StateObject private var vm: OnboardingViewModel
     @EnvironmentObject var darkModeManager: DarkModeManager
     @Environment(\.colorScheme) var colorScheme
 
     init(steps: [OnboardingModel]) {
-        _viewModel = StateObject(wrappedValue: OnboardingViewModel(steps: steps))
+        _vm = StateObject(wrappedValue: OnboardingViewModel(steps: steps))
     }
 
     var body: some View {
@@ -22,24 +22,24 @@ struct OnboardingView: View {
                 .ignoresSafeArea(.all)
 
             VStack {
-                TabView(selection: $viewModel.currentStep) {
-                    ForEach(0..<viewModel.steps.count, id: \.self) { index in
+                TabView(selection: $vm.currentStep) {
+                    ForEach(0..<vm.steps.count, id: \.self) { index in
                         OnboardingStepView(
-                            step: viewModel.steps[index],
-                            isLastStep: index == viewModel.steps.count - 1,
-                            completeOnboarding: viewModel.completeOnboarding
+                            step: vm.steps[index],
+                            isLastStep: index == vm.steps.count - 1,
+                            completeOnboarding: vm.completeOnboarding
                         )
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
                 HStack {
-                    ForEach(0..<viewModel.steps.count, id: \.self) { index in
+                    ForEach(0..<vm.steps.count, id: \.self) { index in
                         Circle()
                             .frame(width: 10, height: 10)
-                            .scaleEffect(index == viewModel.currentStep ? 1.5 : 1)
-                            .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
-                            .foregroundStyle(index == viewModel.currentStep ? Constants.Colors.accent : Constants.Colors.beige)
+                            .scaleEffect(index == vm.currentStep ? 1.5 : 1)
+                            .animation(.easeInOut(duration: 0.3), value: vm.currentStep)
+                            .foregroundStyle(index == vm.currentStep ? Constants.Colors.accent : Constants.Colors.beige)
                     }
                 }
                 .padding(.bottom, Constants.Sizes.middlePadding)
@@ -48,7 +48,7 @@ struct OnboardingView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Button(action: viewModel.skipOnboarding) {
+                    Button(action: vm.skipOnboarding) {
                         Text(Constants.Strings.skipButtonTitle)
                             .font(Constants.Fonts.button)
                             .foregroundColor(Constants.Colors.accent)
@@ -64,7 +64,7 @@ struct OnboardingView: View {
                 Spacer()
             }
         }
-        .fullScreenCover(isPresented: $viewModel.navigateToMainView) {
+        .fullScreenCover(isPresented: $vm.navigateToMainView) {
             MainView()
                 .environmentObject(darkModeManager)
         }

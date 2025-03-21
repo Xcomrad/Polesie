@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-protocol OnboardingViewModelOutput {
+protocol OnboardingViewModelInput {
     func moveToNextStep()
     func completeOnboarding()
     func skipOnboarding()
 }
 
-final class OnboardingViewModel: ObservableObject, OnboardingViewModelOutput {
+
+final class OnboardingViewModel: ObservableObject, OnboardingViewModelInput {
     let steps: [OnboardingModel]
     @Published var currentStep: Int = 0
     @Published var isOnboardingCompleted: Bool = false
