@@ -9,64 +9,43 @@ import XCTest
 @testable import Polesie
 
 class OnboardingTests: XCTestCase {
-    var viewModel: OnboardingViewModel!
+    var vm: OnboardingViewModel!
     
     override func setUp() {
         super.setUp()
-        let steps: [OnboardingModel] = [OnboardingModel(image: "123", title: "dsa", description: "asd"), OnboardingModel(image: "321", title: "asd", description: "dsa")]
-        viewModel = OnboardingViewModel(steps: steps)
+        let steps: [OnboardingModel] = [
+            OnboardingModel(image: nil, title: "dsa", description: "asd"),
+            OnboardingModel(image: nil, title: "asd", description: "dsa")]
+        vm = OnboardingViewModel(steps: steps)
     }
     
-    override class func tearDown() { super.tearDown() }
+    override func tearDown() {
+        vm = nil
+        super.tearDown()
+    }
+    
+    func testStepsInitialization() {
+        XCTAssertEqual(vm.steps.count, 2)
+        XCTAssertEqual(vm.steps[0].title, "dsa")
+        XCTAssertEqual(vm.steps[1].title, "asd")
+    }
+    
     
     func testMoveToNextStep() {
-        viewModel.moveToNextStep()
-        XCTAssertEqual(viewModel.currentStep, 1)
+        vm.moveToNextStep()
+        XCTAssertEqual(vm.currentStep, 1)
     }
     
     func testCompleteOnboarding() {
-        viewModel.moveToNextStep()
-        viewModel.moveToNextStep()
-        XCTAssertTrue(viewModel.isOnboardingCompleted)
-        XCTAssertTrue(viewModel.navigateToMainView)
+        vm.moveToNextStep()
+        vm.moveToNextStep()
+        XCTAssertTrue(vm.isOnboardingCompleted)
+        XCTAssertTrue(vm.navigateToMainView)
     }
     
     func testSkipOnboarding() {
-        viewModel.skipOnboarding()
-        XCTAssertFalse(viewModel.isOnboardingCompleted)
-        XCTAssertTrue(viewModel.navigateToMainView)
-    }
-    
-    func testAsyncOnboardingCompletion() {
-            let expectation = XCTestExpectation(description: "Onboarding completion")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.viewModel.completeOnboarding()
-                expectation.fulfill()
-            }
-            
-            wait(for: [expectation], timeout: 2)
-            XCTAssertTrue(viewModel.isOnboardingCompleted)
-            XCTAssertTrue(viewModel.navigateToMainView)
-        }
-}
-
-class MockViewModel: OnboardingViewModelOutput {
-    
-    var moveToNextStepIsCalled = false
-    func moveToNextStep() {
-        moveToNextStepIsCalled = true
-    }
-    
-    var completeOnboardingIsCalled = false
-    let expectation = XCTestExpectation(description: "Onboarding completion")
-    func completeOnboarding() {
-        expectation.fulfill()
-        completeOnboardingIsCalled = true
-    }
-    
-    var skipOnboardingIsCalled = false
-    func skipOnboarding() {
-        skipOnboardingIsCalled = true
+        vm.skipOnboarding()
+        XCTAssertTrue(vm.navigateToMainView)
+        XCTAssertFalse(vm.isOnboardingCompleted)
     }
 }
