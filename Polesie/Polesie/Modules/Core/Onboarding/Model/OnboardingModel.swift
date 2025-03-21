@@ -18,7 +18,7 @@ enum OnboardingStep: Int, CaseIterable {
     case history
     case traditions
     case quizzes
-    case settiongs
+    case settings
     
     var model: OnboardingModel {
         switch self {
@@ -42,7 +42,7 @@ enum OnboardingStep: Int, CaseIterable {
             title: Constants.Strings.onboardingQuizzesTitle,
             description: Constants.Strings.onboardingQuizzesDescription)
             
-        case .settiongs: return OnboardingModel(
+        case .settings: return OnboardingModel(
             image: Constants.Images.settingsImage,
             title: Constants.Strings.onboardingSettingsTitle,
             description: Constants.Strings.onboardingSettingsDescription)

@@ -15,7 +15,7 @@ struct TabBar: View {
         
         HStack {
             TabBarButton(
-                title: "История",
+                title: Constants.Strings.historyButtonTitle,
                 icon: "books.vertical",
                 selectedIcon: "books.vertical.fill",
                 isSelected: selectedTab == 0,
@@ -23,7 +23,7 @@ struct TabBar: View {
             )
             
             TabBarButton(
-                title: "Традиции",
+                title: Constants.Strings.traditionsButtonTitle,
                 icon: "scroll",
                 selectedIcon: "scroll.fill",
                 isSelected: selectedTab == 1,
@@ -31,15 +31,15 @@ struct TabBar: View {
             )
             
             TabBarButton(
-                title: "Квизы",
-                icon:"questionmark.bubble",
+                title: Constants.Strings.quizzesButtonTitle,
+                icon: "questionmark.bubble",
                 selectedIcon: "questionmark.bubble.fill",
                 isSelected: selectedTab == 2,
                 action: { selectedTab = 2 }
             )
             
             TabBarButton(
-                title: "Настройки",
+                title: Constants.Strings.settingsButtonTitle,
                 icon: "gearshape",
                 selectedIcon: "gearshape.fill",
                 isSelected: selectedTab == 3,

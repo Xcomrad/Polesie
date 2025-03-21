@@ -29,26 +29,26 @@ struct SplashView: View {
                 Spacer()
                 
                 if isTextVisible {
-                    Text("Добро пожаловать в Полесье!")
+                    Text(Constants.Strings.welcomeTitle)
                         .font(Constants.Fonts.h1Bold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding()
                         .transition(.move(edge: .top))
                     
-                    Text("Погрузитесь в уникальный мир Полесья — края лесов, болот и богатой культуры.")
+                    Text(Constants.Strings.welcomeDescription)
                         .font(Constants.Fonts.secondaryBold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
-                    Text("Узнайте о традициях, истории и достопримечательностях этого удивительного региона.")
+                    Text(Constants.Strings.welcomeDescription1)
                         .font(Constants.Fonts.secondaryBold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
-                    Text("Перед началом, мы рекомендуем пройти небольшой онбординг, чтобы в дальшейшем было проще ориентироваться в приложении.")
+                    Text(Constants.Strings.welcomeToOnboarding)
                         .font(Constants.Fonts.small)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
@@ -58,7 +58,7 @@ struct SplashView: View {
                         //hasLaunchedBefore = true
                         showOnboardingView = true
                     }) {
-                        Text("Начать путешествие")
+                        Text(Constants.Strings.startJourney)
                             .font(Constants.Fonts.button)
                             .foregroundColor(Constants.Colors.button)
                             .padding()
