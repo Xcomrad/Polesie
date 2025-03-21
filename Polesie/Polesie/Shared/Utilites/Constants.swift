@@ -71,30 +71,47 @@ enum Constants {
     }
     
     enum Strings {
-        // Кнопки
-        static let skipButtonTitle = "Пропустить"
-        static let startButtonTitle = "Начать"
-        static let nextButtonTitle = "Далее"
-        static let backButtonTitle = "Назад"
-        static let cancelButtonTitle = "Отмена"
-        static let doneButtonTitle = "Готово"
-        
+        // Сплэш
+        static let welcomeTitle = String(localized: "welcomeTitle")
+        static let welcomeDescription = String(localized: "welcomeDescription")
+        static let welcomeDescription1 = String(localized: "welcomeDescription1")
+        static let welcomeToOnboarding = String(localized: "welcomeToOnboarding")
+
         // Онбординг
-        static let onboardingWelcomeTitle = "Приветствуем на онбординге!"
-        static let onboardingWelcomeDescription = "Это краткий экскурс по основным механизмам приложения. Вы вольны пропустить его сейчас, но потом можете вернуться в любой момент, через 'Настройки'."
-        static let onboardingHistoryTitle = "История"
-        static let onboardingHistoryDescription = "Нажав на нее вы сможете перейти во вкладку истории Полесья."
-        static let onboardingTraditionsTitle = "Традиции"
-        static let onboardingTraditionsDescription = "Здесь предоставлена информация о трациях, праздниках и культуре Полесья."
-        static let onboardingQuizzesTitle = "Квизы!"
-        static let onboardingQuizzesDescription = "A тут вы сможете проверить свои знания! \nНе беспокойтесь, мы никому не скажем, если ошибетесь..."
-        static let onboardingSettingsTitle = "Настройки"
-        static let onboardingSettingsDescription = "Помогут вам настроить приложение по вашему усмотрению."
-        
+        static let onboardingWelcomeTitle = String(localized: "onboardingWelcomeTitle")
+        static let onboardingWelcomeDescription = String(localized: "onboardingWelcomeDescription")
+        static let onboardingHistoryTitle = String(localized: "onboardingHistoryTitle")
+        static let onboardingHistoryDescription = String(localized: "onboardingHistoryDescription")
+        static let onboardingTraditionsTitle = String(localized: "onboardingTraditionsTitle")
+        static let onboardingTraditionsDescription = String(localized: "onboardingTraditionsDescription")
+        static let onboardingQuizzesTitle = String(localized: "onboardingQuizzesTitle")
+        static let onboardingQuizzesDescription = String(localized: "onboardingQuizzesDescription")
+        static let onboardingSettingsTitle = String(localized: "onboardingSettingsTitle")
+        static let onboardingSettingsDescription = String(localized: "onboardingSettingsDescription")
+
+        // Кнопки
+        static let startJourney = String(localized: "startJuorney")
+        static let skipButtonTitle = String(localized: "skipButtonTitle")
+        static let startButtonTitle = String(localized: "startButtonTitle")
+        static let nextButtonTitle = String(localized: "nextButtonTitle")
+        static let backButtonTitle = String(localized: "backButtonTitle")
+        static let cancelButtonTitle = String(localized: "cancelButtonTitle")
+        static let doneButtonTitle = String(localized: "doneButtonTitle")
+
+        // Таббар
+        static let historyButtonTitle = String(localized: "historyButtonTitle")
+        static let traditionsButtonTitle = String(localized: "traditionsButtonTitle")
+        static let quizzesButtonTitle = String(localized: "quizzesButtonTitle")
+        static let settingsButtonTitle = String(localized: "settingsButtonTitle")
+
         // Настройки
-        static let settingsThemeTitle = "Настройка темы"
-        static let settingsThemeToggle = "Сменить тему"
-        static let settingsOnboardingTitle = "Обучение"
-        static let settingsOnboardingToggle = "Пройти заново"
+        static let settingsThemeTitle = String(localized: "settingsThemeTitle")
+        static let settingsLanguageTitle = String(localized: "settingsLanguageTitle")
+        static let settingsLanguage = String(localized: "settingsLanguage")
+        static let settingsThemeToggle = String(localized: "settingsThemeToggle")
+        static let settingsOnboardingTitle = String(localized: "settingsOnboardingTitle")
+        static let settingsOnboardingToggle = String(localized: "settingsOnboardingToggle")
+        static let languageName_en = String(localized: "languageName_en")
+        static let languageName_ru = String(localized: "languageName_ru")
     }
 }

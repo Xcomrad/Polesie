@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @State private var selectedTab = 0
     @EnvironmentObject var darkModeManager: DarkModeManager
+    @EnvironmentObject var languageManager: LanguageManager
     
     var body: some View {
         VStack {
@@ -17,7 +18,7 @@ struct MainView: View {
             case 0: HistoryView()
             case 1: TraditionsView()
             case 2: QuizzesView()
-            case 3: SettingsView()
+            case 3: SettingsView(vm: SettingsViewModel())
             default: HistoryView()
             }
             
@@ -29,5 +30,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
-        .environmentObject(DarkModeManager())
+        .environmentObject(DarkModeManager.shared)
+        .environmentObject(LanguageManager.shared)
 }
