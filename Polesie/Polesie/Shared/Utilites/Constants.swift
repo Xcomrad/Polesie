@@ -72,46 +72,46 @@ enum Constants {
     
     enum Strings {
         // Сплэш
-        static let welcomeTitle = String(localized: "welcomeTitle")
-        static let welcomeDescription = String(localized: "welcomeDescription")
-        static let welcomeDescription1 = String(localized: "welcomeDescription1")
-        static let welcomeToOnboarding = String(localized: "welcomeToOnboarding")
-
+        static let welcomeTitle = NSLocalizedString("welcomeTitle", comment: "")
+        static let welcomeDescription = NSLocalizedString("welcomeDescription", comment: "")
+        static let welcomeDescription1 = NSLocalizedString("welcomeDescription1", comment: "")
+        static let welcomeToOnboarding = NSLocalizedString("welcomeToOnboarding", comment: "")
+        
         // Онбординг
-        static let onboardingWelcomeTitle = String(localized: "onboardingWelcomeTitle")
-        static let onboardingWelcomeDescription = String(localized: "onboardingWelcomeDescription")
-        static let onboardingHistoryTitle = String(localized: "onboardingHistoryTitle")
-        static let onboardingHistoryDescription = String(localized: "onboardingHistoryDescription")
-        static let onboardingTraditionsTitle = String(localized: "onboardingTraditionsTitle")
-        static let onboardingTraditionsDescription = String(localized: "onboardingTraditionsDescription")
-        static let onboardingQuizzesTitle = String(localized: "onboardingQuizzesTitle")
-        static let onboardingQuizzesDescription = String(localized: "onboardingQuizzesDescription")
-        static let onboardingSettingsTitle = String(localized: "onboardingSettingsTitle")
-        static let onboardingSettingsDescription = String(localized: "onboardingSettingsDescription")
-
+        static let onboardingWelcomeTitle = NSLocalizedString("onboardingWelcomeTitle", comment: "")
+        static let onboardingWelcomeDescription = NSLocalizedString("onboardingWelcomeDescription", comment: "")
+        static let onboardingHistoryTitle = NSLocalizedString("onboardingHistoryTitle", comment: "")
+        static let onboardingHistoryDescription = NSLocalizedString("onboardingHistoryDescription", comment: "")
+        static let onboardingTraditionsTitle = NSLocalizedString("onboardingTraditionsTitle", comment: "")
+        static let onboardingTraditionsDescription = NSLocalizedString("onboardingTraditionsDescription", comment: "")
+        static let onboardingQuizzesTitle = NSLocalizedString("onboardingQuizzesTitle", comment: "")
+        static let onboardingQuizzesDescription = NSLocalizedString("onboardingQuizzesDescription", comment: "")
+        static let onboardingSettingsTitle = NSLocalizedString("onboardingSettingsTitle", comment: "")
+        static let onboardingSettingsDescription = NSLocalizedString("onboardingSettingsDescription", comment: "")
+        
         // Кнопки
-        static let startJourney = String(localized: "startJuorney")
-        static let skipButtonTitle = String(localized: "skipButtonTitle")
-        static let startButtonTitle = String(localized: "startButtonTitle")
-        static let nextButtonTitle = String(localized: "nextButtonTitle")
-        static let backButtonTitle = String(localized: "backButtonTitle")
-        static let cancelButtonTitle = String(localized: "cancelButtonTitle")
-        static let doneButtonTitle = String(localized: "doneButtonTitle")
-
+        static let startJourney = NSLocalizedString("startJuorney", comment: "")
+        static let skipButtonTitle = NSLocalizedString("skipButtonTitle", comment: "")
+        static let startButtonTitle = NSLocalizedString("startButtonTitle", comment: "")
+        static let nextButtonTitle = NSLocalizedString("nextButtonTitle", comment: "")
+        static let backButtonTitle = NSLocalizedString("backButtonTitle", comment: "")
+        static let cancelButtonTitle = NSLocalizedString("cancelButtonTitle", comment: "")
+        static let doneButtonTitle = NSLocalizedString("doneButtonTitle", comment: "")
+        
         // Таббар
-        static let historyButtonTitle = String(localized: "historyButtonTitle")
-        static let traditionsButtonTitle = String(localized: "traditionsButtonTitle")
-        static let quizzesButtonTitle = String(localized: "quizzesButtonTitle")
-        static let settingsButtonTitle = String(localized: "settingsButtonTitle")
-
+        static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
+        static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
+        static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
+        static let settingsButtonTitle = NSLocalizedString("settingsButtonTitle", comment: "")
+        
         // Настройки
-        static let settingsThemeTitle = String(localized: "settingsThemeTitle")
-        static let settingsLanguageTitle = String(localized: "settingsLanguageTitle")
-        static let settingsLanguage = String(localized: "settingsLanguage")
-        static let settingsThemeToggle = String(localized: "settingsThemeToggle")
-        static let settingsOnboardingTitle = String(localized: "settingsOnboardingTitle")
-        static let settingsOnboardingToggle = String(localized: "settingsOnboardingToggle")
-        static let languageName_en = String(localized: "languageName_en")
-        static let languageName_ru = String(localized: "languageName_ru")
+        static let settingsThemeTitle = NSLocalizedString("settingsThemeTitle", comment: "")
+        static let settingsLanguageTitle = NSLocalizedString("settingsLanguageTitle", comment: "")
+        static let settingsLanguage = NSLocalizedString("settingsLanguage", comment: "")
+        static let settingsThemeToggle = NSLocalizedString("settingsThemeToggle", comment: "")
+        static let settingsOnboardingTitle = NSLocalizedString("settingsOnboardingTitle", comment: "")
+        static let settingsOnboardingToggle = NSLocalizedString("settingsOnboardingToggle", comment: "")
+        static let languageName_en = NSLocalizedString("languageName_en", comment: "")
+        static let languageName_ru = NSLocalizedString("languageName_ru", comment: "")
     }
 }
