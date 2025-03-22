@@ -8,8 +8,6 @@
 import SwiftUI
 
 class DarkModeManager: ObservableObject {
-    static let shared = DarkModeManager()
-    
     @Published var isDarkMode: Bool {
            didSet {
                UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
