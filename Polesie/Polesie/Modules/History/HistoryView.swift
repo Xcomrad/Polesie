@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct HistoryView: View {
+    @EnvironmentObject var fontSizeManager: FontSizeManager
+    
     var body: some View {
         Text("HistoryView")
+            .font(Constants.DynamicFonts.scaledFont(name: Constants.DynamicFonts.h1, baseSize: 32, scale: fontSizeManager.fontSizeScale))
+        Text("HistoryView")
+            .font(.system(size: 10))
         Spacer()
     }
 }
