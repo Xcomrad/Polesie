@@ -19,14 +19,14 @@ struct TabBarButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: isSelected ? selectedIcon : icon)
-                    .font(.system(size: Constants.Sizes.middlePadding))
+                    .font(.system(size: Constants.PaddingSizes.middlePadding))
                     .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.stoneGray)
                     .scaleEffect(isSelected ? 1.2 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: isSelected)
                 
                 
                 Text(title)
-                    .font(Constants.Fonts.small)
+                    .font(Constants.BaseFonts.small)
                     .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.stoneGray)
             }
             .frame(maxWidth: .infinity)

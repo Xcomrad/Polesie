@@ -11,16 +11,16 @@ struct OnboardingView: View {
     @StateObject private var vm: OnboardingViewModel
     @EnvironmentObject var darkModeManager: DarkModeManager
     @Environment(\.colorScheme) var colorScheme
-
+    
     init(steps: [OnboardingModel]) {
         _vm = StateObject(wrappedValue: OnboardingViewModel(steps: steps))
     }
-
+    
     var body: some View {
         ZStack {
             Constants.Colors.background.opacity(0.6)
                 .ignoresSafeArea(.all)
-
+            
             VStack {
                 TabView(selection: $vm.currentStep) {
                     ForEach(0..<vm.steps.count, id: \.self) { index in
@@ -32,7 +32,7 @@ struct OnboardingView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-
+                
                 HStack {
                     ForEach(0..<vm.steps.count, id: \.self) { index in
                         Circle()
@@ -42,15 +42,15 @@ struct OnboardingView: View {
                             .foregroundStyle(index == vm.currentStep ? Constants.Colors.accent : Constants.Colors.beige)
                     }
                 }
-                .padding(.bottom, Constants.Sizes.middlePadding)
+                .padding(.bottom, Constants.PaddingSizes.middlePadding)
             }
-
+            
             VStack {
                 HStack {
                     Spacer()
                     Button(action: vm.skipOnboarding) {
                         Text(Constants.Strings.skipButtonTitle)
-                            .font(Constants.Fonts.button)
+                            .font(Constants.BaseFonts.button)
                             .foregroundColor(Constants.Colors.accent)
                             .padding()
                             .background(
@@ -58,7 +58,7 @@ struct OnboardingView: View {
                                     .fill(Constants.Colors.background)
                             )
                     }
-                    .padding(.top, Constants.Sizes.largePadding)
+                    .padding(.top, Constants.PaddingSizes.largePadding)
                     .adaptiveShadow(colorScheme: colorScheme)
                 }
                 Spacer()
@@ -73,5 +73,5 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView(steps: OnboardingStep.allCases.map { $0.model })
-    .environmentObject(DarkModeManager())
+        .environmentObject(DarkModeManager())
 }
