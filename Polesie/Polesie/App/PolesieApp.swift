@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct PolesieApp: App {
     @StateObject private var darkModeManager = DarkModeManager()
+    @StateObject var fontSizeManager = FontSizeManager()
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     
     var body: some Scene {
@@ -17,6 +18,7 @@ struct PolesieApp: App {
 
             SplashView()
                 .environmentObject(darkModeManager)
+                .environmentObject(fontSizeManager)
                 .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
         }
     }

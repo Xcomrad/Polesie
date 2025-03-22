@@ -35,7 +35,36 @@ enum Constants {
         static let button = Color("ButtonColor")
     }
     
-    enum Fonts {
+    enum BaseFonts {
+        // Заголовки
+        static let h1 = Font.custom("OldStandardTT-Regular", size: 32)
+        static let h1Bold = Font.custom("OldStandardTT-Bold", size: 32)
+        
+        static let h2 = Font.custom("OldStandardTT-Regular", size: 28)
+        static let h2Bold = Font.custom("OldStandardTT-Bold", size: 28)
+        
+        static let h3 = Font.custom("OldStandardTT-Regular", size: 24)
+        static let h3Bold = Font.custom("OldStandardTT-Bold", size: 24)
+        
+        // Основной текст
+        static let body = Font.custom("Lora-Regular", size: 20)
+        static let bodyBold = Font.custom("Lora-Bold", size: 20)
+        static let bodyItalic = Font.custom("Lora-Italic", size: 20)
+        
+        // Второстепенный текст
+        static let secondary = Font.custom("Lora-Regular", size: 18)
+        static let secondaryBold = Font.custom("Lora-Bold", size: 18)
+        
+        // Подписи
+        static let caption = Font.custom("Lora-Regular", size: 16)
+        static let captionBold = Font.custom("Lora-Bold", size: 16)
+        
+        // Интерфейс
+        static let button = Font.custom("Lora-Bold", size: 18)
+        static let small = Font.custom("Lora-Regular", size: 14)
+    }
+    
+    enum DynamicFonts {
         // Заголовки
         static let h1 = "OldStandardTT-Regular"
         static let h1Bold = "OldStandardTT-Bold"
@@ -60,7 +89,7 @@ enum Constants {
         // Интерфейс
         static let button = "Lora-Bold"
         static let small = "Lora-Regular"
-
+        
         static func scaledFont(name: String, baseSize: CGFloat, scale: CGFloat) -> Font {
             let scaledSize = baseSize * scale
             return .custom(name, size: scaledSize)
@@ -111,12 +140,10 @@ enum Constants {
         
         // Настройки
         static let settingsThemeTitle = NSLocalizedString("settingsThemeTitle", comment: "")
-        static let settingsLanguageTitle = NSLocalizedString("settingsLanguageTitle", comment: "")
-        static let settingsLanguage = NSLocalizedString("settingsLanguage", comment: "")
         static let settingsThemeToggle = NSLocalizedString("settingsThemeToggle", comment: "")
+        static let settingsFontTitle = NSLocalizedString("settingsFontTitle", comment: "")
+        static let settingsFontPicker = NSLocalizedString("settingsFontPicker", comment: "")
         static let settingsOnboardingTitle = NSLocalizedString("settingsOnboardingTitle", comment: "")
         static let settingsOnboardingToggle = NSLocalizedString("settingsOnboardingToggle", comment: "")
-        static let languageName_en = NSLocalizedString("languageName_en", comment: "")
-        static let languageName_ru = NSLocalizedString("languageName_ru", comment: "")
     }
 }

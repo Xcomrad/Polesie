@@ -12,7 +12,7 @@ struct OnboardingStepView: View {
     let isLastStep: Bool
     let completeOnboarding: () -> Void
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
         VStack {
             if let imageName = step.image {
@@ -20,41 +20,41 @@ struct OnboardingStepView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(Constants.Colors.accent)
-                    .frame(width: Constants.Sizes.onboardingImage, height: Constants.Sizes.onboardingImage)
+                    .frame(width: Constants.PaddingSizes.onboardingImage, height: Constants.PaddingSizes.onboardingImage)
             }
-
+            
             Text(step.title)
-                .font(Constants.Fonts.h2Bold)
+                .font(Constants.BaseFonts.h2Bold)
                 .foregroundColor(Constants.Colors.text)
                 .multilineTextAlignment(.center)
                 .padding()
-
+            
             Text(step.description)
-                .font(Constants.Fonts.secondary)
+                .font(Constants.BaseFonts.secondary)
                 .foregroundColor(Constants.Colors.text)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal)
-
+            
             if isLastStep {
                 Button(action: completeOnboarding) {
                     Text(Constants.Strings.startButtonTitle)
-                        .font(Constants.Fonts.button)
+                        .font(Constants.BaseFonts.button)
                         .foregroundColor(Constants.Colors.button)
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: Constants.Sizes.cornerRadius)
+                            RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
                                 .fill(Constants.Colors.darkGreen)
                         )
                 }
-                .padding(.top, Constants.Sizes.smalPadding)
+                .padding(.top, Constants.PaddingSizes.smalPadding)
             }
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: Constants.Sizes.cornerRadius)
+            RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
                 .fill(Constants.Colors.background)
                 .adaptiveShadow(colorScheme: colorScheme)
         )
-        .padding(.horizontal, Constants.Sizes.middlePadding)
+        .padding(.horizontal, Constants.PaddingSizes.middlePadding)
     }
 }

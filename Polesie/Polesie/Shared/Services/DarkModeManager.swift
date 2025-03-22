@@ -9,15 +9,15 @@ import SwiftUI
 
 class DarkModeManager: ObservableObject {
     @Published var isDarkMode: Bool {
-           didSet {
-               UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
-               setupTheme()
-           }
-       }
+        didSet {
+            UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+            setupTheme()
+        }
+    }
     
-     init() {
-           self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
-       }
+    init() {
+        self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+    }
     
     private func setupTheme() {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }

@@ -1,10 +1,10 @@
 /* 
-  Localizable.strings
-  Polesie
-
-  Created by Владислав Бут-Гусаим on 22.03.25.
-  
-*/
+ Localizable.strings
+ Polesie
+ 
+ Created by Владислав Бут-Гусаим on 22.03.25.
+ 
+ */
 
 // Splash
 "welcomeTitle" = "Welcome to the amazing world of Polesia!";
@@ -43,6 +43,6 @@
 "settingsThemeTitle" = "Theme";
 "settingsThemeToggle" = "Dark Mode";
 "settingsFontTitle" = "Font Size for reading";
-"settingsFontPicer" = "Select Font";
+"settingsFontPicker" = "Select Font";
 "settingsOnboardingTitle" = "Onboarding";
 "settingsOnboardingToggle" = "Show Onboarding";

@@ -25,31 +25,31 @@ struct SplashView: View {
                 .ignoresSafeArea(.all)
                 .opacity(0.5)
             
-            VStack(alignment: .center, spacing: Constants.Sizes.middlePadding) {
+            VStack(alignment: .center, spacing: Constants.PaddingSizes.middlePadding) {
                 Spacer()
                 
                 if isTextVisible {
                     Text(Constants.Strings.welcomeTitle)
-                        .font(Constants.Fonts.h1Bold)
+                        .font(Constants.BaseFonts.h1Bold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding()
                         .transition(.move(edge: .top))
                     
                     Text(Constants.Strings.welcomeDescription)
-                        .font(Constants.Fonts.secondaryBold)
+                        .font(Constants.BaseFonts.captionBold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
                     Text(Constants.Strings.welcomeDescription1)
-                        .font(Constants.Fonts.secondaryBold)
+                        .font(Constants.BaseFonts.captionBold)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
                     Text(Constants.Strings.welcomeToOnboarding)
-                        .font(Constants.Fonts.small)
+                        .font(Constants.BaseFonts.small)
                         .foregroundColor(Constants.Colors.text)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -59,7 +59,7 @@ struct SplashView: View {
                         showOnboardingView = true
                     }) {
                         Text(Constants.Strings.startJourney)
-                            .font(Constants.Fonts.button)
+                            .font(Constants.BaseFonts.button)
                             .foregroundColor(Constants.Colors.button)
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -68,10 +68,10 @@ struct SplashView: View {
                                     .fill(Constants.Colors.darkGreen)
                             )
                     }
-                    .padding(.top, Constants.Sizes.middlePadding)
+                    .padding(.top, Constants.PaddingSizes.middlePadding)
                 }
             }
-            .padding(Constants.Sizes.largePadding)
+            .padding(Constants.PaddingSizes.largePadding)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     isTextVisible = true
@@ -80,7 +80,7 @@ struct SplashView: View {
         }
         .fullScreenCover(isPresented: $showOnboardingView) {
             OnboardingView(steps: OnboardingStep.allCases.map { $0.model })
-            .environmentObject(DarkModeManager())
+                .environmentObject(DarkModeManager())
         }
     }
 }

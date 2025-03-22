@@ -7,13 +7,4 @@
 
 import Foundation
 
-final class SettingsViewModel: ObservableObject {
-    
-    func languageName(for code: String) -> String {
-        switch code {
-        case "en": return Constants.Strings.languageName_en
-        case "ru": return Constants.Strings.languageName_ru
-        default: return code
-        }
-    }
-}
+final class SettingsViewModel: ObservableObject {}
