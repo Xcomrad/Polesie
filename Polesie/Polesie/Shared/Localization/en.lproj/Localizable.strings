@@ -6,22 +6,23 @@
   
 */
 
-"welcomeTitle" = "Welcome!";
-"welcomeDescription" = "Explore the world of culture and traditions.";
-"welcomeDescription1" = "Start your journey!";
-"welcomeToOnboarding" = "Let's begin the onboarding process";
+// Splash
+"welcomeTitle" = "Welcome to the amazing world of Polesia!";
+"welcomeDescription" = "Immerse yourself in the unique atmosphere of culture, traditions, and history that make Polesia so special.";
+"welcomeDescription1" = "Start your exciting journey and discover the richness of the cultural heritage of this region!";
+"welcomeToOnboarding" = "Let's get started with the app so you can comfortably explore everything it has to offer.";
 
 // Onboarding
-"onboardingWelcomeTitle" = "Welcome to the app";
-"onboardingWelcomeDescription" = "Learn more about our features";
+"onboardingWelcomeTitle" = "Welcome to the tutorial!";
+"onboardingWelcomeDescription" = "This quick overview will help you get acquainted with the main features of the app. If you're in a hurry, you can skip it now and return to the tutorial later via the 'Settings' section.";
 "onboardingHistoryTitle" = "History";
-"onboardingHistoryDescription" = "Discover the rich history of Polesie";
+"onboardingHistoryDescription" = "In this section, you'll find fascinating materials about the history of Polesia, including significant events, notable figures, and interesting facts that will help you better understand this unique region.";
 "onboardingTraditionsTitle" = "Traditions";
-"onboardingTraditionsDescription" = "Dive into the cultural traditions of Polesie";
+"onboardingTraditionsDescription" = "Here, you'll discover the most vibrant traditions, festivals, and cultural elements of Polesia, allowing you to dive deeper into the local flavor and learn how people live in this region.";
 "onboardingQuizzesTitle" = "Quizzes";
-"onboardingQuizzesDescription" = "Test your knowledge about Polesie";
+"onboardingQuizzesDescription" = "Test your knowledge with fun quizzes that will not only teach you something new but also provide a great time! Don't worry if you make a mistake—it stays between us, and you can always try again.";
 "onboardingSettingsTitle" = "Settings";
-"onboardingSettingsDescription" = "Adjust your preferences";
+"onboardingSettingsDescription" = "Customize the app to your preferences to make exploring Polesia even more comfortable and engaging.";
 
 // Buttons
 "startJuorney" = "Start Journey";
