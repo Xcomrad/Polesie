@@ -17,23 +17,50 @@ struct SettingsView: View {
     }
     
     var body: some View {
-        Form {
-            Section(header: Text(Constants.Strings.settingsThemeTitle)
-                .font(Constants.BaseFonts.small)) {
-                    Toggle(Constants.Strings.settingsThemeToggle, isOn: $darkModeManager.isDarkMode)
-                        .font(Constants.BaseFonts.button)
-                }
-            
-            Section(header: Text(Constants.Strings.settingsFontTitle)
-                .font(Constants.BaseFonts.small)) {
-                    Picker(Constants.Strings.settingsFontPicker, selection: $fontSizeManager.userFontSize) {
-                        ForEach(UserFontSize.allCases) { size in
-                            Text(size.rawValue).tag(size)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                }
+        ZStack {
+            Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
+            settingsList
         }
+    }
+    
+    // MARK: - Methods
+    private var settingsList: some View {
+        List {
+            themeSection
+                .listRowBackground(Constants.Colors.stoneGray.opacity(0.1))
+            fontSection
+                .listRowBackground(Constants.Colors.stoneGray.opacity(0.1))
+        }
+        .scrollContentBackground(.hidden)
+        .scrollDisabled(true)
+    }
+    
+    private var themeSection: some View {
+        Section(header: sectionHeader(Constants.Strings.settingsThemeTitle)) {
+            Toggle(Constants.Strings.settingsThemeToggle, isOn: $darkModeManager.isDarkMode)
+                .font(Constants.BaseFonts.captionBold)
+                .tint(Constants.Colors.accent)
+                .animation(.easeInOut, value: darkModeManager.isDarkMode)
+        }
+    }
+    
+    private var fontSection: some View {
+        Section(header: sectionHeader(Constants.Strings.settingsFontTitle)) {
+            Picker(Constants.Strings.settingsFontPicker, selection: $fontSizeManager.userFontSize) {
+                ForEach(UserFontSize.allCases) { size in
+                    Text(size.rawValue).tag(size)
+                }
+            }
+            .pickerStyle(.menu)
+            .font(Constants.BaseFonts.captionBold)
+            .tint(Constants.Colors.accent)
+        }
+    }
+    
+    private func sectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(Constants.BaseFonts.small)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -42,5 +69,3 @@ struct SettingsView: View {
         .environmentObject(DarkModeManager())
         .environmentObject(FontSizeManager())
 }
-
-
