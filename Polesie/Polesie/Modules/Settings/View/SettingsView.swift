@@ -48,7 +48,7 @@ struct SettingsView: View {
         Section(header: sectionHeader(Constants.Strings.settingsFontTitle)) {
             Picker(Constants.Strings.settingsFontPicker, selection: $fontSizeManager.userFontSize) {
                 ForEach(UserFontSize.allCases) { size in
-                    Text(size.rawValue).tag(size)
+                    Text(size.localizedName).tag(size)
                 }
             }
             .pickerStyle(.menu)
