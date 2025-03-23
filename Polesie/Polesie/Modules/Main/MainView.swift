@@ -12,7 +12,7 @@ struct MainView: View {
     @EnvironmentObject var darkModeManager: DarkModeManager
     
     var body: some View {
-        VStack {
+        ZStack {
             switch selectedTab {
             case 0: HistoryView()
             case 1: TraditionsView()
