@@ -46,3 +46,10 @@
 "settingsFontPicker" = "Выберите шрифт";
 "settingsOnboardingTitle" = "Онбординг";
 "settingsOnboardingToggle" = "Показывать онбординг";
+
+// Пикер шрифт
+"tiny" = "Крошечный";
+"small" = "Небольшой";
+"medium" = "Средний";
+"big" = "Крупный";
+"huge" = "Громадный";

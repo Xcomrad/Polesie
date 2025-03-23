@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct QuizzesView: View {
+    
     var body: some View {
-        Text("QuizzesView")
-        Spacer()
+        ZStack {
+            Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
+            VStack {
+                Text("QuizzesView")
+                Spacer()
+            }
+        }
     }
 }
 

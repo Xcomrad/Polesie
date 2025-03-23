@@ -8,13 +8,17 @@
 import Foundation
 
 enum UserFontSize: String, CaseIterable, Identifiable {
-    case tiny = "Крошечный"
-    case small = "Небольшой"
-    case medium = "Средний"
-    case big = "Крупный"
-    case huge = "Громадный"
+    case tiny = "tiny"
+    case small = "small"
+    case medium = "medium"
+    case big = "big"
+    case huge = "huge"
     
     var id: String { self.rawValue }
+    
+    var localizedName: String {
+        NSLocalizedString(self.rawValue, comment: "")
+    }
     
     var scale: CGFloat {
         switch self {

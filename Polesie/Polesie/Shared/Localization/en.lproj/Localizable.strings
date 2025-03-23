@@ -46,3 +46,10 @@
 "settingsFontPicker" = "Select Font";
 "settingsOnboardingTitle" = "Onboarding";
 "settingsOnboardingToggle" = "Show Onboarding";
+
+// settingsFontPicker
+"tiny" = "Tiny";
+"small" = "Small";
+"medium" = "Medium";
+"big" = "Big";
+"huge" = "Huge";
