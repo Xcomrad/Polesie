@@ -9,20 +9,28 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab = 0
+    @State private var isSidebarVisible = false
     @EnvironmentObject var darkModeManager: DarkModeManager
     
     var body: some View {
         ZStack {
-            switch selectedTab {
-            case 0: HistoryView()
-            case 1: TraditionsView()
-            case 2: QuizzesView()
-            case 3: SettingsView(vm: SettingsViewModel())
-            default: HistoryView()
+            Group {
+                switch selectedTab {
+                case 0: HistoryView()
+                case 1: TraditionsView()
+                case 2: QuizzesView()
+                case 3: SettingsView(vm: SettingsViewModel())
+                default: HistoryView()
+                }
             }
+            .environment(\.isSidebarVisible, $isSidebarVisible)
             
-            TabBar(selectedTab: $selectedTab)
+            if !isSidebarVisible {
+                TabBar(selectedTab: $selectedTab)
+                    .transition(.opacity)
+            }
         }
+        .animation(.easeInOut, value: isSidebarVisible)
         .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
     }
 }
