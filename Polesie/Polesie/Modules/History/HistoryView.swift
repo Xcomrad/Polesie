@@ -10,16 +10,15 @@ import SwiftUI
 struct HistoryView: View {
     @EnvironmentObject var fontSizeManager: FontSizeManager
     @Environment(\.colorScheme) var colorScheme
-    @State private var isSidebarVisible = false
+    @Environment(\.isSidebarVisible) private var isSidebarVisible
     
     var body: some View {
         ZStack {
             Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
             VStack {
-                // Кнопка для открытия меню
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.5)) {
-                        isSidebarVisible.toggle()
+                        isSidebarVisible.wrappedValue.toggle()
                     }
                 }) {
                     Image(systemName: "line.horizontal.3")
@@ -37,21 +36,20 @@ struct HistoryView: View {
                 Spacer()
             }
             
-            if isSidebarVisible {
+            if isSidebarVisible.wrappedValue {
                 Constants.Colors.background.ignoresSafeArea(.all)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            isSidebarVisible.toggle()
+                            isSidebarVisible.wrappedValue.toggle()
                         }
                     }
             }
             
-            // Боковое меню
-            if isSidebarVisible {
-                SidebarView(isVisible: $isSidebarVisible)
+            if isSidebarVisible.wrappedValue {
+                SidebarView(isVisible: isSidebarVisible)
                     .transition(.move(edge: .leading))
                     .zIndex(1)
-                    .offset(x: isSidebarVisible ? 0 : UIScreen.main.bounds.width / 2)
+                    .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
             }
         }
     }
@@ -59,4 +57,5 @@ struct HistoryView: View {
 
 #Preview {
     HistoryView()
+        .environment(\.isSidebarVisible, .constant(false))
 }

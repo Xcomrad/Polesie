@@ -43,17 +43,17 @@ struct SidebarView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
-                    .padding(.horizontal)
+                    .padding(Constants.PaddingSizes.smalPadding)
                 }
                 .scrollDisabled(true)
                 
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width / 2) // Ширина меню 50%
+            .frame(width: UIScreen.main.bounds.width * 0.4) // Ширина меню 40%
             .background(Constants.Colors.background.opacity(0.5))
         }
         .adaptiveShadow(colorScheme: colorScheme)
-        .frame(width: UIScreen.main.bounds.width / 2) // Ширина меню 50%
-        .offset(x: isVisible ? -UIScreen.main.bounds.width * 0.25 : -UIScreen.main.bounds.width) // Позиционирование по центру
+        .frame(width: UIScreen.main.bounds.width * 0.4) // Ширина меню 40%
+        .offset(x: isVisible ? -UIScreen.main.bounds.width * 0.3 : -UIScreen.main.bounds.width) 
     }
 }
