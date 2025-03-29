@@ -16,32 +16,15 @@ struct HistoryView: View {
         ZStack {
             Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
             VStack {
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        isSidebarVisible.wrappedValue.toggle()
-                    }
-                }) {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.title)
-                        .foregroundStyle(Constants.Colors.accent)
-                        .padding()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                // Основной экран
-                Text("Экран истории")
-                    .font(.largeTitle)
-                    .padding()
-                
+                burgerButton
+                mainInfo
                 Spacer()
             }
             
             if isSidebarVisible.wrappedValue {
                 Constants.Colors.background.ignoresSafeArea(.all)
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            isSidebarVisible.wrappedValue.toggle()
-                        }
+                        animation()
                     }
             }
             
@@ -51,6 +34,32 @@ struct HistoryView: View {
                     .zIndex(1)
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
             }
+        }
+    }
+    
+    //MARK: - Components
+    private var mainInfo: some View {
+        Text("Экран истории")
+            .font(.largeTitle)
+            .padding()
+    }
+    
+    private var burgerButton: some View {
+        Button(action: {
+            animation()
+        }) {
+            Image(systemName: "line.horizontal.3")
+                .font(.title)
+                .foregroundStyle(Constants.Colors.accent)
+                .padding()
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    //MARK: - Actions
+    private func animation() {
+        withAnimation(.easeInOut(duration: 0.5)) {
+            isSidebarVisible.wrappedValue.toggle()
         }
     }
 }
