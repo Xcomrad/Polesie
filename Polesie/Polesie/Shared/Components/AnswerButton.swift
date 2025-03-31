@@ -20,6 +20,12 @@ struct AnswerButton: View {
         isSelected ? Constants.Colors.accent : Constants.Colors.text
     }
     
+    private var iconImage: String {
+        isCorrect ? "checkmark.circle.fill" :
+        isWrong ? "xmark.circle.fill" :
+        isSelected ? "checkmark.circle.fill" : "circle"
+    }
+    
     private var backgroundColor: Color {
         isCorrect ? Constants.Colors.darkGreen.opacity(0.1) :
         isWrong ? Constants.Colors.earthyBrown.opacity(0.1) :
@@ -38,8 +44,8 @@ struct AnswerButton: View {
                 action()
             }
         }) {
-            HStack(spacing: Constants.PaddingSizes.smalPadding) {
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+            HStack(spacing: Constants.PaddingSizes.smallPadding) {
+                Image(systemName: iconImage)
                     .symbolEffect(.bounce, value: isSelected)
                     .foregroundColor(iconColor)
                     .animation(.easeInOut(duration: 0.3), value: isSelected)

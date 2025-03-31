@@ -97,8 +97,10 @@ enum Constants {
     }
     
     enum PaddingSizes {
-        static let cornerRadius: CGFloat = 10
-        static let smalPadding: CGFloat = 16
+        static let opasity: CGFloat = 0.5
+        static let lineWidth: CGFloat = 0.5
+        static let smallPadding: CGFloat = 8
+        static let cornerRadius: CGFloat = 15
         static let middlePadding: CGFloat = 24
         static let largePadding: CGFloat = 50
         static let onboardingImage: CGFloat = 100
