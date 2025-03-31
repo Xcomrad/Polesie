@@ -57,7 +57,7 @@ struct SidebarView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .padding(Constants.PaddingSizes.smalPadding)
+            .padding(Constants.PaddingSizes.smallPadding)
         }
         .scrollDisabled(true)
     }

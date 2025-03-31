@@ -40,7 +40,7 @@ struct QuizzesCardView: View {
     
     // MARK: - View Components
     private var questionTitle: some View {
-        Text(vm.question.text)
+        Text(vm.currentQuestion.text)
             .font(Constants.BaseFonts.h2)
             .foregroundStyle(Constants.Colors.text)
             .multilineTextAlignment(.center)
@@ -54,7 +54,7 @@ struct QuizzesCardView: View {
     }
     
     private var answersSection: some View {
-        ForEach(0..<vm.question.options.count, id: \.self) { index in
+        ForEach(0..<(vm.currentQuestion.options.count), id: \.self) { index in
             answerButton(index)
                 .transition(.asymmetric(
                     insertion: .opacity.combined(with: .move(edge: .trailing)),
@@ -64,7 +64,7 @@ struct QuizzesCardView: View {
     }
     
     private var resultSection: some View {
-        Text(vm.question.fact)
+        Text(vm.currentQuestion.fact)
             .font(Constants.BaseFonts.caption)
             .padding()
             .background(Constants.Colors.beige.opacity(0.2))
@@ -77,9 +77,9 @@ struct QuizzesCardView: View {
     //MARK: - Actions
     private func answerButton(_ index: Int) -> some View {
         AnswerButton(
-            option: vm.question.options[index],
+            option: vm.currentQuestion.options[index],
             isSelected: vm.selectedAnswer == index,
-            isCorrect: vm.showResult && index == vm.question.correctAnswerIndex,
+            isCorrect: vm.showResult && index == vm.currentQuestion.correctAnswerIndex,
             isWrong: vm.showResult && vm.selectedAnswer == index && !vm.isCorrect
         ) {
             withAnimation(.easeInOut(duration: 0.2)) {
@@ -88,7 +88,7 @@ struct QuizzesCardView: View {
                 }
             }
         }
-        .padding(.horizontal, Constants.PaddingSizes.smalPadding)
+        .padding(.horizontal, Constants.PaddingSizes.smallPadding)
     }
     
     private var nextButton: some View {

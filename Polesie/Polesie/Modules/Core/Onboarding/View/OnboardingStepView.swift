@@ -46,7 +46,7 @@ struct OnboardingStepView: View {
                                 .fill(Constants.Colors.darkGreen)
                         )
                 }
-                .padding(.top, Constants.PaddingSizes.smalPadding)
+                .padding(.top, Constants.PaddingSizes.smallPadding)
             }
         }
         .padding()

@@ -44,7 +44,7 @@ struct AnswerButton: View {
                 action()
             }
         }) {
-            HStack(spacing: Constants.PaddingSizes.smalPadding) {
+            HStack(spacing: Constants.PaddingSizes.smallPadding) {
                 Image(systemName: iconImage)
                     .symbolEffect(.bounce, value: isSelected)
                     .foregroundColor(iconColor)

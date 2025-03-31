@@ -18,7 +18,7 @@ struct MainView: View {
                 switch selectedTab {
                 case 0: HistoryView()
                 case 1: TraditionsView()
-                case 2: QuizzesView()
+                case 2: QuizzesView(vm: QuizViewModel())
                 case 3: SettingsView(vm: SettingsViewModel())
                 default: HistoryView()
                 }

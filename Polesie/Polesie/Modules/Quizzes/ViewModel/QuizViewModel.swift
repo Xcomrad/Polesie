@@ -9,22 +9,102 @@ import SwiftUI
 
 final class QuizViewModel: ObservableObject {
     @Published var selectedAnswer: Int?
+    
     @Published var showResult = false
     @Published var isCorrect = false
-    @Published private(set) var score = 0
+    @Published var isQuizFinished = false
     
-    private(set) var question: QuizQuestion = .init(
-        text: "Какое растение является символом Полесья?",
-        options: ["Клюква", "Папоротник", "Верба", "Осина"],
-        correctAnswerIndex: 0,
-        fact: "Клюква - традиционная ягода Полесья, собираемая на болотах"
-    )
+    @Published private(set) var score = 0
+    @Published var currentThemeIndex = 0
+    @Published var currentQuestionIndex = 0
+
+    var currentQuestion: QuizQuestion {
+        quizThemes[currentThemeIndex].questions[currentQuestionIndex]
+    }
+    
+    let quizThemes: [QuizThemes] = [
+        QuizThemes(image: "polessie_nature.jpg",
+                   name: "Природа Полесья",
+                   description: "Узнайте о природных богатствах этого региона.",
+                   questions: [
+            QuizQuestion(text: "Какой национальный парк находится в Полесье?",
+                         options: ["Беловежская пуща", "Припятский", "Лосиный остров", "Русский Север"],
+                         correctAnswerIndex: 1,
+                         fact: "Припятский национальный парк расположен в белорусском Полесье и знаменит своими болотами и биологическим разнообразием."),
+            QuizQuestion(text: "Какой крупнейший водоём расположен в Полесье?",
+                         options: ["Озеро Нарочь", "Озеро Синее", "Озеро Червонное", "Река Припять"],
+                         correctAnswerIndex: 3,
+                         fact: "Река Припять является одной из главных водных артерий Полесья."),
+            QuizQuestion(text: "Какое животное считается символом Полесья?",
+                         options: ["Бобр", "Лось", "Рысь", "Волк"],
+                         correctAnswerIndex: 0,
+                         fact: "Бобры широко распространены в водных экосистемах Полесья и играют важную роль в формировании ландшафта."),
+            QuizQuestion(text: "Какой редкий хищник встречается в Полесье?",
+                         options: ["Бурый медведь", "Лесная куница", "Европейская норка", "Рысь"],
+                         correctAnswerIndex: 3,
+                         fact: "Рысь – редкий, но встречающийся в Полесье хищник, предпочитающий лесные массивы."),
+        ]),
+        
+        QuizThemes(image: "folklore_polesie.jpg",
+                   name: "Фольклор и традиции",
+                   description: "Традиционные обряды и культура Полесья.",
+                   questions: [
+            QuizQuestion(text: "Какой популярный фольклорный персонаж встречается в сказаниях Полесья?",
+                         options: ["Леший", "Кикимора", "Водяной", "Русалка"],
+                         correctAnswerIndex: 0,
+                         fact: "Леший – дух леса, часто упоминаемый в полесском фольклоре."),
+            QuizQuestion(text: "Как называется традиционный головной убор полесских женщин?",
+                         options: ["Кокошник", "Очипок", "Митра", "Ковпак"],
+                         correctAnswerIndex: 1,
+                         fact: "Очипок – это головной убор замужних женщин в традиционной одежде Полесья."),
+            QuizQuestion(text: "Какой музыкальный инструмент широко используется в полесской народной музыке?",
+                         options: ["Гусли", "Цимбалы", "Бандура", "Трембита"],
+                         correctAnswerIndex: 1,
+                         fact: "Цимбалы – популярный инструмент в народной музыке Полесья."),
+            QuizQuestion(text: "Какая традиционная выпечка популярна в Полесье?",
+                         options: ["Калач", "Паляница", "Бабка", "Перепечи"],
+                         correctAnswerIndex: 2,
+                         fact: "Бабка – традиционное блюдо из картофеля, распространённое в Полесье."),
+        ]),
+        
+        QuizThemes(image: "history_polesie.jpg",
+                   name: "История Полесья",
+                   description: "Важные исторические события, связанные с регионом.",
+                   questions: [
+            QuizQuestion(text: "Какое княжество в средневековье контролировало Полесье?",
+                         options: ["Галицко-Волынское", "Новгородское", "Полоцкое", "Смоленское"],
+                         correctAnswerIndex: 0,
+                         fact: "Полесье входило в состав Галицко-Волынского княжества в XII-XIV веках."),
+            QuizQuestion(text: "Какая известная битва произошла в Полесье во время Великой Отечественной войны?",
+                         options: ["Брестская оборона", "Минское сражение", "Партизанская война", "Бобруйская операция"],
+                         correctAnswerIndex: 2,
+                         fact: "Партизанская война в Полесье была одним из крупнейших очагов сопротивления фашистам."),
+            QuizQuestion(text: "Какой известный исторический деятель родился в Полесье?",
+                         options: ["Тадеуш Костюшко", "Франциск Скорина", "Янка Купала", "Адам Мицкевич"],
+                         correctAnswerIndex: 0,
+                         fact: "Тадеуш Костюшко, национальный герой Польши и США, родился в окрестностях Полесья."),
+            QuizQuestion(text: "Какой древний город является важным центром Полесья?",
+                         options: ["Пинск", "Витебск", "Гродно", "Слуцк"],
+                         correctAnswerIndex: 0,
+                         fact: "Пинск – один из древнейших городов Полесья, имеющий богатую историю."),
+        ])
+        ]
     
     // MARK: - Actions
+    
+    func startQuize(with theme: QuizThemes) {
+        if let index = quizThemes.firstIndex(where: { $0.name == theme.name }) {
+            currentThemeIndex = index
+            currentQuestionIndex = 0
+            score = 0
+            resetForNewQuestion()
+        }
+    }
+    
     func checkAnswer() {
         guard let selected = selectedAnswer else { return }
         
-        isCorrect = selected == question.correctAnswerIndex
+        isCorrect = selected == currentQuestion.correctAnswerIndex
         if isCorrect {
             score += 1
         }
@@ -32,7 +112,11 @@ final class QuizViewModel: ObservableObject {
     }
     
     func moveToNextQuestion() {
-        // пока так
+        if currentQuestionIndex + 1 < quizThemes[currentThemeIndex].questions.count {
+            currentQuestionIndex += 1
+        } else {
+            isQuizFinished = true
+        }
         resetForNewQuestion()
     }
     
@@ -40,5 +124,12 @@ final class QuizViewModel: ObservableObject {
         selectedAnswer = nil
         showResult = false
         isCorrect = false
+    }
+    
+    func restartQuiz() {
+        currentQuestionIndex = 0
+        isQuizFinished = false
+        score = 0
+        resetForNewQuestion()
     }
 }
