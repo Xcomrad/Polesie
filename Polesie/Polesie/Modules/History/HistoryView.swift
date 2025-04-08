@@ -13,9 +13,13 @@ struct HistoryView: View {
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     
     var body: some View {
+        ZStack {
+            Constants.Colors.background
+                .opacity(Constants.PaddingSizes.opasity)
+                .ignoresSafeArea(.all)
             VStack {
                 burgerButton
-                mainInfo
+                MainInfo()
                 Spacer()
             }
             
@@ -35,14 +39,9 @@ struct HistoryView: View {
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
             }
         }
-    
-    //MARK: - Components
-    private var mainInfo: some View {
-        Text("Экран истории")
-            .font(.largeTitle)
-            .padding()
     }
     
+    //MARK: - Components
     private var burgerButton: some View {
         Button(action: {
             animation()

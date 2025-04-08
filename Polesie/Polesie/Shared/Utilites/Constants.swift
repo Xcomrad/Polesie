@@ -37,31 +37,31 @@ enum Constants {
     
     enum BaseFonts {
         // Заголовки
-        static let h1 = Font.custom("OldStandardTT-Regular", size: 32)
-        static let h1Bold = Font.custom("OldStandardTT-Bold", size: 32)
+        static let h1 = Font.custom("OldStandardTT-Regular", size: 30)
+        static let h1Bold = Font.custom("OldStandardTT-Bold", size: 30)
         
-        static let h2 = Font.custom("OldStandardTT-Regular", size: 28)
-        static let h2Bold = Font.custom("OldStandardTT-Bold", size: 28)
+        static let h2 = Font.custom("OldStandardTT-Regular", size: 26)
+        static let h2Bold = Font.custom("OldStandardTT-Bold", size: 26)
         
-        static let h3 = Font.custom("OldStandardTT-Regular", size: 24)
-        static let h3Bold = Font.custom("OldStandardTT-Bold", size: 24)
+        static let h3 = Font.custom("OldStandardTT-Regular", size: 22)
+        static let h3Bold = Font.custom("OldStandardTT-Bold", size: 2)
         
         // Основной текст
-        static let body = Font.custom("Lora-Regular", size: 20)
-        static let bodyBold = Font.custom("Lora-Bold", size: 20)
-        static let bodyItalic = Font.custom("Lora-Italic", size: 20)
+        static let body = Font.custom("Lora-Regular", size: 18)
+        static let bodyBold = Font.custom("Lora-Bold", size: 18)
+        static let bodyItalic = Font.custom("Lora-Italic", size: 18)
         
         // Второстепенный текст
-        static let secondary = Font.custom("Lora-Regular", size: 18)
-        static let secondaryBold = Font.custom("Lora-Bold", size: 18)
-        
-        // Подписи
-        static let caption = Font.custom("Lora-Regular", size: 16)
-        static let captionBold = Font.custom("Lora-Bold", size: 16)
+        static let secondary = Font.custom("Lora-Regular", size: 16)
+        static let secondaryBold = Font.custom("Lora-Bold", size: 16)
         
         // Интерфейс
-        static let button = Font.custom("Lora-Bold", size: 18)
-        static let small = Font.custom("Lora-Regular", size: 14)
+        static let button = Font.custom("Lora-Bold", size: 16)
+        static let small = Font.custom("Lora-Regular", size: 12)
+        
+        // Подписи
+        static let caption = Font.custom("Lora-Regular", size: 14)
+        static let captionBold = Font.custom("Lora-Bold", size: 14)
     }
     
     enum DynamicFonts {
@@ -78,7 +78,6 @@ enum Constants {
         // Основной текст
         static let body = "Lora-Regular"
         static let bodyBold = "Lora-Bold"
-        static let bodyItalic = "Lora-Italic"
         
         static let secondary = "Lora-Regular"
         static let secondaryBold = "Lora-Bold"
@@ -90,9 +89,14 @@ enum Constants {
         static let button = "Lora-Bold"
         static let small = "Lora-Regular"
         
-        static func scaledFont(name: String, baseSize: CGFloat, scale: CGFloat) -> Font {
-            let scaledSize = baseSize * scale
-            return .custom(name, size: scaledSize)
+        // Стоковые размеры шрифта
+        enum Size {
+            static let h1: CGFloat = 30
+            static let h2: CGFloat = 24
+            static let h3: CGFloat = 20
+            static let body: CGFloat = 16
+            static let secondary: CGFloat = 14
+            static let small: CGFloat = 12
         }
     }
     
@@ -100,9 +104,10 @@ enum Constants {
         static let opasity: CGFloat = 0.5
         static let lineWidth: CGFloat = 0.5
         static let smallPadding: CGFloat = 8
-        static let cornerRadius: CGFloat = 15
-        static let middlePadding: CGFloat = 24
-        static let largePadding: CGFloat = 50
+        static let cornerRadius: CGFloat = 12
+        static let middlePadding: CGFloat = 16
+        static let largePadding: CGFloat = 24
+        static let extraPadding: CGFloat = 50
         static let onboardingImage: CGFloat = 100
     }
     
