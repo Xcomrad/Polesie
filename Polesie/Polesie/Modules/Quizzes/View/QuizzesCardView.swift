@@ -19,7 +19,6 @@ struct QuizzesCardView: View {
             VStack {
                 questionTitle
                     .padding()
-                
                 answersSection
                     .transition(.move(edge: .leading))
                 

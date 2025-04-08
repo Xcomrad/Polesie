@@ -14,15 +14,19 @@ struct HistoryView: View {
     
     var body: some View {
         ZStack {
-            Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
+            Constants.Colors.background
+                .opacity(Constants.PaddingSizes.opasity)
+                .ignoresSafeArea(.all)
             VStack {
                 burgerButton
-                mainInfo
+                MainInfo()
                 Spacer()
             }
             
             if isSidebarVisible.wrappedValue {
-                Constants.Colors.background.ignoresSafeArea(.all)
+                Rectangle()
+                    .fill(.ultraThickMaterial.opacity(0.8))
+                    .ignoresSafeArea(.all)
                     .onTapGesture {
                         animation()
                     }
@@ -38,12 +42,6 @@ struct HistoryView: View {
     }
     
     //MARK: - Components
-    private var mainInfo: some View {
-        Text("Экран истории")
-            .font(.largeTitle)
-            .padding()
-    }
-    
     private var burgerButton: some View {
         Button(action: {
             animation()
@@ -58,7 +56,7 @@ struct HistoryView: View {
     
     //MARK: - Actions
     private func animation() {
-        withAnimation(.easeInOut(duration: 0.5)) {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.opasity)) {
             isSidebarVisible.wrappedValue.toggle()
         }
     }

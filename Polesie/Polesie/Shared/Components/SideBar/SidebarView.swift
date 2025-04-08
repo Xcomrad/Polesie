@@ -21,7 +21,7 @@ struct SidebarView: View {
                 Spacer()
             }
             .frame(width: sidebarWidh)
-            .background(Constants.Colors.background.opacity(0.5))
+            .background(Constants.Colors.background)
         }
         .adaptiveShadow(colorScheme: colorScheme)
         .frame(width: sidebarWidh)
