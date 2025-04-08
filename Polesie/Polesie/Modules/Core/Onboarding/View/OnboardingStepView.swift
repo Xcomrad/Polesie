@@ -20,7 +20,8 @@ struct OnboardingStepView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(Constants.Colors.accent)
-                    .frame(width: Constants.PaddingSizes.onboardingImage, height: Constants.PaddingSizes.onboardingImage)
+                    .frame(width: Constants.PaddingSizes.onboardingImage,
+                           height: Constants.PaddingSizes.onboardingImage)
             }
             
             Text(step.title)

@@ -13,8 +13,6 @@ struct HistoryView: View {
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     
     var body: some View {
-        ZStack {
-            Constants.Colors.background.opacity(0.5).ignoresSafeArea(.all)
             VStack {
                 burgerButton
                 mainInfo
@@ -22,7 +20,9 @@ struct HistoryView: View {
             }
             
             if isSidebarVisible.wrappedValue {
-                Constants.Colors.background.ignoresSafeArea(.all)
+                Rectangle()
+                    .fill(.ultraThickMaterial.opacity(0.8))
+                    .ignoresSafeArea(.all)
                     .onTapGesture {
                         animation()
                     }
@@ -35,7 +35,6 @@ struct HistoryView: View {
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
             }
         }
-    }
     
     //MARK: - Components
     private var mainInfo: some View {
@@ -58,7 +57,7 @@ struct HistoryView: View {
     
     //MARK: - Actions
     private func animation() {
-        withAnimation(.easeInOut(duration: 0.5)) {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.opasity)) {
             isSidebarVisible.wrappedValue.toggle()
         }
     }
