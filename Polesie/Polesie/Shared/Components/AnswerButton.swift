@@ -44,7 +44,7 @@ struct AnswerButton: View {
                 action()
             }
         }) {
-            HStack(spacing: Constants.PaddingSizes.smallPadding) {
+            HStack(spacing: Constants.PaddingSizes.p8) {
                 Image(systemName: iconImage)
                     .symbolEffect(.bounce, value: isSelected)
                     .foregroundColor(iconColor)
@@ -60,12 +60,12 @@ struct AnswerButton: View {
             }
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                     .fill(backgroundColor)
                     .animation(.easeInOut(duration: 0.4), value: backgroundColor)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                     .stroke(borderColor, lineWidth: 1)
                     .animation(.easeInOut(duration: 0.3), value: borderColor)
             )

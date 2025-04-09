@@ -18,7 +18,7 @@ struct QuizzesView: View {
         NavigationStack {
             ZStack {
                 Constants.Colors.background
-                    .opacity(Constants.PaddingSizes.opasity)
+                    .opacity(Constants.PaddingSizes.p05)
                     .ignoresSafeArea(.all)
                 
                 ScrollView {
@@ -47,9 +47,9 @@ struct PinterestGrid<Content: View, Item: Identifiable>: View {
     let content: (Item) -> Content
     
     var body: some View {
-        HStack(alignment: .top, spacing: Constants.PaddingSizes.cornerRadius) {
+        HStack(alignment: .top, spacing: Constants.PaddingSizes.p12) {
             ForEach(0..<columns, id: \.self) { column in
-                LazyVStack(spacing: Constants.PaddingSizes.cornerRadius) {
+                LazyVStack(spacing: Constants.PaddingSizes.p12) {
                     ForEach(itemsForColumn(column)) { item in
                         content(item)
                     }
@@ -76,11 +76,11 @@ struct CardsView: View {
             VStack {
                 Text(theme.name)
                     .font(Constants.BaseFonts.captionBold)
-                    .padding(.vertical, Constants.PaddingSizes.smallPadding)
+                    .padding(.vertical, Constants.PaddingSizes.p8)
                 
                 Text(theme.description)
                     .font(Constants.BaseFonts.small)
-                    .padding(.bottom, Constants.PaddingSizes.smallPadding)
+                    .padding(.bottom, Constants.PaddingSizes.p8)
             }
             .padding()
             .background(Constants.Colors.background)
@@ -88,7 +88,7 @@ struct CardsView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
                     .stroke(Constants.Colors.stoneGray
-                        .opacity(Constants.PaddingSizes.opasity),
+                        .opacity(Constants.PaddingSizes.p05),
                             lineWidth: Constants.PaddingSizes.lineWidth)
             )
         }

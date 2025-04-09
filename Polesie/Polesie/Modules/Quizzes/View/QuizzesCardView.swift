@@ -45,7 +45,7 @@ struct QuizzesCardView: View {
             .multilineTextAlignment(.center)
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                     .fill(Constants.Colors.background)
                     .adaptiveShadow(colorScheme: colorScheme)
             )
@@ -67,7 +67,7 @@ struct QuizzesCardView: View {
             .font(Constants.BaseFonts.caption)
             .padding()
             .background(Constants.Colors.beige.opacity(0.2))
-            .cornerRadius(Constants.PaddingSizes.cornerRadius)
+            .cornerRadius(Constants.PaddingSizes.p12)
             .padding(.horizontal)
             .transition(.opacity)
             .animation(.easeInOut(duration: 0.3).delay(0.2), value: vm.showResult)
@@ -87,7 +87,7 @@ struct QuizzesCardView: View {
                 }
             }
         }
-        .padding(.horizontal, Constants.PaddingSizes.smallPadding)
+        .padding(.horizontal, Constants.PaddingSizes.p8)
     }
     
     private var nextButton: some View {
@@ -102,7 +102,7 @@ struct QuizzesCardView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(
-                    RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                    RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                         .fill(vm.selectedAnswer == nil ?
                               Constants.Colors.darkGreen.opacity(0.5) :
                                 Constants.Colors.darkGreen)
@@ -112,7 +112,7 @@ struct QuizzesCardView: View {
         .disabled(vm.selectedAnswer == nil)
         .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
         .padding(.horizontal)
-        .padding(.top, Constants.PaddingSizes.middlePadding)
+        .padding(.top, Constants.PaddingSizes.p16)
     }
 }
 

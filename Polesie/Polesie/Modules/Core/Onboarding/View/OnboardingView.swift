@@ -42,7 +42,7 @@ struct OnboardingView: View {
                             .foregroundStyle(index == vm.currentStep ? Constants.Colors.accent : Constants.Colors.beige)
                     }
                 }
-                .padding(.bottom, Constants.PaddingSizes.middlePadding)
+                .padding(.bottom, Constants.PaddingSizes.p16)
             }
             
             VStack {
@@ -58,7 +58,7 @@ struct OnboardingView: View {
                                     .fill(Constants.Colors.background)
                             )
                     }
-                    .padding(.top, Constants.PaddingSizes.largePadding)
+                    .padding(.top, Constants.PaddingSizes.p24)
                     .adaptiveShadow(colorScheme: colorScheme)
                 }
                 Spacer()

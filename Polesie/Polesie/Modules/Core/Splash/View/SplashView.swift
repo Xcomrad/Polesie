@@ -25,7 +25,7 @@ struct SplashView: View {
                 .ignoresSafeArea(.all)
                 .opacity(0.5)
             
-            VStack(alignment: .center, spacing: Constants.PaddingSizes.middlePadding) {
+            VStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
                 Spacer()
                 
                 if isTextVisible {
@@ -68,10 +68,10 @@ struct SplashView: View {
                                     .fill(Constants.Colors.darkGreen)
                             )
                     }
-                    .padding(.top, Constants.PaddingSizes.middlePadding)
+                    .padding(.top, Constants.PaddingSizes.p16)
                 }
             }
-            .padding(Constants.PaddingSizes.largePadding)
+            .padding(Constants.PaddingSizes.p24)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     isTextVisible = true
