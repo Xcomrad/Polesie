@@ -84,12 +84,12 @@ struct CardsView: View {
             }
             .padding()
             .background(Constants.Colors.background)
-            .cornerRadius(Constants.PaddingSizes.cornerRadius)
+            .cornerRadius(Constants.PaddingSizes.p12)
             .overlay(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                     .stroke(Constants.Colors.stoneGray
                         .opacity(Constants.PaddingSizes.p05),
-                            lineWidth: Constants.PaddingSizes.lineWidth)
+                            lineWidth: Constants.PaddingSizes.p05)
             )
         }
         .buttonStyle(.plain)
