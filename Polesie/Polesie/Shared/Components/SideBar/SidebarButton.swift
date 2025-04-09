@@ -21,7 +21,7 @@ struct SidebarButton: View {
                     .padding()
                     .background(Constants.Colors.accent)
                     .multilineTextAlignment(.leading)
-                    .cornerRadius(Constants.PaddingSizes.cornerRadius)
+                    .cornerRadius(Constants.PaddingSizes.p12)
             }
         }
     }

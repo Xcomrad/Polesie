@@ -19,7 +19,7 @@ struct SettingsView: View {
     var body: some View {
         ZStack {
             Constants.Colors.background
-                .opacity(Constants.PaddingSizes.opasity)
+                .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
             settingsList
         }

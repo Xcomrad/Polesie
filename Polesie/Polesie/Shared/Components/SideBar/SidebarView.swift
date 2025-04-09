@@ -14,7 +14,7 @@ struct SidebarView: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: Constants.PaddingSizes.middlePadding) {
+            VStack(alignment: .leading, spacing: Constants.PaddingSizes.p16) {
                 clouseButton
                 themeTitle
                 scrollView
@@ -48,7 +48,7 @@ struct SidebarView: View {
     
     private var scrollView: some View {
         ScrollView {
-            LazyVStack(spacing: Constants.PaddingSizes.cornerRadius) {
+            LazyVStack(spacing: Constants.PaddingSizes.p12) {
                 ForEach(["История", "События", "Люди", "Ремесло", "Места", "Природа"], id: \.self) { topic in
                     SidebarButton(title: topic, action: {
                         print("Выбрана тема: \(topic)")
@@ -57,7 +57,7 @@ struct SidebarView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .padding(Constants.PaddingSizes.smallPadding)
+            .padding(Constants.PaddingSizes.p8)
         }
         .scrollDisabled(true)
     }

@@ -47,14 +47,14 @@ struct TabBar: View {
                     action: { selectedTab = 3 }
                 )
             }
-            .padding(.vertical, Constants.PaddingSizes.cornerRadius)
-            .padding(.horizontal, Constants.PaddingSizes.middlePadding)
+            .padding(.vertical, Constants.PaddingSizes.p12)
+            .padding(.horizontal, Constants.PaddingSizes.p16)
             .background(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                     .fill(Constants.Colors.background)
                     .adaptiveShadow(colorScheme: colorScheme)
             )
-            .padding(.horizontal, Constants.PaddingSizes.cornerRadius)
+            .padding(.horizontal, Constants.PaddingSizes.p12)
             .ignoresSafeArea(.all, edges: .bottom) 
         }
     }

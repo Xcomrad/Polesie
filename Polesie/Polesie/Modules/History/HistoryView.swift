@@ -15,7 +15,7 @@ struct HistoryView: View {
     var body: some View {
         ZStack {
             Constants.Colors.background
-                .opacity(Constants.PaddingSizes.opasity)
+                .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
             VStack {
                 burgerButton
@@ -56,7 +56,7 @@ struct HistoryView: View {
     
     //MARK: - Actions
     private func animation() {
-        withAnimation(.easeInOut(duration: Constants.PaddingSizes.opasity)) {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
             isSidebarVisible.wrappedValue.toggle()
         }
     }

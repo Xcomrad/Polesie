@@ -20,8 +20,8 @@ struct OnboardingStepView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(Constants.Colors.accent)
-                    .frame(width: Constants.PaddingSizes.onboardingImage,
-                           height: Constants.PaddingSizes.onboardingImage)
+                    .frame(width: Constants.PaddingSizes.p100,
+                           height: Constants.PaddingSizes.p100)
             }
             
             Text(step.title)
@@ -43,19 +43,19 @@ struct OnboardingStepView: View {
                         .foregroundColor(Constants.Colors.button)
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+                            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                                 .fill(Constants.Colors.darkGreen)
                         )
                 }
-                .padding(.top, Constants.PaddingSizes.smallPadding)
+                .padding(.top, Constants.PaddingSizes.p8)
             }
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: Constants.PaddingSizes.cornerRadius)
+            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                 .fill(Constants.Colors.background)
                 .adaptiveShadow(colorScheme: colorScheme)
         )
-        .padding(.horizontal, Constants.PaddingSizes.middlePadding)
+        .padding(.horizontal, Constants.PaddingSizes.p16)
     }
 }
