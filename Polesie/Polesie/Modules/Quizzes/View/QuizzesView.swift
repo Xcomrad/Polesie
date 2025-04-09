@@ -76,11 +76,13 @@ struct CardsView: View {
             VStack {
                 Text(theme.name)
                     .font(Constants.BaseFonts.captionBold)
-                    .padding(.vertical, Constants.PaddingSizes.p8)
+                    .foregroundStyle(Constants.Colors.text)
+                    .padding(.vertical, Constants.PaddingSizes.p12)
                 
                 Text(theme.description)
                     .font(Constants.BaseFonts.small)
-                    .padding(.bottom, Constants.PaddingSizes.p8)
+                    .foregroundStyle(Constants.Colors.text)
+                    .padding(.bottom, Constants.PaddingSizes.p12)
             }
             .padding()
             .background(Constants.Colors.background)

@@ -25,17 +25,18 @@ struct TraditionsView: View {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
                     .ignoresSafeArea(.all)
+                
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))],
-                              spacing: Constants.PaddingSizes.p50) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
                         ForEach(vm.traditions, id: \.self) { item in
-                            TraditionCard(imageName: item.image,
+                            TraditionCardView(imageName: item.image,
                                           text: item.title)
                             .adaptiveShadow(colorScheme: colorScheme)
                         }
                     }
+                              .padding(.bottom, Constants.PaddingSizes.p80)
                 }
-                .padding(.bottom, Constants.PaddingSizes.p80)
+                .scrollIndicators(.hidden)
             }
             .navigationTitle("Традиции")
         }
