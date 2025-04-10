@@ -8,9 +8,8 @@
 
 import Foundation
 
-struct TraditionsModel: Identifiable, Hashable {
-    let id = UUID()
-    let image: String
+struct TraditionsModel: Identifiable, Codable, Hashable {
+    var id: Int
+    let icon: String
     let title: String
 }
-

@@ -10,11 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var darkModeManager: DarkModeManager
     @EnvironmentObject var fontSizeManager: FontSizeManager
-    @StateObject private var vm: SettingsViewModel
-    
-    init(vm: SettingsViewModel) {
-        _vm = StateObject(wrappedValue: vm)
-    }
+    @ObservedObject var vm: SettingsViewModel
     
     var body: some View {
         ZStack {
@@ -64,10 +60,4 @@ struct SettingsView: View {
             .font(Constants.BaseFonts.small)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-}
-
-#Preview {
-    SettingsView(vm: SettingsViewModel())
-        .environmentObject(DarkModeManager())
-        .environmentObject(FontSizeManager())
 }

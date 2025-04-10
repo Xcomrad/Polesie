@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizzesView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var selectedTheme: QuizThemes?
-    @StateObject var vm = QuizViewModel()
+    @ObservedObject var vm: QuizViewModel
     
     private let columns = 2
     

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "icon": "tradition1",
+    "title": "Обряды и праздники"
+  },
+  {
+    "id": 1,
+    "icon": "tradition2",
+    "title": "Семейные традиции"
+  },
+  {
+    "id": 2,
+    "icon": "tradition3",
+    "title": "Народные верования"
+  },
+  {
+    "id": 3,
+    "icon": "tradition4",
+    "title": "Ремесло и быт"
+  },
+  {
+    "id": 4,
+    "icon": "tradition5",
+    "title": "Кухня Полесья"
+  }
+]
