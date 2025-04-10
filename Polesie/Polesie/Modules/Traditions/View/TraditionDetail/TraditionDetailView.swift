@@ -9,6 +9,23 @@ import SwiftUI
 
 struct TraditionDetailView: View {
     var body: some View {
-        Text("Hello, World!")
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 0, pinnedViews: .sectionHeaders) {
+                headerView
+            }
+        }
     }
+    
+    // MARK: - Components
+    private var headerView: some View {
+        Image("")
+    }
+    
+    private var description: some View {
+        Text("")
+    }
+}
+
+#Preview {
+    TraditionDetailView()
 }

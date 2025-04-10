@@ -110,6 +110,7 @@ enum Constants {
         static let p80: CGFloat = 80
         static let p100: CGFloat = 100
         static let p200: CGFloat = 200
+        static let p300: CGFloat = 300
     }
     
     enum Strings {
