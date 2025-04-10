@@ -14,7 +14,7 @@ struct Themes: Codable, Identifiable, Hashable  {
 
 struct QuizThemes: Codable, Identifiable, Hashable {
     var id = UUID()
-    let image: String
+    let image: String?
     let name: String
     let description: String
     let questions: [QuizQuestion]
