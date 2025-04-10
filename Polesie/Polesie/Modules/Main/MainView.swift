@@ -6,20 +6,25 @@
 //
 
 import SwiftUI
-
 struct MainView: View {
     @State private var selectedTab = 0
     @State private var isSidebarVisible = false
+    
     @EnvironmentObject var darkModeManager: DarkModeManager
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @StateObject private var traditionsViewModel = TraditionsViewModel()
+    @StateObject private var quizViewModel = QuizViewModel()
+    @StateObject private var settingsViewModel = SettingsViewModel()
     
     var body: some View {
         ZStack {
             Group {
                 switch selectedTab {
                 case 0: HistoryView()
-                case 1: TraditionsView()
-                case 2: QuizzesView(vm: QuizViewModel())
-                case 3: SettingsView(vm: SettingsViewModel())
+                case 1: TraditionsView(vm: traditionsViewModel, viewContext: viewContext) 
+                case 2: QuizzesView(vm: quizViewModel)
+                case 3: SettingsView(vm: settingsViewModel)
                 default: HistoryView()
                 }
             }
@@ -33,9 +38,4 @@ struct MainView: View {
         .animation(.easeInOut, value: isSidebarVisible)
         .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
     }
-}
-
-#Preview {
-    MainView()
-        .environmentObject(DarkModeManager())
 }

@@ -5,15 +5,22 @@
 //  Created by Владислав Бут-Гусаим on 9.04.25.
 //
 
-import Foundation
+import SwiftUI
+import CoreData
 
 class TraditionsViewModel: ObservableObject {
+    @Published var traditions: [Traditions] = []
     
-    var traditions: [TraditionsModel] = [
-        TraditionsModel(image: "tradition1", title: "Обряды и праздники"),
-        TraditionsModel(image: "tradition2", title: "Семейные традиции"),
-        TraditionsModel(image: "tradition3", title: "Народные верования"),
-        TraditionsModel(image: "tradition4", title: "Ремесла и быт"),
-        TraditionsModel(image: "tradition5", title: "Кухня Полесья"),
-    ]
+    func fetchTraditions(viewContext: NSManagedObjectContext) {
+        let fetchRequest: NSFetchRequest<Traditions> = Traditions.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        
+        do {
+            let fetchedResults = try viewContext.fetch(fetchRequest)
+            traditions = fetchedResults
+            
+        } catch {
+            print("Ошибка получения традиций: \(error)")
+        }
+    }
 }
