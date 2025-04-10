@@ -7,15 +7,20 @@
 
 import Foundation
 
-struct QuizThemesModel: Codable, Identifiable, Hashable {
+struct Themes:Codable, Identifiable, Hashable {
+    var id = UUID()
+    var quizThemes: [QuizThemes]
+}
+
+struct QuizThemes: Codable, Identifiable, Hashable {
     var id = UUID()
     let image: String?
     let name: String
     let description: String
-    let questions: [QuizQuestionsModel]
+    let questions: [QuizQuestions]
 }
 
-struct QuizQuestionsModel: Codable, Identifiable, Hashable {
+struct QuizQuestions: Codable, Identifiable, Hashable {
     var id = UUID()
     let text: String
     let options: [String]
