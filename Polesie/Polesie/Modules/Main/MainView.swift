@@ -13,8 +13,8 @@ struct MainView: View {
     @EnvironmentObject var darkModeManager: DarkModeManager
     @Environment(\.managedObjectContext) private var viewContext
     
-    @StateObject private var traditionsViewModel = TraditionsViewModel()
-    @StateObject private var quizViewModel = QuizViewModel()
+    @StateObject private var traditionsViewModel = TraditionsViewModel(dataManager: DataManager())
+   // @StateObject private var quizViewModel = QuizViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
     
     var body: some View {
@@ -22,8 +22,8 @@ struct MainView: View {
             Group {
                 switch selectedTab {
                 case 0: HistoryView()
-                case 1: TraditionsView(vm: traditionsViewModel, viewContext: viewContext) 
-                case 2: QuizzesView(vm: quizViewModel)
+                case 1: TraditionsView(vm: traditionsViewModel)
+                //case 2: QuizzesView(vm: quizViewModel)
                 case 3: SettingsView(vm: settingsViewModel)
                 default: HistoryView()
                 }

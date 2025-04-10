@@ -11,7 +11,6 @@ import CoreData
 struct TraditionsView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var vm: TraditionsViewModel
-    var viewContext: NSManagedObjectContext
     
     var body: some View {
         NavigationStack {
@@ -23,10 +22,8 @@ struct TraditionsView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
                         ForEach(vm.traditions, id: \.self) { item in
-                            let icon = item.icon ?? ""
-                            let title = item.title ?? ""
-                            TraditionCardView(imageName: icon,
-                                              text: title)
+                            TraditionCardView(imageName: item.icon,
+                                              text: item.title)
                             .adaptiveShadow(colorScheme: colorScheme)
                         }
                     }
@@ -37,7 +34,7 @@ struct TraditionsView: View {
             .navigationTitle("Традиции")
         }
         .onAppear {
-            vm.fetchTraditions(viewContext: viewContext)
+            vm.fetchData()
         }
     }
 }

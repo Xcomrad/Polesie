@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
-import CoreData
 
-class TraditionsViewModel: ObservableObject {
-    @Published var traditions: [Traditions] = []
+
+final class TraditionsViewModel: ObservableObject {
+    @Published var traditions: [TraditionsModel] = []
     
-    func fetchTraditions(viewContext: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<Traditions> = Traditions.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        
-        do {
-            let fetchedResults = try viewContext.fetch(fetchRequest)
-            traditions = fetchedResults
-            
-        } catch {
-            print("Ошибка получения традиций: \(error)")
+    private let dataManager: DataManager
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
+    }
+    
+    // MARK: - FetchData
+    func fetchData() {
+        dataManager.loadData(from: "traditions", type: [TraditionsModel].self) { result in
+            switch result {
+            case .success(let fetchedTraditions):
+                DispatchQueue.main.async {
+                    self.traditions = fetchedTraditions
+                }
+            case .failure(let error):
+                print("проблемки")
+            }
         }
     }
 }
