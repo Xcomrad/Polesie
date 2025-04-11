@@ -12,8 +12,8 @@ struct TraditionCardView: View {
     let text: String
     
     @Environment(\.colorScheme) var colorScheme
-    @State private var isPressed: Bool = false
-    @State private var appearAnimation = false
+    @State private var isPressed = false
+    @State private var isVisible = false
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -23,16 +23,14 @@ struct TraditionCardView: View {
                 traditionText
             }
         }
-        .scaleEffect(isPressed ? 0.95 : (appearAnimation ? 1 : 0.95))
-        .opacity(appearAnimation ? 1 : 0)
-        .offset(y: appearAnimation ? 0 : 20)
         .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
         .padding(.all, Constants.PaddingSizes.p12)
         .padding(.top, Constants.PaddingSizes.p12)
-        .animation(.easeOut(duration: 0.2), value: isPressed)
-        .animation(.easeOut(duration: 0.4).delay(0.2), value: appearAnimation)
+        .opacity(isVisible ? 1 : 0)
+        .animation(.easeOut(duration: Constants.PaddingSizes.p05), value: isPressed)
+        .animation(.spring(duration: Constants.PaddingSizes.p05), value: isVisible)
         .onAppear {
-            appearAnimation = true
+            isVisible = true
         }
         .gesture(
             TapGesture()

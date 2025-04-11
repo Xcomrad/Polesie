@@ -9,21 +9,21 @@ import SwiftUI
 
 final class QuizViewModel: ObservableObject {
     @Published var selectedAnswer: Int?
-    @Published var quizThemes: [QuizThemes] = []
-    
-    @Published var showResult = false
-    @Published var isCorrect = false
-    @Published var isQuizFinished = false
+    @Published var quizThemes: [QuizThemesModel] = []
     
     @Published private(set) var score = 0
     @Published var currentThemeIndex = 0
     @Published var currentQuestionIndex = 0
     
-    private var dataManager: DataManager
+    @Published var showResult = false
+    @Published var isCorrect = false
+    @Published var isQuizFinished = false
 
-    var currentQuestion: QuizQuestions {
+    var currentQuestion: QuizQuestionsModel {
         quizThemes[currentThemeIndex].questions[currentQuestionIndex]
     }
+    
+    private let dataManager: DataManager
     
     init(dataManager: DataManager) {
         self.dataManager = dataManager
@@ -31,20 +31,20 @@ final class QuizViewModel: ObservableObject {
     
     // MARK: - FetchData
     func fetchData() {
-          dataManager.loadData(from: "quizzes", type: [QuizThemes].self) { result in
-              DispatchQueue.main.async {
-                  switch result {
-                  case .success(let themes):
-                      self.quizThemes = themes
-                  case .failure(let error):
-                      print("Ошибка загрузки данных:", error.localizedDescription)
-                  }
-              }
-          }
-      }
+        dataManager.loadData(from: "quizzes", type: [QuizThemesModel].self) { result in
+            switch result {
+            case .success(let fetchQuizzes):
+                DispatchQueue.main.async {
+                    self.quizThemes = fetchQuizzes
+                }
+            case .failure(let failure):
+                print("load quiz data error: \(failure)")
+            }
+        }
+    }
     
     // MARK: - Actions
-    func startQuize(with theme: QuizThemes) {
+    func startQuize(with theme: QuizThemesModel) {
         if let index = quizThemes.firstIndex(where: { $0.name == theme.name }) {
             currentThemeIndex = index
             currentQuestionIndex = 0
@@ -78,7 +78,7 @@ final class QuizViewModel: ObservableObject {
         isCorrect = false
     }
     
-    func restartQuiz() {
+    private func restartQuiz() {
         currentQuestionIndex = 0
         isQuizFinished = false
         score = 0

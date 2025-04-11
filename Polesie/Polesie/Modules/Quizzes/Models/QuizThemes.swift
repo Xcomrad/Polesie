@@ -7,23 +7,26 @@
 
 import Foundation
 
-struct Themes:Codable, Identifiable, Hashable {
-    var id = UUID()
-    var quizThemes: [QuizThemes]
-}
-
-struct QuizThemes: Codable, Identifiable, Hashable {
-    var id = UUID()
+struct QuizThemesModel: Codable, Identifiable, Hashable {
+    let id: UUID = UUID()
     let image: String?
     let name: String
     let description: String
-    let questions: [QuizQuestions]
+    let questions: [QuizQuestionsModel]
+
+    private enum CodingKeys: String, CodingKey {
+        case image, name, description, questions
+    }
 }
 
-struct QuizQuestions: Codable, Identifiable, Hashable {
-    var id = UUID()
+struct QuizQuestionsModel: Codable, Identifiable, Hashable {
+    let id: UUID = UUID()
     let text: String
     let options: [String]
     let correctAnswerIndex: Int
     let fact: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case text, options, correctAnswerIndex, fact
+    }
 }

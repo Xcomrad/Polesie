@@ -3,7 +3,7 @@
 //  Polesie
 //
 //  Created by Владислав Бут-Гусаим on 30.03.25.
-//
+
 
 import SwiftUI
 
@@ -114,4 +114,8 @@ struct QuizzesCardView: View {
         .padding(.horizontal)
         .padding(.top, Constants.PaddingSizes.p16)
     }
+}
+
+#Preview {
+    QuizzesCardView(vm: QuizViewModel(dataManager: DataManager()))
 }
