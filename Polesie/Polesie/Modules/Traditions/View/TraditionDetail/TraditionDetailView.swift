@@ -13,7 +13,6 @@ struct TraditionDetailView: View {
     @ObservedObject var vm: TraditionsViewModel
     
     @State private var isPressed = false
-    @State private var scrollToTop: Bool = false
     
     var title: String
     var description: String
@@ -24,46 +23,19 @@ struct TraditionDetailView: View {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
                     .ignoresSafeArea(.all)
-            ScrollView {
-               
+        
+                ScrollView {
                     VStack(spacing: Constants.PaddingSizes.p16) {
-                        
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark.app.fill")
-                                .resizable()
-                                .scaledToFill()
-                                .foregroundStyle(Constants.Colors.accent)
-                                .frame(width: Constants.PaddingSizes.p24,
-                                       height: Constants.PaddingSizes.p24)
-                        }
-                        .adaptiveShadow(colorScheme: colorScheme)
-                        .padding(.top, Constants.PaddingSizes.p8)
-                        .padding(.leading, Constants.PaddingSizes.p8)
-                        
                         traditionTitle
+                            .padding(.top, Constants.PaddingSizes.p50)
                         traditionDescription
-                       
-                        Button(action: {
-                            withAnimation {
-                                proxy.scrollTo("top", anchor: .top)
-                            }
-                        }) {
-                            Image(systemName: "arrowshape.up.fill")
-                                .resizable()
-                                .scaledToFill()
-                                .foregroundStyle(Constants.Colors.accent)
-                                .frame(width: Constants.PaddingSizes.p24,
-                                       height: Constants.PaddingSizes.p24)
-                        }
-                        .adaptiveShadow(colorScheme: colorScheme)
-                        .padding(.bottom, Constants.PaddingSizes.p8)
-                        .padding(.trailing, Constants.PaddingSizes.p8)
                     }
                     .padding()
                     .id("top")
                 }
+                
+                closeButton
+                scrollToTopButton(proxy: proxy)
             }
         }
         .onAppear {
@@ -76,6 +48,7 @@ struct TraditionDetailView: View {
         Text(title)
             .font(Constants.BaseFonts.h1Bold)
             .foregroundColor(Constants.Colors.text)
+            .multilineTextAlignment(.center)
             .padding(.horizontal)
     }
     
@@ -86,5 +59,55 @@ struct TraditionDetailView: View {
             .lineSpacing(6)
             .padding(.horizontal)
     }
+    
+    private var closeButton: some View {
+        VStack {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark.app.fill")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundStyle(Constants.Colors.accent)
+                        .frame(
+                            width: Constants.PaddingSizes.p24,
+                            height: Constants.PaddingSizes.p24
+                        )
+                }
+                .adaptiveShadow(colorScheme: colorScheme)
+                Spacer()
+            }
+            .padding(.top, Constants.PaddingSizes.p12)
+            .padding(.leading, Constants.PaddingSizes.p24)
+            
+            Spacer()
+        }
+    }
+    
+    private func scrollToTopButton(proxy: ScrollViewProxy) -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button {
+                    withAnimation {
+                        proxy.scrollTo("top", anchor: .top)
+                    }
+                } label: {
+                    Image(systemName: "arrowshape.up.fill")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundStyle(Constants.Colors.accent)
+                        .frame(
+                            width: Constants.PaddingSizes.p24,
+                            height: Constants.PaddingSizes.p24
+                        )
+                }
+                .adaptiveShadow(colorScheme: colorScheme)
+                .padding(.bottom, Constants.PaddingSizes.p12)
+                .padding(.trailing, Constants.PaddingSizes.p24)
+            }
+        }
+    }
 }
-
