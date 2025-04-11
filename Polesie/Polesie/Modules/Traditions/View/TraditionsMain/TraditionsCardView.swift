@@ -10,6 +10,7 @@ import SwiftUI
 struct TraditionCardView: View {
     let imageName: String
     let text: String
+    var onTap: (() -> Void)?
     
     @Environment(\.colorScheme) var colorScheme
     @State private var isPressed = false
@@ -34,7 +35,9 @@ struct TraditionCardView: View {
         }
         .gesture(
             TapGesture()
-                .onEnded { _ in /* детальный экран */ }
+                .onEnded { _ in
+                    onTap?()
+                }
                 .simultaneously(with: LongPressGesture(minimumDuration: 0.1)
                     .onChanged { _ in isPressed = true }
                     .onEnded { _ in isPressed = false }
@@ -68,8 +71,4 @@ struct TraditionCardView: View {
             .padding(.leading, Constants.PaddingSizes.p16)
             .padding(.vertical, Constants.PaddingSizes.p16)
     }
-}
-
-#Preview {
-    TraditionCardView(imageName: "", text: "")
 }

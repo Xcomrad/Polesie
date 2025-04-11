@@ -10,11 +10,11 @@ import SwiftUI
 
 final class TraditionsViewModel: ObservableObject {
     @Published var traditions: [TraditionsModel] = []
-    
     private let dataManager: DataManager
     
     init(dataManager: DataManager) {
         self.dataManager = dataManager
+        fetchData()
     }
     
     // MARK: - FetchData
@@ -29,5 +29,9 @@ final class TraditionsViewModel: ObservableObject {
                 print("load traditions data error: \(failure)")
             }
         }
+    }
+    
+    func getTraditionList(for id: Int) -> [TraditionListModel]? {
+        traditions.first { $0.id == id }?.listModels
     }
 }
