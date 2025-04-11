@@ -16,12 +16,12 @@ struct TraditionListCell: View {
         Button(action: {
             onTap?()
         }) {
-            HStack(spacing: Constants.PaddingSizes.p24) {
+            HStack(spacing: Constants.PaddingSizes.p12) {
                 HStack() {
                     traditionTitle
                     chevronImage
                 }
-                .padding(.all, Constants.PaddingSizes.p16)
+                .padding(.all, Constants.PaddingSizes.p24)
                 .background(Constants.Colors.background)
                 .cornerRadius(Constants.PaddingSizes.p12)
                 .adaptiveShadow(colorScheme: colorScheme)

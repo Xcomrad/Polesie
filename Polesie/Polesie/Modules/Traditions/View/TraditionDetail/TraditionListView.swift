@@ -28,10 +28,10 @@ struct TraditionListView: View {
                             selectedListItem = item
                         }
                     }
-                    .padding(.vertical, Constants.PaddingSizes.p8)
+                    Spacer()
+                    .padding(.vertical, Constants.PaddingSizes.p05)
                 }
             }
-            .padding(.bottom, Constants.PaddingSizes.p100)
         }
         .onAppear {
             vm.fetchData()
