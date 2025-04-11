@@ -25,8 +25,8 @@ final class TraditionsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.traditions = fetchedTraditions
                 }
-            case .failure(let error):
-                print("проблемки")
+            case .failure(let failure):
+                print("load traditions data error: \(failure)")
             }
         }
     }
