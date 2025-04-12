@@ -13,6 +13,7 @@ struct QuizzesView: View {
     @ObservedObject var vm: QuizViewModel
     
     private let columns = 2
+    private let animationDuration = 0.3
     
     var body: some View {
         NavigationStack {
@@ -22,8 +23,8 @@ struct QuizzesView: View {
                     .ignoresSafeArea(.all)
                 
                 ScrollView {
-                    PinterestGrid(items: vm.quizThemes, columns: columns) { theme in
-                        CardsView(theme: theme, selectedTheme: $selectedTheme)
+                    PinterestGrid(items: vm.quizThemes, columns: columns) { item in
+                        CardsView(theme: item, selectedTheme: $selectedTheme)
                             .adaptiveShadow(colorScheme: colorScheme)
                     }
                     .padding()
@@ -32,12 +33,12 @@ struct QuizzesView: View {
             }
             .navigationTitle("Квизы")
             .onAppear {
-                vm.fetchData()
+                vm.fetchData() 
             }
-            .fullScreenCover(item: $selectedTheme) { theme in
+            .fullScreenCover(item: $selectedTheme) { item in
                 QuizzesCardView(vm: vm)
                     .onAppear {
-                        vm.startQuize(with: theme)
+                        vm.startQuize(with: item)
                     }
             }
         }
@@ -104,8 +105,7 @@ struct CardsView: View {
                     .stroke(Constants.Colors.stoneGray.opacity(Constants.PaddingSizes.p05),
                             lineWidth: Constants.PaddingSizes.p05))
             .opacity(isVisible ? 1 : 0)
-            .animation(.easeOut(duration: Constants.PaddingSizes.p05), value: isPressed)
-            .animation(.spring(duration: Constants.PaddingSizes.p05), value: isVisible)
+            .animation(.spring(dampingFraction: Constants.PaddingSizes.p05), value: isVisible)
         }
         .onTapGesture {
             withAnimation {

@@ -73,7 +73,6 @@ struct AnswerButton: View {
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
         }
         .buttonStyle(.plain)
-        // Тактильная отдача
         .sensoryFeedback(.selection, trigger: isSelected)
     }
 }

@@ -28,21 +28,13 @@ struct TraditionCardView: View {
         .padding(.all, Constants.PaddingSizes.p12)
         .padding(.top, Constants.PaddingSizes.p12)
         .opacity(isVisible ? 1 : 0)
-        .animation(.easeOut(duration: Constants.PaddingSizes.p05), value: isPressed)
         .animation(.spring(duration: Constants.PaddingSizes.p05), value: isVisible)
         .onAppear {
             isVisible = true
         }
         .gesture(
             TapGesture()
-                .onEnded { _ in
-                    onTap?()
-                }
-                .simultaneously(with: LongPressGesture(minimumDuration: 0.1)
-                    .onChanged { _ in isPressed = true }
-                    .onEnded { _ in isPressed = false }
-                )
-        )
+                .onEnded { _ in onTap?() })
     }
     
     // MARK: - Components
