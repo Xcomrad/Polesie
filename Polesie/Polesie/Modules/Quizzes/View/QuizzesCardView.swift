@@ -13,7 +13,8 @@ struct QuizzesCardView: View {
     
     var body: some View {
         ZStack {
-            Constants.Colors.background.opacity(0.5)
+            Constants.Colors.background
+                .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
             
             VStack {
@@ -33,7 +34,7 @@ struct QuizzesCardView: View {
                 nextButton
             }
             .padding()
-            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
+            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: vm.showResult)
         }
     }
     
@@ -49,7 +50,12 @@ struct QuizzesCardView: View {
                     .fill(Constants.Colors.background)
                     .adaptiveShadow(colorScheme: colorScheme)
             )
-            .transition(.scale(scale: 0.95).combined(with: .opacity))
+            .transition(
+                .asymmetric(
+                    insertion: .scale(scale: 0.95).combined(with: .opacity),
+                    removal: .opacity
+                )
+            )
     }
     
     private var answersSection: some View {
@@ -69,8 +75,12 @@ struct QuizzesCardView: View {
             .background(Constants.Colors.beige.opacity(0.2))
             .cornerRadius(Constants.PaddingSizes.p12)
             .padding(.horizontal)
-            .transition(.opacity)
-            .animation(.easeInOut(duration: 0.3).delay(0.2), value: vm.showResult)
+            .transition(
+                .asymmetric(
+                    insertion: .move(edge: .bottom).combined(with: .opacity),
+                    removal: .opacity.animation(.easeIn(duration: 0.2))
+                )
+            )
     }
     
     //MARK: - Actions
@@ -108,6 +118,7 @@ struct QuizzesCardView: View {
                                 Constants.Colors.darkGreen)
                 )
                 .scaleEffect(vm.selectedAnswer == nil ? 1.0 : 1.05)
+                .animation(.easeInOut(duration: 0.2), value: vm.selectedAnswer)
         }
         .disabled(vm.selectedAnswer == nil)
         .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
