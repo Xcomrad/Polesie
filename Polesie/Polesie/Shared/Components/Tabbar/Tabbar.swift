@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabBar: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var selectedTab: Int
+    @Binding var selectedTab: Tab
     
     var body: some View {
         VStack {
@@ -19,32 +19,32 @@ struct TabBar: View {
                     title: Constants.Strings.historyButtonTitle,
                     icon: "books.vertical",
                     selectedIcon: "books.vertical.fill",
-                    isSelected: selectedTab == 0,
-                    action: { selectedTab = 0 }
+                    isSelected: selectedTab == .history,
+                    action: { selectedTab = .history }
                 )
                 
                 TabBarButton(
                     title: Constants.Strings.traditionsButtonTitle,
                     icon: "scroll",
                     selectedIcon: "scroll.fill",
-                    isSelected: selectedTab == 1,
-                    action: { selectedTab = 1 }
+                    isSelected: selectedTab == .traditions,
+                    action: { selectedTab = .traditions }
                 )
                 
                 TabBarButton(
                     title: Constants.Strings.quizzesButtonTitle,
                     icon: "questionmark.bubble",
                     selectedIcon: "questionmark.bubble.fill",
-                    isSelected: selectedTab == 2,
-                    action: { selectedTab = 2 }
+                    isSelected: selectedTab == .quizzes,
+                    action: { selectedTab = .quizzes }
                 )
                 
                 TabBarButton(
                     title: Constants.Strings.settingsButtonTitle,
                     icon: "gearshape",
                     selectedIcon: "gearshape.fill",
-                    isSelected: selectedTab == 3,
-                    action: { selectedTab = 3 }
+                    isSelected: selectedTab == .settings,
+                    action: { selectedTab = .settings }
                 )
             }
             .padding(.vertical, Constants.PaddingSizes.p12)

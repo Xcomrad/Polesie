@@ -10,6 +10,7 @@ import SwiftUI
 struct TraditionDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
+    @Environment(\.isTabBarVisible) var isTabBarVisible
     @ObservedObject var vm: TraditionsViewModel
     
     @State private var isPressed = false
@@ -18,69 +19,71 @@ struct TraditionDetailView: View {
     var description: String
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Constants.Colors.background
-                    .opacity(Constants.PaddingSizes.p05)
-                    .ignoresSafeArea(.all)
-                ScrollView {
-                    VStack(spacing: Constants.PaddingSizes.p16) {
-                        traditionTitle
-                            .padding(.top, Constants.PaddingSizes.p50)
-                        traditionDescription
-                    }
-                    .padding()
-                    .id("top")
+        ZStack {
+            Constants.Colors.background
+                .opacity(Constants.PaddingSizes.p05)
+                .ignoresSafeArea(.all)
+            ScrollView {
+                VStack(spacing: Constants.PaddingSizes.p16) {
+                    traditionTitle
+                        .padding(.top, Constants.PaddingSizes.p50)
+                    traditionDescription
                 }
-                
-                closeButton
+                .padding()
+                .id("top")
             }
+            
+            closeButton
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
+            isTabBarVisible.wrappedValue = false
             vm.fetchData()
         }
-}
-
-// MARK: - Components
-private var traditionTitle: some View {
-    Text(title)
-        .font(Constants.BaseFonts.h1Bold)
-        .foregroundColor(Constants.Colors.text)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal)
-}
-
-private var traditionDescription: some View {
-    Text(description)
-        .font(Constants.BaseFonts.body)
-        .foregroundColor(Constants.Colors.text)
-        .lineSpacing(6)
-        .padding(.horizontal)
-}
-
-private var closeButton: some View {
-    VStack {
-        HStack {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "arrowshape.backward.fill")
-                    .resizable()
-                    .scaledToFill()
-                    .foregroundStyle(Constants.Colors.accent)
-                    .frame(
-                        width: Constants.PaddingSizes.p24,
-                        height: Constants.PaddingSizes.p24
-                    )
+        .onDisappear {
+            isTabBarVisible.wrappedValue = true
+        }
+    }
+    
+    // MARK: - Components
+    private var traditionTitle: some View {
+        Text(title)
+            .font(Constants.BaseFonts.h1Bold)
+            .foregroundColor(Constants.Colors.text)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal)
+    }
+    
+    private var traditionDescription: some View {
+        Text(description)
+            .font(Constants.BaseFonts.body)
+            .foregroundColor(Constants.Colors.text)
+            .lineSpacing(6)
+            .padding(.horizontal)
+    }
+    
+    private var closeButton: some View {
+        VStack {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "arrowshape.backward.fill")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundStyle(Constants.Colors.accent)
+                        .frame(
+                            width: Constants.PaddingSizes.p24,
+                            height: Constants.PaddingSizes.p24
+                        )
+                }
+                .adaptiveShadow(colorScheme: colorScheme)
+                Spacer()
             }
-            .adaptiveShadow(colorScheme: colorScheme)
+            .padding(.top, Constants.PaddingSizes.p12)
+            .padding(.leading, Constants.PaddingSizes.p24)
+            
             Spacer()
         }
-        .padding(.top, Constants.PaddingSizes.p12)
-        .padding(.leading, Constants.PaddingSizes.p24)
-        
-        Spacer()
     }
-}
 }

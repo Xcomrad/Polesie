@@ -10,12 +10,12 @@ import SwiftUI
 struct TraditionListView: View {
     @ObservedObject var vm: TraditionsViewModel
     @State private var selectedListItem: TraditionListModel? = nil
+    @Environment(\.isTabBarVisible) var isTabBarVisible
     
     var title: String
     var traditionList: [TraditionListModel]
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
@@ -31,10 +31,13 @@ struct TraditionListView: View {
                     Spacer()
                         .padding(.vertical, Constants.PaddingSizes.p05)
                 }
-            }
         }
         .onAppear {
+            isTabBarVisible.wrappedValue = false
             vm.fetchData()
+        }
+        .onDisappear {
+            isTabBarVisible.wrappedValue = true
         }
         .navigationDestination(item: $selectedListItem) { item in
             TraditionDetailView(vm: vm,
