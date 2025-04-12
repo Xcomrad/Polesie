@@ -18,3 +18,14 @@ extension EnvironmentValues {
         set { self[SidebarVisibleKey.self] = newValue }
     }
 }
+
+struct TabBarVisibilityKey: EnvironmentKey {
+    static var defaultValue: Binding<Bool> = .constant(true)
+}
+
+extension EnvironmentValues {
+    var isTabBarVisible: Binding<Bool> {
+        get { self[TabBarVisibilityKey.self] }
+        set { self[TabBarVisibilityKey.self] = newValue }
+    }
+}
