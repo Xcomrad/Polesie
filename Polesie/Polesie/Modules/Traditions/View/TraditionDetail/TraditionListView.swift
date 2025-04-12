@@ -29,20 +29,20 @@ struct TraditionListView: View {
                         }
                     }
                     Spacer()
-                    .padding(.vertical, Constants.PaddingSizes.p05)
+                        .padding(.vertical, Constants.PaddingSizes.p05)
                 }
             }
         }
         .onAppear {
             vm.fetchData()
         }
-        .fullScreenCover(item: $selectedListItem) { item in
+        .navigationDestination(item: $selectedListItem) { item in
             TraditionDetailView(vm: vm,
                                 title: item.title,
                                 description: item.description)
         }
     }
-       
+    
     // MARK: - Components
     private var headerText: some View {
         Text(title)
