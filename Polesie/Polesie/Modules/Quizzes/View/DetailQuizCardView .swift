@@ -1,4 +1,4 @@
-//
+
 //  QuizzesCardView.swift
 //  Polesie
 //
@@ -45,9 +45,7 @@ struct DetailQuizCardView: View {
                 nextButton
                     .padding()
             }
-<<<<<<< HEAD:Polesie/Polesie/Modules/Quizzes/View/DetailQuizCardView.swift
             .padding(.horizontal, Constants.PaddingSizes.p24)
-            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
             
             if vm.isQuizFinished {
                 ResultPopUp(vm: vm)
@@ -57,12 +55,9 @@ struct DetailQuizCardView: View {
                     ))
                     .zIndex(1)
             }
-=======
-            .padding()
-            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: vm.showResult)
->>>>>>> main:Polesie/Polesie/Modules/Quizzes/View/QuizzesCardView.swift
         }
-        .animation(.easeInOut(duration: Constants.PaddingSizes.p05), value: vm.isQuizFinished)
+        .animation(.easeInOut(duration: 0.3), value: vm.isQuizFinished)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
     }
     
     // MARK: - View Components
