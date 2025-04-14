@@ -11,16 +11,21 @@ final class QuizViewModel: ObservableObject {
     @Published var selectedAnswer: Int?
     @Published var quizThemes: [QuizThemesModel] = []
     
-    @Published private(set) var score = 0
+    @Published var correctAnswersCount = 0
     @Published var currentThemeIndex = 0
     @Published var currentQuestionIndex = 0
     
     @Published var showResult = false
     @Published var isCorrect = false
     @Published var isQuizFinished = false
-
+    
     var currentQuestion: QuizQuestionsModel {
-        quizThemes[currentThemeIndex].questions[currentQuestionIndex]
+        return quizThemes[currentThemeIndex].questions[currentQuestionIndex]
+    }
+    
+    var currentQuestionCount: Int {
+        guard !quizThemes.isEmpty else { return 0 }
+        return quizThemes[currentThemeIndex].questions.count
     }
     
     private let dataManager: DataManager
@@ -48,7 +53,7 @@ final class QuizViewModel: ObservableObject {
         if let index = quizThemes.firstIndex(where: { $0.name == theme.name }) {
             currentThemeIndex = index
             currentQuestionIndex = 0
-            score = 0
+            correctAnswersCount = 0
             resetForNewQuestion()
         }
     }
@@ -58,7 +63,7 @@ final class QuizViewModel: ObservableObject {
         
         isCorrect = selected == currentQuestion.correctAnswerIndex
         if isCorrect {
-            score += 1
+            correctAnswersCount += 1
         }
         showResult = true
     }
@@ -66,10 +71,10 @@ final class QuizViewModel: ObservableObject {
     func moveToNextQuestion() {
         if currentQuestionIndex + 1 < quizThemes[currentThemeIndex].questions.count {
             currentQuestionIndex += 1
+            resetForNewQuestion()
         } else {
             isQuizFinished = true
         }
-        resetForNewQuestion()
     }
     
     private func resetForNewQuestion() {
@@ -78,10 +83,10 @@ final class QuizViewModel: ObservableObject {
         isCorrect = false
     }
     
-    private func restartQuiz() {
+    func restartQuiz() {
         currentQuestionIndex = 0
         isQuizFinished = false
-        score = 0
+        correctAnswersCount = 0
         resetForNewQuestion()
     }
 }

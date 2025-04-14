@@ -13,7 +13,6 @@ struct QuizzesView: View {
     @ObservedObject var vm: QuizViewModel
     
     private let columns = 2
-    private let animationDuration = 0.3
     
     var body: some View {
         NavigationStack {
@@ -23,8 +22,8 @@ struct QuizzesView: View {
                     .ignoresSafeArea(.all)
                 
                 ScrollView {
-                    PinterestGrid(items: vm.quizThemes, columns: columns) { item in
-                        CardsView(theme: item, selectedTheme: $selectedTheme)
+                    PinterestGrid(items: vm.quizThemes, columns: columns) { theme in
+                        CardsView(theme: theme, selectedTheme: $selectedTheme)
                             .adaptiveShadow(colorScheme: colorScheme)
                     }
                     .padding()
@@ -33,12 +32,13 @@ struct QuizzesView: View {
             }
             .navigationTitle("Квизы")
             .onAppear {
-                vm.fetchData() 
+                vm.fetchData()
             }
-            .fullScreenCover(item: $selectedTheme) { item in
-                QuizzesCardView(vm: vm)
+            .fullScreenCover(item: $selectedTheme) { theme in
+                DetailQuizCardView(vm: vm)
+                    .preferredColorScheme(colorScheme)
                     .onAppear {
-                        vm.startQuize(with: item)
+                        vm.startQuize(with: theme)
                     }
             }
         }
@@ -83,15 +83,8 @@ struct CardsView: View {
             selectedTheme = theme
         } label: {
             VStack(alignment: .center, spacing: Constants.PaddingSizes.p8) {
-                Text(theme.name)
-                    .font(Constants.BaseFonts.captionBold)
-                    .foregroundStyle(Constants.Colors.text)
-                
-                Text(theme.description)
-                    .font(Constants.BaseFonts.small)
-                    .foregroundStyle(Constants.Colors.text)
-                    .truncationMode(.tail)
-                
+                quizName
+                quizeDescription
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -105,7 +98,8 @@ struct CardsView: View {
                     .stroke(Constants.Colors.stoneGray.opacity(Constants.PaddingSizes.p05),
                             lineWidth: Constants.PaddingSizes.p05))
             .opacity(isVisible ? 1 : 0)
-            .animation(.spring(dampingFraction: Constants.PaddingSizes.p05), value: isVisible)
+            .animation(.easeOut(duration: Constants.PaddingSizes.p05), value: isPressed)
+            .animation(.spring(duration: Constants.PaddingSizes.p05), value: isVisible)
         }
         .onTapGesture {
             withAnimation {
@@ -118,6 +112,21 @@ struct CardsView: View {
         .adaptiveShadow(colorScheme: colorScheme)
         .buttonStyle(.plain)
     }
+    
+    // MARK: - Card Components
+    private var quizName: some View {
+        Text(theme.name)
+            .font(Constants.BaseFonts.captionBold)
+            .foregroundStyle(Constants.Colors.text)
+    }
+    
+    private var quizeDescription: some View {
+        Text(theme.description)
+            .font(Constants.BaseFonts.small)
+            .foregroundStyle(Constants.Colors.text)
+            .truncationMode(.tail)
+    }
+    
 }
 
 #Preview {

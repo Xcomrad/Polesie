@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct QuizzesCardView: View {
+struct DetailQuizCardView: View {
     @StateObject var vm: QuizViewModel
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
@@ -18,8 +19,18 @@ struct QuizzesCardView: View {
                 .ignoresSafeArea(.all)
             
             VStack {
+                HStack {
+                    Spacer()
+                    dismissButton
+                }
+                .padding(.bottom, Constants.PaddingSizes.p24)
+                
                 questionTitle
-                    .padding()
+                    .padding(.bottom, Constants.PaddingSizes.p12)
+                
+                quizeProrgeress
+                    .padding(.bottom, Constants.PaddingSizes.p12)
+                
                 answersSection
                     .transition(.move(edge: .leading))
                 
@@ -32,13 +43,50 @@ struct QuizzesCardView: View {
                 }
                 
                 nextButton
+                    .padding()
             }
+<<<<<<< HEAD:Polesie/Polesie/Modules/Quizzes/View/DetailQuizCardView.swift
+            .padding(.horizontal, Constants.PaddingSizes.p24)
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
+            
+            if vm.isQuizFinished {
+                ResultPopUp(vm: vm)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .scale(scale: 0.9)),
+                        removal: .opacity
+                    ))
+                    .zIndex(1)
+            }
+=======
             .padding()
             .animation(.spring(response: 0.3, dampingFraction: 0.8), value: vm.showResult)
+>>>>>>> main:Polesie/Polesie/Modules/Quizzes/View/QuizzesCardView.swift
         }
+        .animation(.easeInOut(duration: Constants.PaddingSizes.p05), value: vm.isQuizFinished)
     }
     
     // MARK: - View Components
+    private var dismissButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Image(systemName:"xmark.app.fill")
+                .resizable()
+                .scaledToFill()
+                .frame(width: Constants.PaddingSizes.p24, height: Constants.PaddingSizes.p24)
+                .foregroundColor(Constants.Colors.accent)
+        }
+    }
+    
+    private var quizeProrgeress: some View {
+        HStack {
+            ProgressView(value: Double(vm.correctAnswersCount),
+                         total: Double(vm.currentQuestionCount))
+            .progressViewStyle(.linear)
+            .tint(Constants.Colors.darkGreen)
+        }
+    }
+    
     private var questionTitle: some View {
         Text(vm.currentQuestion.text)
             .font(Constants.BaseFonts.h2)
@@ -97,7 +145,6 @@ struct QuizzesCardView: View {
                 }
             }
         }
-        .padding(.horizontal, Constants.PaddingSizes.p8)
     }
     
     private var nextButton: some View {
@@ -122,11 +169,9 @@ struct QuizzesCardView: View {
         }
         .disabled(vm.selectedAnswer == nil)
         .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
-        .padding(.horizontal)
-        .padding(.top, Constants.PaddingSizes.p16)
     }
 }
 
 #Preview {
-    QuizzesCardView(vm: QuizViewModel(dataManager: DataManager()))
+    DetailQuizCardView(vm: QuizViewModel(dataManager: DataManager()))
 }
