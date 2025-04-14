@@ -6,24 +6,25 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct TraditionsView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var vm: TraditionsViewModel
+    @State private var selectedTradition: TraditionsModel? = nil
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
-                    .ignoresSafeArea(.all)
+                    .ignoresSafeArea()
                 
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
                         ForEach(vm.traditions, id: \.self) { item in
-                            TraditionCardView(imageName: item.icon,
-                                              text: item.title)
+                            TraditionCardView(imageName: item.icon, text: item.title) {
+                                selectedTradition = item
+                            }
                             .adaptiveShadow(colorScheme: colorScheme)
                         }
                     }
@@ -32,10 +33,14 @@ struct TraditionsView: View {
                 .scrollIndicators(.hidden)
             }
             .navigationTitle("Традиции")
+            .navigationDestination(item: $selectedTradition) { item in
+                TraditionListView(vm: vm,
+                                  title: item.title,
+                                  traditionList: item.listModels ?? [])
+            }
         }
         .onAppear {
             vm.fetchData()
         }
     }
 }
-

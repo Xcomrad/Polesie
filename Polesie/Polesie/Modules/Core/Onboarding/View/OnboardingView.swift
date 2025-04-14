@@ -65,7 +65,7 @@ struct OnboardingView: View {
             }
         }
         .fullScreenCover(isPresented: $vm.navigateToMainView) {
-            MainView()
+            MainView(selectedTab: .history)
                 .environmentObject(darkModeManager)
         }
     }

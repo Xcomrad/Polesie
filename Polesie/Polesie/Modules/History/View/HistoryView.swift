@@ -11,6 +11,7 @@ struct HistoryView: View {
     @EnvironmentObject var fontSizeManager: FontSizeManager
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.isSidebarVisible) private var isSidebarVisible
+    @Environment(\.isTabBarVisible) private var isTabBarVisible
     
     var body: some View {
         ZStack {
