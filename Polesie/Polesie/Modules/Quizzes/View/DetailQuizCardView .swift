@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailQuizCardView: View {
-    @StateObject var vm: QuizViewModel
+    @ObservedObject var vm: QuizViewModel
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
@@ -32,20 +32,21 @@ struct DetailQuizCardView: View {
                     .padding(.bottom, Constants.PaddingSizes.p12)
                 
                 answersSection
-                    .transition(.move(edge: .leading))
                 
                 if vm.showResult {
                     resultSection
                         .transition(.asymmetric(
                             insertion: .opacity.combined(with: .move(edge: .bottom)),
-                            removal: .opacity
-                        ))
+                            removal: .opacity))
                 }
                 
                 nextButton
                     .padding()
+                
+                Spacer()
+                
             }
-            .padding(.horizontal, Constants.PaddingSizes.p24)
+            .padding(.all, Constants.PaddingSizes.p24)
             
             if vm.isQuizFinished {
                 ResultPopUp(vm: vm)
@@ -102,12 +103,14 @@ struct DetailQuizCardView: View {
     }
     
     private var answersSection: some View {
-        ForEach(0..<(vm.currentQuestion.options.count), id: \.self) { index in
-            answerButton(index)
-                .transition(.asymmetric(
-                    insertion: .opacity.combined(with: .move(edge: .trailing)),
-                    removal: .opacity
-                ))
+        VStack {
+            ForEach(0..<(vm.currentQuestion.options.count), id: \.self) { index in
+                answerButton(index)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .move(edge: .trailing)),
+                        removal: .opacity
+                    ))
+            }
         }
     }
     
@@ -165,8 +168,4 @@ struct DetailQuizCardView: View {
         .disabled(vm.selectedAnswer == nil)
         .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
     }
-}
-
-#Preview {
-    DetailQuizCardView(vm: QuizViewModel(dataManager: DataManager()))
 }
