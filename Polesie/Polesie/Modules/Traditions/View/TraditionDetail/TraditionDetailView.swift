@@ -30,7 +30,6 @@ struct TraditionDetailView: View {
                     traditionDescription
                 }
                 .padding()
-                .id("top")
             }
             
             closeButton
