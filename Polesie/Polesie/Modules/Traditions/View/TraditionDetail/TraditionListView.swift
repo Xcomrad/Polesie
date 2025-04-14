@@ -41,6 +41,7 @@ struct TraditionListView: View {
         }
         .navigationDestination(item: $selectedListItem) { item in
             TraditionDetailView(vm: vm,
+                                icon: item.icons ?? "",
                                 title: item.title,
                                 description: item.description)
         }

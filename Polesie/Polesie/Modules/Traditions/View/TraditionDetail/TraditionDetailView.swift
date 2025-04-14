@@ -13,76 +13,140 @@ struct TraditionDetailView: View {
     @Environment(\.isTabBarVisible) var isTabBarVisible
     @ObservedObject var vm: TraditionsViewModel
     
-    @State private var isPressed = false
+    @State private var isSaved = false
+    @State private var scrollOffset: CGFloat = 0
+    @State private var showContent = false
     
+    var icon: String
     var title: String
     var description: String
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Constants.Colors.background
                 .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
-            ScrollView {
-                VStack(spacing: Constants.PaddingSizes.p16) {
-                    traditionTitle
-                        .padding(.top, Constants.PaddingSizes.p50)
-                    traditionDescription
-                }
-                .padding()
-            }
             
-            closeButton
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    
+                    GeometryReader { geometry in
+                        traditionHeaderImage
+                            .offset(y: scrollOffset > 0 ? -scrollOffset/3 : 0)
+                            .onAppear {
+                                scrollOffset = geometry.frame(in: .global).minY
+                            }
+                    }
+                    .frame(height: Constants.PaddingSizes.p300)
+                    
+                    contentSection
+                        .opacity(showContent ? 1 : 0)
+                        .offset(y: showContent ? 0 : 20)
+                }
+            }
+            .overlay(navigationButtons, alignment: .top)
         }
+        .edgesIgnoringSafeArea(.top)
         .navigationBarBackButtonHidden(true)
         .onAppear {
+            withAnimation(.easeOut(duration: Constants.PaddingSizes.p05).delay(0.1)) {
+                showContent = true
+            }
+            
             isTabBarVisible.wrappedValue = false
             vm.fetchData()
+            
         }
         .onDisappear {
             isTabBarVisible.wrappedValue = true
         }
     }
     
-    // MARK: - Components
-    private var traditionTitle: some View {
-        Text(title)
-            .font(Constants.BaseFonts.h1Bold)
-            .foregroundColor(Constants.Colors.text)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal)
-    }
-    
-    private var traditionDescription: some View {
-        Text(description)
-            .font(Constants.BaseFonts.body)
-            .foregroundColor(Constants.Colors.text)
-            .lineSpacing(6)
-            .padding(.horizontal)
-    }
-    
-    private var closeButton: some View {
-        VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "arrowshape.backward.fill")
-                        .resizable()
-                        .scaledToFill()
-                        .foregroundStyle(Constants.Colors.accent)
-                        .frame(
-                            width: Constants.PaddingSizes.p24,
-                            height: Constants.PaddingSizes.p24
-                        )
-                }
-                .adaptiveShadow(colorScheme: colorScheme)
-                Spacer()
+    // MARK: - Сomponents
+    private var traditionHeaderImage: some View {
+        Image(icon)
+            .resizable()
+            .scaledToFill()
+            .frame(width: UIScreen.main.bounds.width)
+            .clipped()
+            .overlay(alignment: .bottom) {
+                LinearGradient(
+                    colors: [.clear, Constants.Colors.background
+                        .opacity(Constants.PaddingSizes.p05)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: Constants.PaddingSizes.p100)
             }
-            .padding(.top, Constants.PaddingSizes.p12)
-            .padding(.leading, Constants.PaddingSizes.p24)
+    }
+    
+    private var contentSection: some View {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
+            Text(title)
+                .font(Constants.BaseFonts.h1Bold)
+                .foregroundColor(Constants.Colors.text)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+                .padding(.top, Constants.PaddingSizes.p24)
             
+            Text(description)
+                .font(Constants.BaseFonts.body)
+                .foregroundColor(Constants.Colors.text)
+                .lineSpacing(8)
+                .padding(.horizontal)
+        }
+        .padding(.bottom, Constants.PaddingSizes.p50)
+        .background(Constants.Colors.background)
+        .adaptiveShadow(colorScheme: colorScheme)
+    }
+    
+    private var navigationButtons: some View {
+        HStack {
+            backButton
             Spacer()
+            saveButton
+        }
+        .padding(.horizontal)
+        .padding(.top, Constants.PaddingSizes.p50)
+    }
+    
+    private var backButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Circle()
+                .fill(Constants.Colors.background
+                    .opacity(Constants.PaddingSizes.p05))
+                .frame(width: Constants.PaddingSizes.p50,
+                       height:  Constants.PaddingSizes.p50)
+                .overlay(
+                    Image(systemName: "chevron.left")
+                        .frame(width: Constants.PaddingSizes.p35,
+                               height: Constants.PaddingSizes.p35)
+                        .foregroundColor(Constants.Colors.accent)
+                )
+                .adaptiveShadow(colorScheme: colorScheme)
+        }
+    }
+    
+    private var saveButton: some View {
+        Button {
+            withAnimation(.spring()) {
+                isSaved.toggle()
+            }
+        } label: {
+            Circle()
+                .fill(Constants.Colors.background
+                    .opacity(Constants.PaddingSizes.p05))
+                .frame(width: Constants.PaddingSizes.p50,
+                       height: Constants.PaddingSizes.p50)
+                .overlay(
+                    Image(systemName: isSaved ? "heart.fill" : "heart")
+                        .frame(width: Constants.PaddingSizes.p35,
+                               height:  Constants.PaddingSizes.p35)
+                        .foregroundColor(isSaved ? .red : Constants.Colors.accent)
+                )
+                .adaptiveShadow(colorScheme: colorScheme)
         }
     }
 }
