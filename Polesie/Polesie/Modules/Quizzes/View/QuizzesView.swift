@@ -35,7 +35,7 @@ struct QuizzesView: View {
                 vm.fetchData()
             }
             .fullScreenCover(item: $selectedTheme) { theme in
-                QuizzesCardView(vm: vm)
+                DetailQuizCardView(vm: vm)
                     .onAppear {
                         vm.startQuize(with: theme)
                     }
@@ -82,15 +82,8 @@ struct CardsView: View {
             selectedTheme = theme
         } label: {
             VStack(alignment: .center, spacing: Constants.PaddingSizes.p8) {
-                Text(theme.name)
-                    .font(Constants.BaseFonts.captionBold)
-                    .foregroundStyle(Constants.Colors.text)
-                
-                Text(theme.description)
-                    .font(Constants.BaseFonts.small)
-                    .foregroundStyle(Constants.Colors.text)
-                    .truncationMode(.tail)
-                
+                quizName
+                quizeDescription
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -118,6 +111,21 @@ struct CardsView: View {
         .adaptiveShadow(colorScheme: colorScheme)
         .buttonStyle(.plain)
     }
+    
+    // MARK: - Card Components
+    private var quizName: some View {
+        Text(theme.name)
+            .font(Constants.BaseFonts.captionBold)
+            .foregroundStyle(Constants.Colors.text)
+    }
+    
+    private var quizeDescription: some View {
+        Text(theme.description)
+            .font(Constants.BaseFonts.small)
+            .foregroundStyle(Constants.Colors.text)
+            .truncationMode(.tail)
+    }
+
 }
 
 #Preview {

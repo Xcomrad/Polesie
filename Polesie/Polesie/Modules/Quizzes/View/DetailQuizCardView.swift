@@ -7,18 +7,26 @@
 
 import SwiftUI
 
-struct QuizzesCardView: View {
+struct DetailQuizCardView: View {
     @StateObject var vm: QuizViewModel
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
-            Constants.Colors.background.opacity(0.5)
+            Constants.Colors.background
+                .opacity(0.5)
                 .ignoresSafeArea(.all)
             
             VStack {
+                HStack {
+                    Spacer()
+                    dismissButton
+                }
+                .padding(.bottom, Constants.PaddingSizes.p24)
+                
                 questionTitle
-                    .padding()
+                    .padding(.bottom, Constants.PaddingSizes.p12)
                 answersSection
                     .transition(.move(edge: .leading))
                 
@@ -31,13 +39,26 @@ struct QuizzesCardView: View {
                 }
                 
                 nextButton
+                    .padding()
             }
-            .padding()
+            .padding(.horizontal, Constants.PaddingSizes.p24)
             .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
         }
     }
     
     // MARK: - View Components
+    private var dismissButton: some View {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName:"xmark.app.fill")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: Constants.PaddingSizes.p24, height: Constants.PaddingSizes.p24)
+                    .foregroundColor(Constants.Colors.accent)
+        }
+    }
+    
     private var questionTitle: some View {
         Text(vm.currentQuestion.text)
             .font(Constants.BaseFonts.h2)
@@ -87,7 +108,6 @@ struct QuizzesCardView: View {
                 }
             }
         }
-        .padding(.horizontal, Constants.PaddingSizes.p8)
     }
     
     private var nextButton: some View {
@@ -111,11 +131,9 @@ struct QuizzesCardView: View {
         }
         .disabled(vm.selectedAnswer == nil)
         .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
-        .padding(.horizontal)
-        .padding(.top, Constants.PaddingSizes.p16)
     }
 }
 
 #Preview {
-    QuizzesCardView(vm: QuizViewModel(dataManager: DataManager()))
+    DetailQuizCardView(vm: QuizViewModel(dataManager: DataManager()))
 }
