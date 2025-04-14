@@ -15,64 +15,66 @@ struct AnswerButton: View {
     let action: () -> Void
     
     private var iconColor: Color {
-        isCorrect ? Constants.Colors.darkGreen :
-        isWrong ? Constants.Colors.earthyBrown :
-        isSelected ? Constants.Colors.accent : Constants.Colors.text
+        if isCorrect { return Constants.Colors.darkGreen }
+        if isWrong { return Constants.Colors.earthyBrown }
+        return isSelected ? Constants.Colors.accent : Constants.Colors.text.opacity(0.7)
     }
     
     private var iconImage: String {
-        isCorrect ? "checkmark.circle.fill" :
-        isWrong ? "xmark.circle.fill" :
-        isSelected ? "checkmark.circle.fill" : "circle"
+        if isCorrect { return "checkmark.circle.fill" }
+        if isWrong { return "xmark.circle.fill" }
+        return isSelected ? "circle.fill" : "circle"
     }
     
     private var backgroundColor: Color {
-        isCorrect ? Constants.Colors.darkGreen.opacity(0.1) :
-        isWrong ? Constants.Colors.earthyBrown.opacity(0.1) :
-        isSelected ? Constants.Colors.accent.opacity(0.1) : Constants.Colors.background
+        if isCorrect { return Constants.Colors.darkGreen.opacity(0.08) }
+        if isWrong { return Constants.Colors.earthyBrown.opacity(0.08) }
+        return isSelected ? Constants.Colors.accent.opacity(0.08) : Constants.Colors.background
     }
     
     private var borderColor: Color {
-        isCorrect ? Constants.Colors.darkGreen :
-        isWrong ? Constants.Colors.earthyBrown :
-        isSelected ? Constants.Colors.accent : Constants.Colors.text.opacity(0.2)
+        if isCorrect { return Constants.Colors.darkGreen.opacity(0.3) }
+        if isWrong { return Constants.Colors.earthyBrown.opacity(0.3) }
+        return isSelected ? Constants.Colors.accent.opacity(0.3) : Constants.Colors.text.opacity(0.1)
+    }
+    
+    private var borderWidth: CGFloat {
+        isSelected ? 1.5 : 1.0
     }
     
     var body: some View {
-        Button(action: {
-            withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
-                action()
-            }
-        }) {
-            HStack(spacing: Constants.PaddingSizes.p8) {
+        Button(action: action) {
+            HStack(spacing: Constants.PaddingSizes.p12) {
                 Image(systemName: iconImage)
-                    .symbolEffect(.bounce, value: isSelected)
+                    .font(.system(size: 22))
                     .foregroundColor(iconColor)
-                    .animation(.easeInOut(duration: 0.3), value: isSelected)
+                    .transition(.opacity)
                 
                 Text(option)
                     .font(Constants.BaseFonts.body)
                     .foregroundColor(Constants.Colors.text)
                     .multilineTextAlignment(.leading)
-                    .contentTransition(.opacity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
                 
-                Spacer()
+                Spacer(minLength: 0)
             }
-            .padding()
+            .padding(Constants.PaddingSizes.p16)
             .background(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p16)
                     .fill(backgroundColor)
-                    .animation(.easeInOut(duration: 0.4), value: backgroundColor)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                    .stroke(borderColor, lineWidth: 1)
-                    .animation(.easeInOut(duration: 0.3), value: borderColor)
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p16)
+                    .stroke(borderColor, lineWidth: borderWidth)
             )
             .scaleEffect(isSelected ? 1.02 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
+            .animation(.spring(), value: isSelected)
         }
         .buttonStyle(.plain)
-        .sensoryFeedback(.selection, trigger: isSelected)
+        .sensoryFeedback(.impact(flexibility: .soft), trigger: isSelected)
+        .sensoryFeedback(.success, trigger: isCorrect)
+        .sensoryFeedback(.error, trigger: isWrong)
+        .accessibilityHint(isCorrect ? "Правильный ответ" : isWrong ? "Неправильный ответ" : "")
     }
 }

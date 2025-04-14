@@ -16,21 +16,21 @@ struct TraditionListView: View {
     var traditionList: [TraditionListModel]
     
     var body: some View {
-            ZStack {
-                Constants.Colors.background
-                    .opacity(Constants.PaddingSizes.p05)
-                    .ignoresSafeArea(.all)
-                
-                VStack {
-                    headerText
-                    ForEach(traditionList, id: \.id) { item in
-                        TraditionListCell(traditionList: item) {
-                            selectedListItem = item
-                        }
+        ZStack {
+            Constants.Colors.background
+                .opacity(Constants.PaddingSizes.p05)
+                .ignoresSafeArea(.all)
+            
+            VStack {
+                headerText
+                ForEach(traditionList, id: \.id) { item in
+                    TraditionListCell(traditionList: item) {
+                        selectedListItem = item
                     }
-                    Spacer()
-                        .padding(.vertical, Constants.PaddingSizes.p05)
                 }
+                Spacer()
+                    .padding(.vertical, Constants.PaddingSizes.p05)
+            }
         }
         .onAppear {
             isTabBarVisible.wrappedValue = false
