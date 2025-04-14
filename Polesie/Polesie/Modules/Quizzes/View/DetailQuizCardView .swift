@@ -49,16 +49,37 @@ struct DetailQuizCardView: View {
             .padding(.all, Constants.PaddingSizes.p24)
             
             if vm.isQuizFinished {
-                ResultPopUp(vm: vm)
-                    .transition(.asymmetric(
-                        insertion: .opacity.combined(with: .scale(scale: 0.9)),
-                        removal: .opacity
-                    ))
-                    .zIndex(1)
+                ResultPopUp(
+                    text: vm.correctAnswersCount == vm.currentQuestionCount ?
+                    "Поздравляем! Тест пройден!" :
+                    "К сожалению, тест не пройден :(",
+                    score: "Верных ответов: \(vm.correctAnswersCount)",
+                    questions: "А вопросов всего: \(vm.currentQuestionCount)",
+                    description: vm.correctAnswersCount == vm.currentQuestionCount ?
+                    "Вы отлично справились!" :
+                    "Вы можете попробовать снова.",
+                    onRestart: vm.restartQuiz,
+                    onMenu: {
+                        dismiss()
+                        vm.isQuizFinished = false
+                    }
+                )
+                .transition(.asymmetric(
+                    insertion: .opacity.combined(with: .scale(scale: 0.9)),
+                    removal: .opacity
+                ))
+                .zIndex(1)
             }
         }
-        .animation(.easeInOut(duration: 0.3), value: vm.isQuizFinished)
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: vm.showResult)
+        .animation(
+            .spring(response: 0.4, dampingFraction: 0.8)
+            .speed(1.5),
+            value: vm.showResult
+        )
+        .animation(
+            .easeInOut(duration: 0.3),
+            value: vm.isQuizFinished
+        )
     }
     
     // MARK: - View Components

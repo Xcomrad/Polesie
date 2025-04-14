@@ -16,8 +16,13 @@ final class QuizViewModel: ObservableObject {
     @Published var currentQuestionIndex = 0
     
     @Published var showResult = false
+    @Published var showSuccessBage = false
     @Published var isCorrect = false
     @Published var isQuizFinished = false
+    
+    var allQuestionsDone: Bool {
+        correctAnswersCount == quizThemes[currentThemeIndex].questions.count
+    }
     
     var currentQuestion: QuizQuestionsModel {
         return quizThemes[currentThemeIndex].questions[currentQuestionIndex]
