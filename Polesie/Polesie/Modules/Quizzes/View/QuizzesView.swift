@@ -36,6 +36,7 @@ struct QuizzesView: View {
             }
             .fullScreenCover(item: $selectedTheme) { theme in
                 DetailQuizCardView(vm: vm)
+                    .preferredColorScheme(colorScheme)
                     .onAppear {
                         vm.startQuize(with: theme)
                     }
@@ -125,7 +126,7 @@ struct CardsView: View {
             .foregroundStyle(Constants.Colors.text)
             .truncationMode(.tail)
     }
-
+    
 }
 
 #Preview {
