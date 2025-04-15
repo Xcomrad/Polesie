@@ -14,22 +14,23 @@ final class TraditionsViewModel: ObservableObject {
     
     init(dataManager: DataManager) {
         self.dataManager = dataManager
-        fetchData()
     }
     
     // MARK: - FetchData
     func fetchData() {
-        dataManager.loadData(from: "traditions", type: [TraditionsModel].self) { result in
-            switch result {
-            case .success(let fetchedTraditions):
-                DispatchQueue.main.async {
+        Task { @MainActor in
+            do {
+                let fetchedTraditions: [TraditionsModel] = try await self.dataManager.loadDataFromBundle(file: "traditions", type: [TraditionsModel].self)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
                     self.traditions = fetchedTraditions
                 }
-            case .failure(let failure):
-                print("load traditions data error: \(failure)")
+            } catch {
+                print("Ошибка при загрузке данных традиций: \(error)")
             }
         }
     }
+    
     
     func getTraditionList(for id: Int) -> [TraditionListModel]? {
         traditions.first { $0.id == id }?.listModels

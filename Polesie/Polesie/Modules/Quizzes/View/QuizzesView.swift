@@ -33,8 +33,9 @@ struct QuizzesView: View {
                 }
             }
             .navigationTitle("Квизы")
+            
             .onAppear {
-                vm.fetchData()
+                vm.fetchBundleData()
             }
             .fullScreenCover(item: $selectedTheme) { theme in
                 DetailQuizCardView(vm: vm)
@@ -70,8 +71,4 @@ struct PinterestGrid<Content: View, Item: Identifiable>: View {
             .filter { $0.offset % columns == column }
             .map { $0.element }
     }
-}
-
-#Preview {
-    QuizzesView(vm: QuizViewModel(dataManager: DataManager()))
 }
