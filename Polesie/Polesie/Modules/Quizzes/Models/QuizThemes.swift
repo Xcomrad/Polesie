@@ -12,6 +12,7 @@ struct QuizThemesModel: Codable, Identifiable, Hashable {
     let image: String?
     let name: String
     let description: String
+    var hasSuccessBadge: Bool = false
     let questions: [QuizQuestionsModel]
 
     private enum CodingKeys: String, CodingKey {

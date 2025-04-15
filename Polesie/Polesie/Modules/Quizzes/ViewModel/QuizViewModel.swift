@@ -16,9 +16,10 @@ final class QuizViewModel: ObservableObject {
     @Published var currentQuestionIndex = 0
     
     @Published var showResult = false
+    @Published var showSuccessBage = false
     @Published var isCorrect = false
     @Published var isQuizFinished = false
-    
+
     var currentQuestion: QuizQuestionsModel {
         return quizThemes[currentThemeIndex].questions[currentQuestionIndex]
     }
@@ -74,6 +75,9 @@ final class QuizViewModel: ObservableObject {
             resetForNewQuestion()
         } else {
             isQuizFinished = true
+            if correctAnswersCount == currentQuestionCount {
+                quizThemes[currentThemeIndex].hasSuccessBadge = true
+            }
         }
     }
     
