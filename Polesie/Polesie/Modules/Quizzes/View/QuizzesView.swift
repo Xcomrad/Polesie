@@ -26,12 +26,6 @@ struct QuizzesView: View {
                         ZStack {
                             CardsView(theme: theme, selectedTheme: $selectedTheme)
                                 .adaptiveShadow(colorScheme: colorScheme)
-                            
-                            if vm.allQuestionsDone {
-                                successBage
-                                    .offset(x: -8, y: -8)
-                                    .transition(.scale.combined(with: .opacity))
-                            }
                         }
                     }
                     .padding()
@@ -49,24 +43,6 @@ struct QuizzesView: View {
                         vm.startQuize(with: theme)
                     }
             }
-        }
-    }
-    
-    // MARK: - Bage
-    private var successBage: some View {
-        ZStack {
-            Circle()
-                .fill(Constants.Colors.swampGreen)
-                .frame(width: Constants.PaddingSizes.p24,
-                       height: Constants.PaddingSizes.p24)
-            
-            Image(systemName: "checkmark")
-                .resizable()
-                .scaledToFit()
-                .frame(width: Constants.PaddingSizes.p12,
-                       height: Constants.PaddingSizes.p12)
-                .foregroundColor(Constants.Colors.button)
-                .fontWeight(.bold)
         }
     }
 }
