@@ -44,6 +44,8 @@ struct CardsView: View {
                 if theme.hasSuccessBadge {
                     successBage
                         .padding(Constants.PaddingSizes.p8)
+                        .opacity(isVisible ? 1 : 0)
+                        .animation(.easeOut(duration: 0.2), value: isVisible)
                 }
             }
         }
@@ -81,6 +83,8 @@ struct CardsView: View {
             .padding(Constants.PaddingSizes.p8)
             .background(
                 Rectangle()
+                    .fill(Constants.Colors.background
+                        .opacity(0.7))
                     .stroke(Constants.Colors.darkGreen, lineWidth: 2)
             )
             .rotationEffect(.degrees(Constants.PaddingSizes.p12))
