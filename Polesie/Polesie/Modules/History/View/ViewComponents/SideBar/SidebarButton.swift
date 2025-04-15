@@ -17,7 +17,7 @@ struct SidebarButton: View {
             VStack {
                 Text(title)
                     .font(Constants.BaseFonts.button)
-                    .foregroundStyle(Constants.Colors.riverBlue)
+                    .foregroundStyle(Constants.Colors.button)
                     .padding()
                     .background(Constants.Colors.accent)
                     .multilineTextAlignment(.leading)

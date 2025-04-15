@@ -5,9 +5,9 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0x6B",
-          "green" : "0x9A",
-          "red" : "0xC1"
+          "blue" : "0x35",
+          "green" : "0x4C",
+          "red" : "0x6A"
         }
       },
       "idiom" : "iphone"
@@ -23,9 +23,9 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0x37",
-          "green" : "0xAF",
-          "red" : "0xD4"
+          "blue" : "0x6B",
+          "green" : "0x9A",
+          "red" : "0xC1"
         }
       },
       "idiom" : "iphone"
