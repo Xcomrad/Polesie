@@ -41,7 +41,7 @@ final class DataManager: DataManagerProtocol {
     // MARK: - From Bundle
     func loadDataFromBundle<T: Decodable>(file: String, type: T.Type) async throws -> T {
         guard let url = Bundle.main.url(forResource: file, withExtension: "json") else {
-            throw FileError.fileNotFoundInBundle
+            throw AppError.fileNotFoundInBundle
         }
         
         let data = try Data(contentsOf: url)
@@ -63,7 +63,7 @@ final class DataManager: DataManagerProtocol {
         let directoryURL = try selectDirectory(directory)
         let fileURL = directoryURL.appendingPathComponent("\(file).json")
         guard fileManager.fileExists(atPath: fileURL.path) else {
-            throw FileError.fileNotFound
+            throw AppError.fileNotFound
         }
         
         let data = try Data(contentsOf: fileURL)
@@ -87,7 +87,7 @@ final class DataManager: DataManagerProtocol {
         case .cachesDirectory:
             return try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         default:
-            throw FileError.invalidDirectory
+            throw AppError.invalidDirectory
         }
     }
 }

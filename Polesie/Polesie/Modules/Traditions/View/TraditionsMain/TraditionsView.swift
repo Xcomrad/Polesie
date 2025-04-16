@@ -40,7 +40,7 @@ struct TraditionsView: View {
             }
         }
         .onAppear {
-            vm.fetchData()
+            Task { await vm.fetchData() }
         }
     }
 }
