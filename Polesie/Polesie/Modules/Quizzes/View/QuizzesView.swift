@@ -37,7 +37,7 @@ struct QuizzesView: View {
                 DetailQuizCardView(vm: vm)
                     .preferredColorScheme(colorScheme)
                     .onAppear {
-                        vm.startQuize(with: theme)
+                        vm.startQuiz(with: theme)
                     }
             }
         }

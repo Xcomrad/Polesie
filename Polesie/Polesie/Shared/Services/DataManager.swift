@@ -8,7 +8,8 @@
 import Foundation
 
 protocol DataManagerProtocol {
-    func loadDataFromBundle<T: Decodable>(file: String, type: T.Type) async throws -> T
+    func loadDataFromBundle<T: Decodable>(file: String,
+                                          type: T.Type) async throws -> T
     func save<T: Encodable>(_ object: T,
                             to file: String,
                             in directory: FileManager.SearchPathDirectory) throws
@@ -16,8 +17,15 @@ protocol DataManagerProtocol {
                             in directory: FileManager.SearchPathDirectory) throws -> T
     func delete(file: String,
                 in directory: FileManager.SearchPathDirectory) throws
-    func savePassedThems(_ themes: [QuizThemesModel]) async throws
-    func loadPassedThems() async throws -> [QuizThemesModel]?
+    
+    func savePassedTheme(_ id: [Int]) async throws
+    func loadPassedTheme() async throws -> [Int]
+    
+    func saveFavoriteTraditions(_ id: [Int]) async throws
+    func loadFavoriteTraditions() async throws -> [Int]?
+    
+    func saveFavoritePlaces(_ id: [Int]) async throws
+    func loadFavoritePlaces() async throws -> [Int]?
 }
 
 final class DataManager: DataManagerProtocol {
@@ -84,17 +92,16 @@ final class DataManager: DataManagerProtocol {
     }
 }
 
-// MARK: - For passed quize thems
+// MARK: - For passed quiz themes
 extension DataManager {
-    private var passedThems: String { "passedThems" }
+    private var passedThemesFile: String { "passedThemes" }
     
-    func savePassedThems(_ themes: [QuizThemesModel]) async throws {
-        try save(themes, to: passedThems)
+    func savePassedTheme(_ id: [Int]) async throws {
+        try save(id, to: passedThemesFile)
     }
     
-    func loadPassedThems() async throws -> [QuizThemesModel]? {
-        let loadedThemes: [QuizThemesModel]? = try load(from: passedThems)
-        return loadedThemes
+    func loadPassedTheme() async throws -> [Int] {
+        try load(from: passedThemesFile)
     }
 }
 
@@ -102,11 +109,24 @@ extension DataManager {
 extension DataManager {
     private var favoriteTraditions: String { "favoriteTraditions" }
     
-    func saveFavoriteTraditions(_ themes: TraditionsModel) async throws {
-        try save(themes, to: favoriteTraditions)
+    func saveFavoriteTraditions(_ id: [Int]) async throws {
+        try save(id, to: favoriteTraditions)
     }
     
-    func loadFavoriteTraditions() async throws -> TraditionsModel? {
+    func loadFavoriteTraditions() async throws -> [Int]? {
         try load(from: favoriteTraditions)
+    }
+}
+
+// MARK: - For places
+extension DataManager {
+    private var favoritePlaces: String { "favoritePlaces" }
+    
+    func saveFavoritePlaces(_ id: [Int]) async throws {
+        try save(id, to: favoritePlaces)
+    }
+    
+    func loadFavoritePlaces() async throws -> [Int]? {
+        try load(from: favoritePlaces)
     }
 }
