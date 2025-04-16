@@ -8,8 +8,8 @@
 import SwiftUI
 
 final class QuizViewModel: ObservableObject {
-    @Published var selectedAnswer: Int?
     @Published var quizThemes: [QuizThemesModel] = []
+    @Published var selectedAnswer: Int?
     
     @Published var correctAnswersCount = 0
     @Published var currentThemeIndex = 0
@@ -21,45 +21,46 @@ final class QuizViewModel: ObservableObject {
     @Published var isQuizFinished = false
     
     var currentQuestion: QuizQuestionsModel {
-        return quizThemes[currentThemeIndex].questions[currentQuestionIndex]
+        quizThemes[currentThemeIndex].questions[currentQuestionIndex]
     }
     
     var currentQuestionCount: Int {
-        guard !quizThemes.isEmpty else { return 0 }
-        return quizThemes[currentThemeIndex].questions.count
+        quizThemes[currentThemeIndex].questions.count
     }
     
-    private let dataManager: DataManager
+    private let dataManager: DataManagerProtocol
     
-    init(dataManager: DataManager) {
+    init(dataManager: DataManager = DataManager()) {
         self.dataManager = dataManager
+        Task { await fetchData() }
     }
     
-    // MARK: - FetchData
-    func fetchBundleData() {
-        Task { @MainActor in
-            do {
-                let data: [QuizThemesModel] = try await dataManager.loadDataFromBundle(file: "quizzes", type: [QuizThemesModel].self)
-                let passedThemes = try await dataManager.loadPassedThemes()
-                let updatedData = data.map { theme -> QuizThemesModel in
-                    var mutableTheme = theme
-                    if passedThemes.contains(theme.name) {
-                        mutableTheme.hasSuccessBadge = true
+    @MainActor
+    func fetchData() async {
+        do {
+            var bundleThemes = try await dataManager.loadDataFromBundle(file: "quizzes", type: [QuizThemesModel].self)
+            let passedThemes = try await dataManager.loadPassedThems()
+
+            if let passedThemes = passedThemes {
+                for (index, var theme) in bundleThemes.enumerated() {
+                    if passedThemes.contains(where: { $0.id == theme.id && $0.hasSuccessBadge }) {
+                        theme.hasSuccessBadge = true
                     }
-                    return mutableTheme
+                    bundleThemes[index] = theme
                 }
-                
-                quizThemes = updatedData
-                
-            } catch {
-                print("ошибка получения данных: \(error.localizedDescription)")
             }
+            
+            DispatchQueue.main.async {
+                self.quizThemes = bundleThemes
+            }
+        } catch {
+            print("Failed to load themes: \(error.localizedDescription)")
         }
     }
     
-    // MARK: - Actions
+    // MARK: - Start Quiz
     func startQuize(with theme: QuizThemesModel) {
-        if let index = quizThemes.firstIndex(where: { $0.name == theme.name }) {
+        if let index = quizThemes.firstIndex(where: { $0.id == theme.id }) {
             currentThemeIndex = index
             currentQuestionIndex = 0
             correctAnswersCount = 0
@@ -67,9 +68,18 @@ final class QuizViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func markThemeAsPassed(_ theme: QuizThemesModel) async {
+        guard let index = quizThemes.firstIndex(where: { $0.id == theme.id }) else { return }
+        quizThemes[index].hasSuccessBadge = true
+        
+        let passedThemes = quizThemes.filter { $0.hasSuccessBadge }
+        try? await dataManager.savePassedThems(passedThemes)
+    }
+    
+    // MARK: - Answer Checking
     func checkAnswer() {
         guard let selected = selectedAnswer else { return }
-        
         isCorrect = selected == currentQuestion.correctAnswerIndex
         if isCorrect {
             correctAnswersCount += 1
@@ -78,21 +88,18 @@ final class QuizViewModel: ObservableObject {
     }
     
     func moveToNextQuestion() {
-        if currentQuestionIndex + 1 < quizThemes[currentThemeIndex].questions.count {
+        if currentQuestionIndex + 1 < currentQuestionCount {
             currentQuestionIndex += 1
             resetForNewQuestion()
         } else {
             isQuizFinished = true
             if correctAnswersCount == currentQuestionCount {
-                markCurrentThemeAsPassed()
+                showSuccessBage = true
+                Task {
+                    await markThemeAsPassed(quizThemes[currentThemeIndex])
+                }
             }
         }
-    }
-    
-    private func resetForNewQuestion() {
-        selectedAnswer = nil
-        showResult = false
-        isCorrect = false
     }
     
     func restartQuiz() {
@@ -102,21 +109,9 @@ final class QuizViewModel: ObservableObject {
         resetForNewQuestion()
     }
     
-    func markCurrentThemeAsPassed() {
-        Task { @MainActor in
-            do {
-                var passedThemes = try await dataManager.loadPassedThemes()
-                let currentThemeName = quizThemes[currentThemeIndex].name
-                passedThemes.insert(currentThemeName)
-                try await dataManager.savePassedThemes(passedThemes)
-                
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.quizThemes[self.currentThemeIndex].hasSuccessBadge = true
-                }
-            } catch {
-                print("Ошибка при сохранении данных: \(error.localizedDescription)")
-            }
-        }
+    private func resetForNewQuestion() {
+        selectedAnswer = nil
+        showResult = false
+        isCorrect = false
     }
 }
