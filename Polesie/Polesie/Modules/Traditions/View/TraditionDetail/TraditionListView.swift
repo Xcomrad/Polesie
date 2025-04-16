@@ -34,13 +34,14 @@ struct TraditionListView: View {
         }
         .onAppear {
             isTabBarVisible.wrappedValue = false
-            vm.fetchData()
+            Task { await vm.fetchData() }
         }
         .onDisappear {
             isTabBarVisible.wrappedValue = true
         }
         .navigationDestination(item: $selectedListItem) { item in
             TraditionDetailView(vm: vm,
+                                id: item.id,
                                 icon: item.icons ?? "",
                                 title: item.title,
                                 description: item.description)

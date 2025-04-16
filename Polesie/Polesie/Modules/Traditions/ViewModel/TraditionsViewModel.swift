@@ -7,31 +7,58 @@
 
 import SwiftUI
 
-
+@MainActor
 final class TraditionsViewModel: ObservableObject {
     @Published var traditions: [TraditionsModel] = []
-    private let dataManager: DataManager
-    
-    init(dataManager: DataManager) {
+    @Published var favoriteTradition: [Int] = []
+    @Published var error: AppError?
+
+    private let dataManager: DataManagerProtocol
+
+    init(dataManager: DataManager = DataManager()) {
         self.dataManager = dataManager
+        Task { await loadFavorites() }
     }
-    
+
     // MARK: - FetchData
-    func fetchData() {
-        Task { @MainActor in
-            do {
-                let fetchedTraditions: [TraditionsModel] = try await self.dataManager.loadDataFromBundle(file: "traditions", type: [TraditionsModel].self)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.traditions = fetchedTraditions
-                }
-            } catch {
-                print("Ошибка при загрузке данных традиций: \(error)")
-            }
+    func fetchData() async {
+        do {
+            let fetchedData = try await dataManager.loadDataFromBundle(file: "traditions", type: [TraditionsModel].self)
+            traditions = fetchedData
+        } catch {
+            self.error = .fileNotFound
         }
     }
-    
-    
+
+    // MARK: - Favorites Logic
+    func toggleFavorite(id: Int) async {
+        if favoriteTradition.contains(id) {
+            favoriteTradition.removeAll { $0 == id }
+        } else {
+            favoriteTradition.append(id)
+        }
+
+        do {
+            try await dataManager.saveFavoriteTraditions(favoriteTradition)
+        } catch {
+            self.error = .savingFailed
+        }
+    }
+
+    func isFavorite(id: Int) -> Bool {
+        favoriteTradition.contains(id)
+    }
+
+    func loadFavorites() async {
+        do {
+            let saved = try await dataManager.loadFavoriteTraditions()
+            favoriteTradition = saved ?? []
+        } catch {
+            self.error = .loadingFailed
+        }
+    }
+
+    // MARK: - Получение списка по ID
     func getTraditionList(for id: Int) -> [TraditionListModel]? {
         traditions.first { $0.id == id }?.listModels
     }

@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+@MainActor
 final class QuizViewModel: ObservableObject {
     @Published var quizThemes: [QuizThemesModel] = []
+    @Published var error: AppError?
     @Published var selectedAnswer: Int?
     
     @Published var correctAnswersCount = 0
@@ -36,7 +38,6 @@ final class QuizViewModel: ObservableObject {
     }
     
     // MARK: - Fetch data
-    @MainActor
     func fetchData() async {
         do {
             var bundleThemes = try await dataManager.loadDataFromBundle(file: "quizzes", type: [QuizThemesModel].self)
@@ -51,11 +52,10 @@ final class QuizViewModel: ObservableObject {
 
             self.quizThemes = bundleThemes
         } catch {
-            print("Failed to load themes: \(error.localizedDescription)")
+            self.error = .loadingFailed
         }
     }
     
-    @MainActor
     func markThemeAsPassed(_ theme: QuizThemesModel) async {
         guard let index = quizThemes.firstIndex(where: { $0.id == theme.id }) else { return }
         quizThemes[index].hasSuccessBadge = true

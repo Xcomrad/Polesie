@@ -13,10 +13,10 @@ struct TraditionDetailView: View {
     @Environment(\.isTabBarVisible) var isTabBarVisible
     @ObservedObject var vm: TraditionsViewModel
     
-    @State private var isSaved = false
     @State private var scrollOffset: CGFloat = 0
     @State private var showContent = false
     
+    var id: Int
     var icon: String
     var title: String
     var description: String
@@ -54,7 +54,7 @@ struct TraditionDetailView: View {
             }
             
             isTabBarVisible.wrappedValue = false
-            vm.fetchData()
+            Task { await vm.fetchData() }
             
         }
         .onDisappear {
@@ -131,8 +131,10 @@ struct TraditionDetailView: View {
     
     private var saveButton: some View {
         Button {
-            withAnimation(.spring()) {
-                isSaved.toggle()
+            Task {
+                withAnimation(.spring()) {
+                    Task { await vm.toggleFavorite(id: id) }
+                }
             }
         } label: {
             Circle()
@@ -141,10 +143,10 @@ struct TraditionDetailView: View {
                 .frame(width: Constants.PaddingSizes.p50,
                        height: Constants.PaddingSizes.p50)
                 .overlay(
-                    Image(systemName: isSaved ? "heart.fill" : "heart")
+                    Image(systemName: vm.isFavorite(id: id) ? "heart.fill" : "heart")
                         .frame(width: Constants.PaddingSizes.p35,
                                height:  Constants.PaddingSizes.p35)
-                        .foregroundColor(isSaved ? .red : Constants.Colors.accent)
+                        .foregroundColor(vm.isFavorite(id: id) ? .red : Constants.Colors.accent)
                 )
                 .adaptiveShadow(colorScheme: colorScheme)
         }
