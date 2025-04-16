@@ -33,9 +33,9 @@ struct AnswerButton: View {
     }
     
     private var borderColor: Color {
-        if isCorrect { return Constants.Colors.darkGreen.opacity(0.3) }
-        if isWrong { return Constants.Colors.earthyBrown.opacity(0.3) }
-        return isSelected ? Constants.Colors.accent.opacity(0.3) : Constants.Colors.text.opacity(0.1)
+        if isCorrect { return Constants.Colors.darkGreen.opacity(Constants.PaddingSizes.p03) }
+        if isWrong { return Constants.Colors.earthyBrown.opacity(Constants.PaddingSizes.p03) }
+        return isSelected ? Constants.Colors.accent.opacity(Constants.PaddingSizes.p03) : Constants.Colors.text.opacity(0.1)
     }
     
     private var borderWidth: CGFloat {
