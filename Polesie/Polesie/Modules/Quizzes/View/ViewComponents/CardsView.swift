@@ -39,13 +39,16 @@ struct CardsView: View {
                                 lineWidth: Constants.PaddingSizes.p05)
                 )
                 .opacity(isVisible ? 1 : 0)
-                .animation(.easeOut(duration: 0.2), value: isVisible)
+                .animation(.easeOut(duration: Constants.PaddingSizes.p03), value: isVisible)
                 
                 if theme.hasSuccessBadge {
                     successBage
                         .padding(Constants.PaddingSizes.p8)
+                        .scaleEffect(isVisible ? 1 : 0.5)
                         .opacity(isVisible ? 1 : 0)
-                        .animation(.easeOut(duration: 0.2), value: isVisible)
+                        .animation(.interpolatingSpring(stiffness: Constants.PaddingSizes.p200,
+                                                        damping: Constants.PaddingSizes.p12), value: isVisible)
+                        .rotationEffect(.degrees(isVisible ? 0 : -15))
                 }
             }
         }

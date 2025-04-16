@@ -118,7 +118,7 @@ struct ResultPopUp: View {
                 
                 Divider()
                     .background(Constants.Colors.text
-                        .opacity(0.2))
+                        .opacity(Constants.PaddingSizes.p03))
                 
                 HStack(spacing: Constants.PaddingSizes.p16) {
                     Button {

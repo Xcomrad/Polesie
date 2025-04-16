@@ -28,7 +28,7 @@ struct TraditionCardView: View {
         .padding(.all, Constants.PaddingSizes.p12)
         .padding(.top, Constants.PaddingSizes.p12)
         .opacity(isVisible ? 1 : 0)
-        .animation(.spring(duration: Constants.PaddingSizes.p05), value: isVisible)
+        .animation(.spring(duration: Constants.PaddingSizes.p03), value: isVisible)
         .onAppear {
             isVisible = true
         }

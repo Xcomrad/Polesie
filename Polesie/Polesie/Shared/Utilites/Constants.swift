@@ -101,6 +101,7 @@ enum Constants {
     }
     
     enum PaddingSizes {
+        static let p03: CGFloat = 0.3
         static let p05: CGFloat = 0.5
         static let p8: CGFloat = 8
         static let p12: CGFloat = 12

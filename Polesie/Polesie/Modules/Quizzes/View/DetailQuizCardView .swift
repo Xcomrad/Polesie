@@ -77,7 +77,7 @@ struct DetailQuizCardView: View {
             value: vm.showResult
         )
         .animation(
-            .easeInOut(duration: 0.3),
+            .easeInOut(duration: Constants.PaddingSizes.p03),
             value: vm.isQuizFinished
         )
     }
@@ -139,13 +139,13 @@ struct DetailQuizCardView: View {
         Text(vm.currentQuestion.fact)
             .font(Constants.BaseFonts.caption)
             .padding()
-            .background(Constants.Colors.beige.opacity(0.2))
+            .background(Constants.Colors.beige.opacity(Constants.PaddingSizes.p03))
             .cornerRadius(Constants.PaddingSizes.p12)
             .padding(.horizontal)
             .transition(
                 .asymmetric(
                     insertion: .move(edge: .bottom).combined(with: .opacity),
-                    removal: .opacity.animation(.easeIn(duration: 0.2))
+                    removal: .opacity.animation(.easeIn(duration: Constants.PaddingSizes.p03))
                 )
             )
     }
@@ -158,7 +158,7 @@ struct DetailQuizCardView: View {
             isCorrect: vm.showResult && index == vm.currentQuestion.correctAnswerIndex,
             isWrong: vm.showResult && vm.selectedAnswer == index && !vm.isCorrect
         ) {
-            withAnimation(.easeInOut(duration: 0.2)) {
+            withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
                 if !vm.showResult {
                     vm.selectedAnswer = index
                 }
@@ -168,7 +168,7 @@ struct DetailQuizCardView: View {
     
     private var nextButton: some View {
         Button(action: {
-            withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
+            withAnimation(.interactiveSpring(response: Constants.PaddingSizes.p03, dampingFraction: 0.7)) {
                 vm.showResult ? vm.moveToNextQuestion() : vm.checkAnswer()
             }
         }) {
@@ -184,9 +184,9 @@ struct DetailQuizCardView: View {
                                 Constants.Colors.darkGreen)
                 )
                 .scaleEffect(vm.selectedAnswer == nil ? 1.0 : 1.05)
-                .animation(.easeInOut(duration: 0.2), value: vm.selectedAnswer)
+                .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: vm.selectedAnswer)
         }
         .disabled(vm.selectedAnswer == nil)
-        .animation(.easeInOut(duration: 0.3), value: vm.selectedAnswer)
+        .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: vm.selectedAnswer)
     }
 }
