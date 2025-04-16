@@ -33,15 +33,11 @@ struct QuizzesView: View {
                 }
             }
             .navigationTitle("Квизы")
-            
-            .onAppear {
-                vm.fetchBundleData()
-            }
             .fullScreenCover(item: $selectedTheme) { theme in
                 DetailQuizCardView(vm: vm)
                     .preferredColorScheme(colorScheme)
                     .onAppear {
-                        vm.startQuize(with: theme)
+                        vm.startQuiz(with: theme)
                     }
             }
         }

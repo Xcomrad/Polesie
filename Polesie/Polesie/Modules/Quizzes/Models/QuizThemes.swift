@@ -8,15 +8,15 @@
 import Foundation
 
 struct QuizThemesModel: Codable, Identifiable, Hashable {
-    let id: UUID = UUID()
+    let id: Int
     let image: String?
     let name: String
     let description: String
-    var hasSuccessBadge: Bool = false
+    var hasSuccessBadge = false
     let questions: [QuizQuestionsModel]
 
     private enum CodingKeys: String, CodingKey {
-        case image, name, description, questions
+        case id, image, name, description, questions
     }
 }
 
