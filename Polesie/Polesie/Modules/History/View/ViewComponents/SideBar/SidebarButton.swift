@@ -11,7 +11,7 @@ struct SidebarButton: View {
     @Environment(\.colorScheme) var colorScheme
     
     let title: String
-    var isSelected: Bool = false
+    var isSelected: Bool
     let action: () -> Void
     
     @State private var isPressed = false
@@ -21,7 +21,7 @@ struct SidebarButton: View {
             VStack {
                 Text(title)
                     .font(Constants.BaseFonts.button)
-                    .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.text)
+                    .foregroundStyle(isSelected ? Constants.Colors.background : Constants.Colors.text)
                     .padding(.vertical, Constants.PaddingSizes.p16)
                     .padding(.horizontal, Constants.PaddingSizes.p24)
                     .background(

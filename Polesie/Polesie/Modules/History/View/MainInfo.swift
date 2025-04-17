@@ -11,59 +11,106 @@ struct MainInfo: View {
     @EnvironmentObject var fontSizeManager: FontSizeManager
     @Environment(\.colorScheme) var colorScheme
     
+    var history: HistoryThemeModel
+    
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Constants.PaddingSizes.p16) {
-                VStack(alignment: .center, spacing: Constants.PaddingSizes.p8) {
-                    headerTitile
-                    divider
-                    secondaryTitle
-                    mainText
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
+                    VStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
+                        headerTitile
+                        divider
+                        secondaryTitle
+                            .padding(.horizontal, Constants.PaddingSizes.p24)
+                        descriptionSection
+                            .padding(.top, Constants.PaddingSizes.p12)
+                        subthemesSection
+                            .padding(.top, Constants.PaddingSizes.p24)
+                    }
+                    .padding(.horizontal, Constants.PaddingSizes.p16)
+                    .padding(.bottom, Constants.PaddingSizes.p80)
+                    .id("top")
                 }
-                .padding(.horizontal, Constants.PaddingSizes.p16)
-                .padding(.bottom, Constants.PaddingSizes.p16)
-                .contentMargins(.vertical, Constants.PaddingSizes.p24)
+            }
+            .scrollIndicators(.hidden)
+            .onChange(of: history.id) { old, new in
+                withAnimation {
+                    proxy.scrollTo("top", anchor: .top)
+                }
             }
         }
     }
     
     // MARK: - Components
     var headerTitile: some View {
-        Text("Экран истории")
+        Text(history.title)
             .font(fontSizeManager.font(.h1Bold))
             .foregroundStyle(Constants.Colors.text)
             .tracking(1.2)
             .lineSpacing(4)
             .multilineTextAlignment(.center)
             .adaptiveShadow(colorScheme: colorScheme)
-            .padding(.top, Constants.PaddingSizes.p16)
     }
     
     var divider: some View {
         Divider()
-            .overlay(Constants.Colors.accent
+            .background(Constants.Colors.accent
                 .opacity(Constants.PaddingSizes.p05))
-            .padding(.horizontal, Constants.PaddingSizes.p16)
-            .padding(.bottom, Constants.PaddingSizes.p16)
     }
     
     var secondaryTitle: some View {
-        Text("Подзаголовок (если надо)")
-            .font(fontSizeManager.font(.h3))
+        Text(history.subtitle)
+            .font(fontSizeManager.font(.secondary))
             .foregroundColor(.secondary)
-            .padding(.horizontal, Constants.PaddingSizes.p24)
+            .multilineTextAlignment(.center)
+        
     }
     
-    var mainText: some View {
-        Text("""
-            Основной текст про всякую лабуду дубуду дабуди дабудай чтоб было видно много букв.
-            Новый абзац с текстом для демонстрации переноса строк и вообще чтобы было все четко, приятно, как в сказке блять у самого счастливого человека под грибами.
-            """)
-        .font(fontSizeManager.font(.body))
-        .foregroundStyle(Constants.Colors.text)
-        .lineSpacing(8)
-        .tracking(0.4)
-        .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
-        .fixedSize(horizontal: false, vertical: true)
+    var descriptionSection: some View {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
+            if !history.content.text.isEmpty {
+                Text(history.content.text)
+                    .font(fontSizeManager.font(.body))
+                    .foregroundStyle(Constants.Colors.text)
+                    .lineSpacing(8)
+                    .tracking(0.4)
+                    .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+    
+    var subthemesSection: some View {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
+            if !history.subthemes.isEmpty {
+                
+                ForEach(history.subthemes, id: \.id) { item in
+                    VStack(spacing: Constants.PaddingSizes.p8) {
+                        Text(item.title)
+                            .font(fontSizeManager.font(.h3Bold))
+                            .foregroundStyle(Constants.Colors.text)
+                            .multilineTextAlignment(.center)
+                        Text(item.description)
+                            .font(fontSizeManager.font(.secondary))
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                        Text(item.content.text)
+                            .font(fontSizeManager.font(.body))
+                            .foregroundStyle(Constants.Colors.text)
+                            .multilineTextAlignment(.leading)
+                            .lineSpacing(8)
+                            .tracking(0.4)
+                            .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                        divider
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: Constants.PaddingSizes.p16)
+                            .fill(Constants.Colors.background)
+                            .adaptiveShadow(colorScheme: colorScheme))
+                }
+            }
+        }
     }
 }

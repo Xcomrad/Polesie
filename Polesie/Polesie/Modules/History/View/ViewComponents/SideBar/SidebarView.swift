@@ -12,6 +12,8 @@ struct SidebarView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var isVisible: Bool
     
+    @ObservedObject var vm: HistoryViewModel
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: Constants.PaddingSizes.p16) {
@@ -47,12 +49,14 @@ struct SidebarView: View {
     
     private var scrollView: some View {
         ScrollView {
-            LazyVStack(spacing: Constants.PaddingSizes.p12) {
-                ForEach(["История", "События", "Люди", "Ремесло", "Места", "Природа"], id: \.self) { topic in
-                    SidebarButton(title: topic, action: {
+            LazyVStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
+                ForEach(vm.history) { theme in
+                    SidebarButton(
+                        title: theme.title,
+                        isSelected: theme.id == vm.selectedHistory?.id) {
+                        vm.selectedHistory = theme
                         toggleSidebar()
-                    })
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
             }
             .padding(Constants.PaddingSizes.p8)
@@ -62,7 +66,7 @@ struct SidebarView: View {
     
     //MARK: - Actions
     private func toggleSidebar() {
-        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
             isVisible.toggle()
         }
     }
