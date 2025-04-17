@@ -11,7 +11,8 @@ import Foundation
 final class HistoryViewModel: ObservableObject {
     @Published var history: [HistoryThemeModel] = []
     @Published var selectedHistory: HistoryThemeModel?
-    @Published var error: AppError?
+    @Published var toastMessage: String?
+    @Published var toastError: ToastType = .success
     
     private let dataManager: DataManagerProtocol
     
@@ -30,7 +31,8 @@ final class HistoryViewModel: ObservableObject {
                 selectedHistory = history.first
             }
         } catch {
-            self.error = .fileNotFoundInBundle
+            self.toastMessage = (error as? AppError)?.localizedDescription
+            self.toastError = .failure
         }
     }
 }
