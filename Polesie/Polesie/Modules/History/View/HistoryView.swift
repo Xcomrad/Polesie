@@ -20,6 +20,18 @@ struct HistoryView: View {
             Constants.Colors.background
                 .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
+            
+            if let toastMessage = vm.toastMessage {
+                ToastView(message: toastMessage, type: vm.toastError)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            withAnimation {
+                                vm.toastMessage = nil
+                            }
+                        }
+                    }
+                    .zIndex(1)
+            }
             VStack {
                 burgerButton
                 if let selectedHistory = vm.selectedHistory {
