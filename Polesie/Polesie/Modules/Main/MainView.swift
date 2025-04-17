@@ -12,6 +12,7 @@ struct MainView: View {
     @State private var isSidebarVisible = false
     @State private var isTabBarVisible = true
     
+    @StateObject private var historyViewModel: HistoryViewModel = HistoryViewModel(dataManager: DataManager())
     @StateObject private var traditionsViewModel = TraditionsViewModel(dataManager: DataManager())
     @StateObject private var quizViewModel = QuizViewModel(dataManager: DataManager())
     @StateObject private var settingsViewModel = SettingsViewModel()
@@ -23,7 +24,7 @@ struct MainView: View {
             ZStack {
                 Group {
                     switch selectedTab {
-                    case .history: HistoryView()
+                    case .history: HistoryView(vm: historyViewModel)
                     case .traditions: TraditionsView(vm: traditionsViewModel)
                     case .quizzes: QuizzesView(vm: quizViewModel)
                     case .settings: SettingsView(vm: settingsViewModel)

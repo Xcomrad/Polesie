@@ -13,6 +13,8 @@ struct HistoryView: View {
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(\.isTabBarVisible) private var isTabBarVisible
     
+    @ObservedObject var vm: HistoryViewModel
+    
     var body: some View {
         ZStack {
             Constants.Colors.background
@@ -20,7 +22,9 @@ struct HistoryView: View {
                 .ignoresSafeArea(.all)
             VStack {
                 burgerButton
-                MainInfo()
+                if let selectedHistory = vm.selectedHistory {
+                    MainInfo(history: selectedHistory)
+                }
                 Spacer()
             }
             
@@ -30,13 +34,13 @@ struct HistoryView: View {
                     .opacity(isSidebarVisible.wrappedValue ? 0.8 : 0)
                     .ignoresSafeArea(.all)
                     .onTapGesture {
-                        animation()
+                        toggleSidebar()
                     }
                     .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: isSidebarVisible.wrappedValue)
             }
             
             if isSidebarVisible.wrappedValue {
-                SidebarView(isVisible: isSidebarVisible)
+                SidebarView(isVisible: isSidebarVisible, vm: vm)
                     .transition(.move(edge: .leading))
                     .zIndex(1)
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
@@ -48,7 +52,7 @@ struct HistoryView: View {
     //MARK: - Components
     private var burgerButton: some View {
         Button(action: {
-            animation()
+            toggleSidebar()
         }) {
             Image(systemName: "line.horizontal.3")
                 .font(.title)
@@ -59,14 +63,9 @@ struct HistoryView: View {
     }
     
     //MARK: - Actions
-    private func animation() {
-        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
+    private func toggleSidebar() {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
             isSidebarVisible.wrappedValue.toggle()
         }
     }
-}
-
-#Preview {
-    HistoryView()
-        .environment(\.isSidebarVisible, .constant(false))
 }
