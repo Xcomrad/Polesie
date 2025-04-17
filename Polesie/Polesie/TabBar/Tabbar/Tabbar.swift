@@ -49,13 +49,17 @@ struct TabBar: View {
             }
             .padding(.vertical, Constants.PaddingSizes.p12)
             .padding(.horizontal, Constants.PaddingSizes.p16)
+            
             .background(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                    .fill(Constants.Colors.background)
-                    .adaptiveShadow(colorScheme: colorScheme)
-            )
+                BlurView(style: .systemUltraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24)
+                            .strokeBorder(Constants.Colors.stoneGray.opacity(0.05), lineWidth: 1)))
+            
+            .adaptiveShadow(colorScheme: colorScheme)
             .padding(.horizontal, Constants.PaddingSizes.p12)
-            .ignoresSafeArea(.all, edges: .bottom) 
+            .ignoresSafeArea(.all, edges: .bottom)
         }
     }
 }
