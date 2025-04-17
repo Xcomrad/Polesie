@@ -29,7 +29,6 @@ struct SidebarView: View {
     }
     
     //MARK: - Components
-    
     private var clouseButton: some View {
         Button(action: toggleSidebar) {
             Image(systemName: "xmark")
@@ -51,7 +50,6 @@ struct SidebarView: View {
             LazyVStack(spacing: Constants.PaddingSizes.p12) {
                 ForEach(["История", "События", "Люди", "Ремесло", "Места", "Природа"], id: \.self) { topic in
                     SidebarButton(title: topic, action: {
-                        print("Выбрана тема: \(topic)")
                         toggleSidebar()
                     })
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,7 +62,7 @@ struct SidebarView: View {
     
     //MARK: - Actions
     private func toggleSidebar() {
-        withAnimation(.easeInOut(duration: 0.5)) {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
             isVisible.toggle()
         }
     }
