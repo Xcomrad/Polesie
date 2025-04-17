@@ -8,21 +8,40 @@
 import SwiftUI
 
 struct SidebarButton: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let title: String
-    let isSelected: Bool = false
+    var isSelected: Bool = false
     let action: () -> Void
+    
+    @State private var isPressed = false
     
     var body: some View {
         Button(action: action) {
             VStack {
                 Text(title)
                     .font(Constants.BaseFonts.button)
-                    .foregroundStyle(Constants.Colors.button)
-                    .padding()
-                    .background(Constants.Colors.accent)
-                    .multilineTextAlignment(.leading)
-                    .cornerRadius(Constants.PaddingSizes.p12)
+                    .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.text)
+                    .padding(.vertical, Constants.PaddingSizes.p16)
+                    .padding(.horizontal, Constants.PaddingSizes.p24)
+                    .background(
+                        ZStack {
+                            if isSelected {
+                                Constants.Colors.accent
+                                    .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
+                                    .adaptiveShadow(colorScheme: colorScheme)
+                            } else {
+                                Constants.Colors.button
+                                    .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
+                            }
+                        }
+                    )
+                    .scaleEffect(isPressed ? 0.96 : 1.0)
             }
+            .buttonStyle(PlainButtonStyle())
+            .pressEvents(
+                onPress: { withAnimation { isPressed = true } },
+                onRelease: { withAnimation { isPressed = false } })
         }
     }
 }

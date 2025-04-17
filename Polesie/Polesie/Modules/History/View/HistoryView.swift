@@ -26,11 +26,13 @@ struct HistoryView: View {
             
             if isSidebarVisible.wrappedValue {
                 Rectangle()
-                    .fill(.ultraThickMaterial.opacity(0.8))
+                    .fill(.ultraThinMaterial)
+                    .opacity(isSidebarVisible.wrappedValue ? 0.8 : 0)
                     .ignoresSafeArea(.all)
                     .onTapGesture {
                         animation()
                     }
+                    .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: isSidebarVisible.wrappedValue)
             }
             
             if isSidebarVisible.wrappedValue {
@@ -38,6 +40,7 @@ struct HistoryView: View {
                     .transition(.move(edge: .leading))
                     .zIndex(1)
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
+                    .animation(.interpolatingSpring(stiffness: Constants.PaddingSizes.p300, damping: 30), value: isSidebarVisible.wrappedValue)
             }
         }
     }
