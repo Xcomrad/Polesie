@@ -21,14 +21,13 @@ struct TabBarButton: View {
                 Image(systemName: isSelected ? selectedIcon : icon)
                     .font(.system(size: Constants.PaddingSizes.p24))
                     .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.stoneGray)
-                    .scaleEffect(isSelected ? 1.2 : 1.0)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: isSelected)
-                
                 
                 Text(title)
                     .font(Constants.BaseFonts.small)
                     .foregroundStyle(isSelected ? Constants.Colors.accent : Constants.Colors.stoneGray)
             }
+            .scaleEffect(isSelected ? 1.2 : 1.0)
+            .animation(.spring(response: Constants.PaddingSizes.p05, dampingFraction: 0.7, blendDuration: 0), value: isSelected)
             .frame(maxWidth: .infinity)
         }
     }
