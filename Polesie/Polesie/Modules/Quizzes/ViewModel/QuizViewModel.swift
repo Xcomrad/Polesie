@@ -10,9 +10,10 @@ import SwiftUI
 @MainActor
 final class QuizViewModel: ObservableObject {
     @Published var quizThemes: [QuizThemesModel] = []
-    @Published var error: AppError?
-    @Published var selectedAnswer: Int?
+    @Published var toastMessage: String?
+    @Published var toastError: ToastType = .success
     
+    @Published var selectedAnswer: Int?
     @Published var correctAnswersCount = 0
     @Published var currentThemeIndex = 0
     @Published var currentQuestionIndex = 0
@@ -34,7 +35,6 @@ final class QuizViewModel: ObservableObject {
     
     init(dataManager: DataManager = DataManager()) {
         self.dataManager = dataManager
-        Task { await fetchData() }
     }
     
     // MARK: - Fetch data
@@ -52,7 +52,8 @@ final class QuizViewModel: ObservableObject {
 
             self.quizThemes = bundleThemes
         } catch {
-            self.error = .loadingFailed
+            self.toastMessage = (error as? AppError)?.localizedDescription
+            self.toastError = .failure
         }
     }
     

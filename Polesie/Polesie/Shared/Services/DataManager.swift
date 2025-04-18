@@ -41,7 +41,7 @@ final class DataManager: DataManagerProtocol {
     // MARK: - From Bundle
     func loadDataFromBundle<T: Decodable>(file: String, type: T.Type) async throws -> T {
         guard let url = Bundle.main.url(forResource: file, withExtension: "json") else {
-            throw AppError.fileNotFoundInBundle
+            throw AppError.fileNotFound
         }
         
         let data = try Data(contentsOf: url)

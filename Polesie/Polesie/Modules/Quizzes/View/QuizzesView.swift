@@ -9,10 +9,12 @@ import SwiftUI
 
 struct QuizzesView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var selectedTheme: QuizThemesModel?
-    @ObservedObject var vm: QuizViewModel
     
+    @State private var selectedTheme: QuizThemesModel?
+    @State private var isShowing: Bool = true
     private let columns = 2
+    
+    @ObservedObject var vm: QuizViewModel
     
     var body: some View {
         NavigationStack {
@@ -20,6 +22,11 @@ struct QuizzesView: View {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
                     .ignoresSafeArea(.all)
+                
+                // MARK: If no data
+                if let toastMessage = vm.toastMessage {
+                        ToastView(isShowing: $isShowing, message: toastMessage, type: vm.toastError)
+                }
                 
                 ScrollView {
                     PinterestGrid(items: vm.quizThemes, columns: columns) { theme in
@@ -32,17 +39,22 @@ struct QuizzesView: View {
                     .padding(.bottom, Constants.PaddingSizes.p80)
                 }
             }
-            .navigationTitle("Квизы")
-            .fullScreenCover(item: $selectedTheme) { theme in
-                DetailQuizCardView(vm: vm)
-                    .preferredColorScheme(colorScheme)
-                    .onAppear {
-                        vm.startQuiz(with: theme)
-                    }
-            }
+        }
+        .onAppear {
+            Task { await vm.fetchData() }
+        }
+        
+        .navigationTitle("Квизы")
+        .fullScreenCover(item: $selectedTheme) { theme in
+            DetailQuizCardView(vm: vm)
+                .preferredColorScheme(colorScheme)
+                .onAppear {
+                    vm.startQuiz(with: theme)
+                }
         }
     }
 }
+
 
 // MARK: - Components
 struct PinterestGrid<Content: View, Item: Identifiable>: View {

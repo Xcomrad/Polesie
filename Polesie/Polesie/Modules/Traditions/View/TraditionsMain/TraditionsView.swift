@@ -10,7 +10,9 @@ import SwiftUI
 struct TraditionsView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var vm: TraditionsViewModel
+    
     @State private var selectedTradition: TraditionsModel? = nil
+    @State private var isShowing: Bool = true
     
     var body: some View {
         NavigationStack {
@@ -18,6 +20,11 @@ struct TraditionsView: View {
                 Constants.Colors.background
                     .opacity(Constants.PaddingSizes.p05)
                     .ignoresSafeArea()
+                
+                // MARK: - If no data
+                if let toastMessage = vm.toastMessage {
+                    ToastView(isShowing: $isShowing, message: toastMessage, type: vm.toastError)
+                }
                 
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
