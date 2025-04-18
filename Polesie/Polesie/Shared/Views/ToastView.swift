@@ -25,7 +25,7 @@ struct ToastView: View {
                 .foregroundStyle(Constants.Colors.darkGreen)
         case .failure:
             return Image(systemName: "xmark.circle.fill")
-                .foregroundStyle(Constants.Colors.earthyBrown)
+                .foregroundStyle(Constants.Colors.darkRed)
             
         }
     }
@@ -36,7 +36,7 @@ struct ToastView: View {
             return Constants.Colors.darkGreen
                 .opacity(Constants.PaddingSizes.p05)
         case .failure:
-            return Constants.Colors.earthyBrown
+            return Constants.Colors.darkRed
                 .opacity(Constants.PaddingSizes.p05)
         }
     }
@@ -44,7 +44,7 @@ struct ToastView: View {
     var borderColor: Color {
         switch type {
         case .success: return Constants.Colors.darkGreen
-        case .failure: return Constants.Colors.earthyBrown
+        case .failure: return Constants.Colors.darkRed
         }
     }
     
@@ -74,8 +74,7 @@ struct ToastView: View {
                     }
             }
             .padding(.bottom, UIScreen.main.bounds.height * 0.7)
-            .transition(.move(edge: .top).combined(with: .opacity))
-            .animation(.spring, value: isShowing)
+            .animation(.easeInOut, value: isShowing)
             .zIndex(1)
         }
     }

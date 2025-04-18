@@ -25,6 +25,7 @@ enum Constants {
         
         // Цвета отражающие атмосферу Полесья
         static let darkGreen = Color("DarkGreen")
+        static let darkRed = Color("DarkRed")
         static let earthyBrown = Color("EarthyBrown")
         static let riverBlue = Color("RiverBlue")
         
