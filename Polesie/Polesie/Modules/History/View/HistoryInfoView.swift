@@ -7,25 +7,32 @@
 
 import SwiftUI
 
-struct MainInfo: View {
+struct HistoryInfoView: View {
     @EnvironmentObject var fontSizeManager: FontSizeManager
     @Environment(\.colorScheme) var colorScheme
     
+    @ObservedObject var vm: HistoryViewModel
     var history: HistoryThemeModel
     
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
-                    VStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
+                LazyVStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
+                    LazyVStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
                         headerTitile
                         divider
                         secondaryTitle
                             .padding(.horizontal, Constants.PaddingSizes.p24)
+                        
                         descriptionSection
                             .padding(.top, Constants.PaddingSizes.p12)
-                        subthemesSection
-                            .padding(.top, Constants.PaddingSizes.p24)
+                        
+                        SubthemesSection(subthemes: history.subthemes,
+                                         expandSubtheme: vm.expandSubtheme,
+                                         onTap: { id in
+                            vm.toggleToExpand(id)
+                        })
+                        .padding(.top, Constants.PaddingSizes.p24)
                     }
                     .padding(.horizontal, Constants.PaddingSizes.p16)
                     .padding(.bottom, Constants.PaddingSizes.p80)
@@ -76,40 +83,6 @@ struct MainInfo: View {
                     .tracking(0.4)
                     .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-    }
-    
-    var subthemesSection: some View {
-        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
-            if !history.subthemes.isEmpty {
-                
-                ForEach(history.subthemes, id: \.id) { item in
-                    VStack(spacing: Constants.PaddingSizes.p8) {
-                        Text(item.title)
-                            .font(fontSizeManager.font(.h3Bold))
-                            .foregroundStyle(Constants.Colors.text)
-                            .multilineTextAlignment(.center)
-                        Text(item.description)
-                            .font(fontSizeManager.font(.secondary))
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                        Text(item.content.text)
-                            .font(fontSizeManager.font(.body))
-                            .foregroundStyle(Constants.Colors.text)
-                            .multilineTextAlignment(.leading)
-                            .lineSpacing(8)
-                            .tracking(0.4)
-                            .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                        divider
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: Constants.PaddingSizes.p16)
-                            .fill(Constants.Colors.background)
-                            .adaptiveShadow(colorScheme: colorScheme))
-                }
             }
         }
     }

@@ -18,6 +18,7 @@ struct MainView: View {
     @StateObject private var settingsViewModel = SettingsViewModel()
     
     @EnvironmentObject var darkModeManager: DarkModeManager
+    @EnvironmentObject var fontSizeManager: FontSizeManager
     
     var body: some View {
         NavigationStack {
@@ -32,6 +33,7 @@ struct MainView: View {
                 }
                 .environment(\.isTabBarVisible, $isTabBarVisible)
                 .environment(\.isSidebarVisible, $isSidebarVisible)
+                .environmentObject(fontSizeManager)
                 
                 if isTabBarVisible && !isSidebarVisible {
                     TabBar(selectedTab: $selectedTab)

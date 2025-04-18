@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @EnvironmentObject var fontSizeManager: FontSizeManager
+    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(\.isTabBarVisible) private var isTabBarVisible
@@ -29,12 +29,14 @@ struct HistoryView: View {
             
             VStack {
                 burgerButton
+                
                 if let selectedHistory = vm.selectedHistory {
-                    MainInfo(history: selectedHistory)
+                    HistoryInfoView(vm: vm, history: selectedHistory)
                 }
                 Spacer()
             }
             
+            // MARK: - SideBar Content
             if isSidebarVisible.wrappedValue {
                 Rectangle()
                     .fill(.ultraThinMaterial)
@@ -43,7 +45,8 @@ struct HistoryView: View {
                     .onTapGesture {
                         toggleSidebar()
                     }
-                    .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: isSidebarVisible.wrappedValue)
+                    .animation(.easeInOut(duration: Constants.PaddingSizes.p03),
+                               value: isSidebarVisible.wrappedValue)
             }
             
             if isSidebarVisible.wrappedValue {
@@ -51,7 +54,8 @@ struct HistoryView: View {
                     .transition(.move(edge: .leading))
                     .zIndex(1)
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
-                    .animation(.interpolatingSpring(stiffness: Constants.PaddingSizes.p300, damping: 30), value: isSidebarVisible.wrappedValue)
+                    .animation(.interpolatingSpring(stiffness: Constants.PaddingSizes.p300, damping: 30),
+                               value: isSidebarVisible.wrappedValue)
             }
         }
         .onAppear {
