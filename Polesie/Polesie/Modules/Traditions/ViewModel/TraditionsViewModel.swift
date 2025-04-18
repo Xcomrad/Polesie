@@ -58,7 +58,7 @@ final class TraditionsViewModel: ObservableObject {
             favoriteTradition = saved ?? []
         } catch {
             self.toastMessage = (error as? AppError)?.localizedDescription
-            self.toastError = .loadingFailed
+            self.toastError = .failure
         }
     }
 
