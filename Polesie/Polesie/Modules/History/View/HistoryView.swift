@@ -12,8 +12,9 @@ struct HistoryView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(\.isTabBarVisible) private var isTabBarVisible
-    
+
     @ObservedObject var vm: HistoryViewModel
+    @State private var isShowing: Bool = true
     
     var body: some View {
         ZStack {
@@ -21,17 +22,11 @@ struct HistoryView: View {
                 .opacity(Constants.PaddingSizes.p05)
                 .ignoresSafeArea(.all)
             
+            // MARK: - If no data
             if let toastMessage = vm.toastMessage {
-                ToastView(message: toastMessage, type: vm.toastError)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            withAnimation {
-                                vm.toastMessage = nil
-                            }
-                        }
-                    }
-                    .zIndex(1)
+                ToastView(isShowing: $isShowing, message: toastMessage, type: vm.toastError)
             }
+            
             VStack {
                 burgerButton
                 if let selectedHistory = vm.selectedHistory {
@@ -58,6 +53,9 @@ struct HistoryView: View {
                     .offset(x: isSidebarVisible.wrappedValue ? 0 : -UIScreen.main.bounds.width)
                     .animation(.interpolatingSpring(stiffness: Constants.PaddingSizes.p300, damping: 30), value: isSidebarVisible.wrappedValue)
             }
+        }
+        .onAppear {
+            Task { await vm.fetchData() }
         }
     }
     

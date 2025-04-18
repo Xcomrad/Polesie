@@ -10,7 +10,6 @@ import Foundation
 enum AppError: Error, LocalizedError {
     case invalidDirectory
     case fileNotFound
-    case fileNotFoundInBundle
     case decodingFailed
     case encodingFailed
     case loadingFailed
@@ -22,8 +21,6 @@ enum AppError: Error, LocalizedError {
             return "Недопустимая папка"
         case .fileNotFound:
             return "Файл не найден"
-        case .fileNotFoundInBundle:
-            return "Файл не найден в бандле"
         case .decodingFailed:
             return "Ошибка чтения файла"
         case .encodingFailed:

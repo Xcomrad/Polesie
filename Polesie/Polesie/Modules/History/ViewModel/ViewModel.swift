@@ -18,7 +18,6 @@ final class HistoryViewModel: ObservableObject {
     
     init(dataManager: DataManagerProtocol = DataManager()) {
         self.dataManager = dataManager
-        Task { await fetchData() }
     }
     
     // MARK: - FetchData

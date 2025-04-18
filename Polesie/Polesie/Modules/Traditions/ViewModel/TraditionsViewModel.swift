@@ -11,13 +11,14 @@ import SwiftUI
 final class TraditionsViewModel: ObservableObject {
     @Published var traditions: [TraditionsModel] = []
     @Published var favoriteTradition: [Int] = []
+    @Published var toastMessage: String?
     @Published var error: AppError?
+    @Published var toastError: ToastType = .success
 
     private let dataManager: DataManagerProtocol
 
     init(dataManager: DataManager = DataManager()) {
         self.dataManager = dataManager
-        Task { await loadFavorites() }
     }
 
     // MARK: - FetchData
@@ -26,7 +27,8 @@ final class TraditionsViewModel: ObservableObject {
             let fetchedData = try await dataManager.loadDataFromBundle(file: "traditions", type: [TraditionsModel].self)
             traditions = fetchedData
         } catch {
-            self.error = .fileNotFound
+            self.toastMessage = (error as? AppError)?.localizedDescription
+            self.toastError = .failure
         }
     }
 
@@ -41,7 +43,8 @@ final class TraditionsViewModel: ObservableObject {
         do {
             try await dataManager.saveFavoriteTraditions(favoriteTradition)
         } catch {
-            self.error = .savingFailed
+            self.toastMessage = (error as? AppError)?.localizedDescription
+            self.toastError = .failure
         }
     }
 
@@ -54,7 +57,8 @@ final class TraditionsViewModel: ObservableObject {
             let saved = try await dataManager.loadFavoriteTraditions()
             favoriteTradition = saved ?? []
         } catch {
-            self.error = .loadingFailed
+            self.toastMessage = (error as? AppError)?.localizedDescription
+            self.toastError = .loadingFailed
         }
     }
 
