@@ -41,19 +41,17 @@ final class QuizViewModel: ObservableObject {
     func fetchData() async {
         do {
             var bundleThemes = try await dataManager.loadDataFromBundle(file: "quizzes", type: [QuizThemesModel].self)
-            let passedThemesId = try await dataManager.loadPassedTheme()
-
-            for (index, var theme) in bundleThemes.enumerated() {
-                if passedThemesId.contains(theme.id) {
-                    theme.hasSuccessBadge = true
-                }
-                bundleThemes[index] = theme
+            let passedThemesId = (try? await dataManager.loadPassedTheme()) ?? []
+            
+            bundleThemes = bundleThemes.map { theme in
+                var modifiedTheme = theme
+                modifiedTheme.hasSuccessBadge = passedThemesId.contains(theme.id)
+                return modifiedTheme
             }
-
-            self.quizThemes = bundleThemes
+                self.quizThemes = bundleThemes
         } catch {
-            self.toastMessage = (error as? AppError)?.localizedDescription
-            self.toastError = .failure
+                self.toastMessage = (error as? AppError)?.localizedDescription
+                self.toastError = .failure
         }
     }
     

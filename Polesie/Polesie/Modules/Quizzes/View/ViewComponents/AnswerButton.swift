@@ -16,7 +16,7 @@ struct AnswerButton: View {
     
     private var iconColor: Color {
         if isCorrect { return Constants.Colors.darkGreen }
-        if isWrong { return Constants.Colors.earthyBrown }
+        if isWrong { return Constants.Colors.darkRed }
         return isSelected ? Constants.Colors.accent : Constants.Colors.text.opacity(0.7)
     }
     
@@ -28,13 +28,13 @@ struct AnswerButton: View {
     
     private var backgroundColor: Color {
         if isCorrect { return Constants.Colors.darkGreen.opacity(0.08) }
-        if isWrong { return Constants.Colors.earthyBrown.opacity(0.08) }
+        if isWrong { return Constants.Colors.darkRed.opacity(0.08) }
         return isSelected ? Constants.Colors.accent.opacity(0.08) : Constants.Colors.background
     }
     
     private var borderColor: Color {
         if isCorrect { return Constants.Colors.darkGreen.opacity(Constants.PaddingSizes.p03) }
-        if isWrong { return Constants.Colors.earthyBrown.opacity(Constants.PaddingSizes.p03) }
+        if isWrong { return Constants.Colors.darkRed.opacity(Constants.PaddingSizes.p03) }
         return isSelected ? Constants.Colors.accent.opacity(Constants.PaddingSizes.p03) : Constants.Colors.text.opacity(0.1)
     }
     

@@ -44,8 +44,12 @@ final class DataManager: DataManagerProtocol {
             throw AppError.fileNotFound
         }
         
-        let data = try Data(contentsOf: url)
-        return try decoder.decode(T.self, from: data)
+        do {
+            let data = try Data(contentsOf: url)
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            throw AppError.decodingFailed
+        }
     }
     
     // MARK: - From Manager
