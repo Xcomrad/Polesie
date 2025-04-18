@@ -10,6 +10,8 @@ import Foundation
 @MainActor
 final class HistoryViewModel: ObservableObject {
     @Published var history: [HistoryThemeModel] = []
+    @Published var expandSubtheme: Set<Int> = []
+    
     @Published var selectedHistory: HistoryThemeModel?
     @Published var toastMessage: String?
     @Published var toastError: ToastType = .success
@@ -32,6 +34,15 @@ final class HistoryViewModel: ObservableObject {
         } catch {
             self.toastMessage = (error as? AppError)?.localizedDescription
             self.toastError = .failure
+        }
+    }
+    
+    // MARK: - Actions
+    func toggleToExpand(_ id: Int) {
+        if expandSubtheme.contains(id) {
+            expandSubtheme.remove(id)
+        } else {
+            expandSubtheme.insert(id)
         }
     }
 }

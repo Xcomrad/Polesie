@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     @StateObject private var vm: OnboardingViewModel
     @EnvironmentObject var darkModeManager: DarkModeManager
+    @EnvironmentObject var fontSizeManager: FontSizeManager
     @Environment(\.colorScheme) var colorScheme
     
     init(steps: [OnboardingModel]) {
