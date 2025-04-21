@@ -22,7 +22,7 @@ struct PolesieApp: App {
                     .environmentObject(fontSizeManager)
                     .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
             } else {
-                SplashView()
+                SplashView(vm: SplashViewModel())
                     .environmentObject(darkModeManager)
                     .environmentObject(fontSizeManager)
                     .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
