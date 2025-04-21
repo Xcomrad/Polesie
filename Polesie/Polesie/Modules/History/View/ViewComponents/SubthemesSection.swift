@@ -17,7 +17,7 @@ struct SubthemesSection: View {
     
     var body: some View {
         ScrollViewReader { proxy in
-            LazyVStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
+            VStack(alignment: .leading, spacing: Constants.PaddingSizes.p24) {
                 
                 if !subthemes.isEmpty {
                     ForEach(subthemes, id: \.id) { item in
@@ -30,12 +30,16 @@ struct SubthemesSection: View {
                     }
                 }
             }
+            .animation(.spring(response: Constants.PaddingSizes.p05, dampingFraction: 0.8), value: expandSubtheme)
         }
     }
     
     @ViewBuilder
     private func subthemeCell(item: HistorySubthemeModel, proxy: ScrollViewProxy) -> some View {
-        LazyVStack(spacing: Constants.PaddingSizes.p8) {
+        VStack(spacing: Constants.PaddingSizes.p8) {
+            Color.clear
+                .frame(height: 1)
+                .id("anchor_\(item.id)")
             subthemeButton(item: item, proxy: proxy)
             
             if expandSubtheme.contains(item.id) {
@@ -48,9 +52,24 @@ struct SubthemesSection: View {
     
     private func subthemeButton(item: HistorySubthemeModel, proxy: ScrollViewProxy) -> some View {
         Button {
+            let isExpanded = expandSubtheme.contains(item.id)
             withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
                 onTap(item.id)
-                proxy.scrollTo(item.id, anchor: .top)
+                
+                if isExpanded {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.PaddingSizes.p03) {
+                        withAnimation(.spring(response: Constants.PaddingSizes.p05, dampingFraction: 0.8)) {
+                            proxy.scrollTo(item.id, anchor: .top)
+                        }
+                    }
+                    
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.PaddingSizes.p03) {
+                        withAnimation(.spring(response: Constants.PaddingSizes.p05, dampingFraction: 0.8)) {
+                            proxy.scrollTo("anchor_\(item.id)", anchor: .top)
+                        }
+                    }
+                }
             }
         } label: {
             HStack {
@@ -68,7 +87,7 @@ struct SubthemesSection: View {
     }
     
     private func subthemeButtonContent(item: HistorySubthemeModel) -> some View {
-        LazyVStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
             Text(item.description)
                 .font(fontSizeManager.font(.secondary))
                 .foregroundColor(.secondary)
