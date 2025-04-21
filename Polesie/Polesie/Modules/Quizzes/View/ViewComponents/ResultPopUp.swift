@@ -126,7 +126,7 @@ struct ResultPopUp: View {
                     } label: {
                         Text("Начать заново")
                             .font(Constants.BaseFonts.small)
-                            .foregroundStyle(Constants.Colors.button)
+                            .foregroundStyle(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(Constants.Colors.accent)
@@ -138,10 +138,10 @@ struct ResultPopUp: View {
                     } label: {
                         Text("На главную")
                             .font(Constants.BaseFonts.small)
-                            .foregroundStyle(Constants.Colors.button)
+                            .foregroundStyle(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Constants.Colors.earthyBrown)
+                            .background(Constants.Colors.accent)
                             .cornerRadius(Constants.PaddingSizes.p12)
                     }
                 }

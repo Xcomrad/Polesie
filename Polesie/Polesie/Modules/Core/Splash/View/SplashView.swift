@@ -134,7 +134,7 @@ struct SplashView: View {
         } label: {
             Text(Constants.Strings.startJourney)
                 .font(Constants.BaseFonts.button)
-                .foregroundColor(Constants.Colors.text)
+                .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(

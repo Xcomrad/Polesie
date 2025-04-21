@@ -11,6 +11,7 @@ enum Constants {
     
     enum Images {
         static let splashImage = "splash"
+        static let educationImage = "graduationcap.fill"
         static let historyImage = "books.vertical.fill"
         static let traditionsImage = "scroll.fill"
         static let questsImage = "questionmark.bubble.fill"
@@ -26,12 +27,8 @@ enum Constants {
         // Цвета отражающие атмосферу Полесья
         static let darkGreen = Color("DarkGreen")
         static let darkRed = Color("DarkRed")
-        static let earthyBrown = Color("EarthyBrown")
-        static let riverBlue = Color("RiverBlue")
         
         // Дополнительные цвета
-        static let swampGreen = Color("SwampGreen")
-        static let beige = Color("Beige")
         static let stoneGray = Color("StoneGray")
         static let button = Color("ButtonColor")
     }

@@ -79,7 +79,7 @@ struct SubthemesSection: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Image(systemName: "chevron.down")
-                    .foregroundColor(Constants.Colors.earthyBrown)
+                    .foregroundColor(Constants.Colors.accent)
                     .rotationEffect(.degrees(expandSubtheme.contains(item.id) ? 180 : 0))
             }
         }

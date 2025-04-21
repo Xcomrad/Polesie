@@ -51,11 +51,11 @@ struct TabBar: View {
             .padding(.horizontal, Constants.PaddingSizes.p16)
             
             .background(
-                BlurView(style: .systemUltraThinMaterial)
+                Constants.Colors.background
                     .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24))
                     .overlay(
                         RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24)
-                            .strokeBorder(Constants.Colors.stoneGray.opacity(0.05), lineWidth: 1)))
+                            .strokeBorder(Constants.Colors.accent.opacity(0.05), lineWidth: 1)))
             
             .adaptiveShadow(colorScheme: colorScheme)
             .padding(.horizontal, Constants.PaddingSizes.p12)

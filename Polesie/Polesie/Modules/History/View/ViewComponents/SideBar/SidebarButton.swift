@@ -31,12 +31,12 @@ struct SidebarButton: View {
                                     .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
                                     .adaptiveShadow(colorScheme: colorScheme)
                             } else {
-                                Constants.Colors.button
+                                Constants.Colors.background
                                     .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
                             }
                         }
                     )
-                    .scaleEffect(isPressed ? 0.96 : 1.0)
+                    .scaleEffect(isPressed ? 0.95 : 1.0)
             }
             .buttonStyle(PlainButtonStyle())
             .pressEvents(

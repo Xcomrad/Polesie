@@ -139,7 +139,8 @@ struct DetailQuizCardView: View {
         Text(vm.currentQuestion.fact)
             .font(Constants.BaseFonts.caption)
             .padding()
-            .background(Constants.Colors.beige.opacity(Constants.PaddingSizes.p03))
+            .background(Constants.Colors.accent
+                .opacity(Constants.PaddingSizes.p03))
             .cornerRadius(Constants.PaddingSizes.p12)
             .padding(.horizontal)
             .transition(
