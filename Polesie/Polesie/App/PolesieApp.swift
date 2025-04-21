@@ -11,16 +11,22 @@ import SwiftUI
 struct PolesieApp: App {
     
     @StateObject private var darkModeManager = DarkModeManager()
-    @StateObject var fontSizeManager = FontSizeManager()
+    @StateObject private var fontSizeManager = FontSizeManager()
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     
     var body: some Scene {
         WindowGroup {
-
-            SplashView()
-                .environmentObject(darkModeManager)
-                .environmentObject(fontSizeManager)
-                .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
+            if isOnboardingCompleted {
+                MainView(selectedTab: .history)
+                    .environmentObject(darkModeManager)
+                    .environmentObject(fontSizeManager)
+                    .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
+            } else {
+                SplashView()
+                    .environmentObject(darkModeManager)
+                    .environmentObject(fontSizeManager)
+                    .preferredColorScheme(darkModeManager.isDarkMode ? .dark : .light)
+            }
         }
     }
 }
