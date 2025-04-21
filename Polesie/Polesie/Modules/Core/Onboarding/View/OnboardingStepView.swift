@@ -15,38 +15,13 @@ struct OnboardingStepView: View {
     
     var body: some View {
         VStack {
-            if let imageName = step.image {
-                Image(systemName: imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundStyle(Constants.Colors.accent)
-                    .frame(width: Constants.PaddingSizes.p100,
-                           height: Constants.PaddingSizes.p100)
-            }
             
-            Text(step.title)
-                .font(Constants.BaseFonts.h2Bold)
-                .foregroundColor(Constants.Colors.text)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Text(step.description)
-                .font(Constants.BaseFonts.secondary)
-                .foregroundColor(Constants.Colors.text)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal)
-            
+            icon
+            title
+            description
+   
             if isLastStep {
-                Button(action: completeOnboarding) {
-                    Text(Constants.Strings.startButtonTitle)
-                        .font(Constants.BaseFonts.button)
-                        .foregroundColor(Constants.Colors.button)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                                .fill(Constants.Colors.darkGreen)
-                        )
-                }
+                startButton
                 .padding(.top, Constants.PaddingSizes.p8)
             }
         }
@@ -57,5 +32,45 @@ struct OnboardingStepView: View {
                 .adaptiveShadow(colorScheme: colorScheme)
         )
         .padding(.horizontal, Constants.PaddingSizes.p16)
+    }
+    
+    // MARK: - Components
+    private var icon: some View {
+        Image(systemName: step.image)
+            .resizable()
+            .scaledToFit()
+            .foregroundStyle(Constants.Colors.accent)
+            .frame(width: Constants.PaddingSizes.p80,
+                   height: Constants.PaddingSizes.p80)
+    }
+    
+    private var title: some View {
+        Text(step.title)
+            .font(Constants.BaseFonts.h2Bold)
+            .foregroundColor(Constants.Colors.text)
+            .multilineTextAlignment(.center)
+            .padding()
+    }
+    
+    private var description: some View {
+        Text(step.description)
+            .font(Constants.BaseFonts.secondary)
+            .foregroundColor(Constants.Colors.text)
+            .multilineTextAlignment(.leading)
+            .padding(.horizontal)
+    }
+    
+    // MARK: - Action
+    private var startButton: some View {
+        Button(action: completeOnboarding) {
+            Text(Constants.Strings.startButtonTitle)
+                .font(Constants.BaseFonts.button)
+                .foregroundColor(.white)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                        .fill(Constants.Colors.darkGreen)
+                )
+        }
     }
 }

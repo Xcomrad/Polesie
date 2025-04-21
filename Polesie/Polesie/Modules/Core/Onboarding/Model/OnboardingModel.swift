@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingModel {
-    let image: String?
+    let image: String
     let title: String
     let description: String
 }
@@ -23,7 +23,7 @@ enum OnboardingStep: Int, CaseIterable {
     var model: OnboardingModel {
         switch self {
         case .welcome: return OnboardingModel(
-            image: nil,
+            image: Constants.Images.educationImage,
             title: Constants.Strings.onboardingWelcomeTitle,
             description: Constants.Strings.onboardingWelcomeDescription)
             
