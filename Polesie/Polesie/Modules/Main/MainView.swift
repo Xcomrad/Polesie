@@ -15,7 +15,7 @@ struct MainView: View {
     @StateObject private var historyViewModel: HistoryViewModel = HistoryViewModel(dataManager: DataManager())
     @StateObject private var traditionsViewModel = TraditionsViewModel(dataManager: DataManager())
     @StateObject private var quizViewModel = QuizViewModel(dataManager: DataManager())
-    @StateObject private var settingsViewModel = SettingsViewModel()
+    @StateObject private var placesViewModel = PlacesViewModel()
     
     @EnvironmentObject var darkModeManager: DarkModeManager
     @EnvironmentObject var fontSizeManager: FontSizeManager
@@ -28,7 +28,7 @@ struct MainView: View {
                     case .history: HistoryView(vm: historyViewModel)
                     case .traditions: TraditionsView(vm: traditionsViewModel)
                     case .quizzes: QuizzesView(vm: quizViewModel)
-                    case .map: SettingsView(vm: settingsViewModel)
+                    case .places: PlacesView(vm: placesViewModel)
                     }
                 }
                 .environment(\.isTabBarVisible, $isTabBarVisible)

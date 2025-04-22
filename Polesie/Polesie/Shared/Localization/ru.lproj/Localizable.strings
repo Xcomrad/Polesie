@@ -23,6 +23,8 @@
 "onboardingQuizzesDescription" = "Проверьте свои знания в увлекательных квизах, которые помогут вам не только узнать что-то новое, но и весело провести время! \nНе переживайте, если ошибётесь — это останется между нами, и вы всегда сможете попробовать снова.";
 "onboardingSettingsTitle" = "Настройки";
 "onboardingSettingsDescription" = "Настройте приложение под свои предпочтения, чтобы сделать процесс изучения Полесья ещё более комфортным и увлекательным.";
+"onboardingPlacesTitle" = "Места";
+"onboardingPlacesDescription" = "Откройте места Полесья — маршрут к самым запоминающимся природным и историческим локациям.";
 
 // Кнопки
 "startJuorney" = "Начать Путешествие";
@@ -37,7 +39,7 @@
 "historyButtonTitle" = "История";
 "traditionsButtonTitle" = "Традиции";
 "quizzesButtonTitle" = "Квизы";
-"mapButtonTitle" = "Карта";
+"placesButtonTitle" = "Места";
 
 // Настройки
 "settingsThemeTitle" = "Тема";
