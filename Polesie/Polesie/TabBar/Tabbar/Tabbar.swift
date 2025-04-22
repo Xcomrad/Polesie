@@ -57,9 +57,9 @@ struct TabBar: View {
                         RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24)
                             .strokeBorder(Constants.Colors.accent.opacity(0.05), lineWidth: 1)))
             
-            .adaptiveShadow(colorScheme: colorScheme)
             .padding(.horizontal, Constants.PaddingSizes.p12)
             .ignoresSafeArea(.all, edges: .bottom)
         }
+        .adaptiveShadow(colorScheme: colorScheme)
     }
 }

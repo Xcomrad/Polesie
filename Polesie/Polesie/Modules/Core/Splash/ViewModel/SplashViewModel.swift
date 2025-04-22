@@ -20,25 +20,25 @@ final class SplashViewModel: ObservableObject {
             animationStep = 1
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeOut(duration: Constants.PaddingSizes.p03)) {
                 self.animationStep = 2
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation(.easeOut(duration: Constants.PaddingSizes.p03)) {
                 self.animationStep = 3
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             withAnimation(.easeOut(duration: Constants.PaddingSizes.p03)) {
                 self.animationStep = 4
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             withAnimation(.easeOut(duration: Constants.PaddingSizes.p03)) {
                 self.animationStep = 5
             }

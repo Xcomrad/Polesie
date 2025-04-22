@@ -51,13 +51,12 @@ struct DetailQuizCardView: View {
             if vm.isQuizFinished {
                 ResultPopUp(
                     text: vm.correctAnswersCount == vm.currentQuestionCount ?
-                    "Поздравляем! Тест пройден!" :
-                    "К сожалению, тест не пройден :(",
-                    score: "Верных ответов: \(vm.correctAnswersCount)",
-                    questions: "А вопросов всего: \(vm.currentQuestionCount)",
+                    "🎉 Тест пройден! 🎉" :
+                    "Тест не пройден 😢",
+                    score: "Верных ответов: \(vm.correctAnswersCount) из \(vm.currentQuestionCount)",
                     description: vm.correctAnswersCount == vm.currentQuestionCount ?
-                    "Вы отлично справились!" :
-                    "Вы можете попробовать снова.",
+                    "Попробуйте следующий.":
+                    "Вы можете попробовать снова...",
                     onRestart: vm.restartQuiz,
                     onMenu: {
                         dismiss()
@@ -139,9 +138,11 @@ struct DetailQuizCardView: View {
         Text(vm.currentQuestion.fact)
             .font(Constants.BaseFonts.caption)
             .padding()
-            .background(Constants.Colors.accent
-                .opacity(Constants.PaddingSizes.p03))
-            .cornerRadius(Constants.PaddingSizes.p12)
+            .background(
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                    .fill(Constants.Colors.background.opacity(Constants.PaddingSizes.p05))
+                    .stroke(Constants.Colors.accent, lineWidth: 0.5)
+            )
             .padding(.horizontal)
             .transition(
                 .asymmetric(
@@ -181,7 +182,7 @@ struct DetailQuizCardView: View {
                 .background(
                     RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                         .fill(vm.selectedAnswer == nil ?
-                              Constants.Colors.darkGreen.opacity(0.5) :
+                              Constants.Colors.darkGreen.opacity(Constants.PaddingSizes.p05) :
                                 Constants.Colors.darkGreen)
                 )
                 .scaleEffect(vm.selectedAnswer == nil ? 1.0 : 1.05)
