@@ -16,9 +16,10 @@ struct OnboardingModel {
 enum OnboardingStep: Int, CaseIterable {
     case welcome
     case history
+    case settings
     case traditions
     case quizzes
-    case settings
+    case map
     
     var model: OnboardingModel {
         switch self {
@@ -32,6 +33,11 @@ enum OnboardingStep: Int, CaseIterable {
             title: Constants.Strings.onboardingHistoryTitle,
             description: Constants.Strings.onboardingHistoryDescription)
             
+        case .settings: return OnboardingModel(
+            image: Constants.Images.settingsImage,
+            title: Constants.Strings.onboardingSettingsTitle,
+            description: Constants.Strings.onboardingSettingsDescription)
+            
         case .traditions: return OnboardingModel(
             image: Constants.Images.traditionsImage,
             title: Constants.Strings.onboardingTraditionsTitle,
@@ -42,10 +48,10 @@ enum OnboardingStep: Int, CaseIterable {
             title: Constants.Strings.onboardingQuizzesTitle,
             description: Constants.Strings.onboardingQuizzesDescription)
             
-        case .settings: return OnboardingModel(
-            image: Constants.Images.settingsImage,
-            title: Constants.Strings.onboardingSettingsTitle,
-            description: Constants.Strings.onboardingSettingsDescription)
+        case .map: return OnboardingModel(
+            image: Constants.Images.mapImage,
+            title: Constants.Strings.onboardingPlacesTitle,
+            description: Constants.Strings.onboardingPlacesDescription)
         }
     }
 }

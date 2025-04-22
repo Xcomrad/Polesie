@@ -23,6 +23,8 @@
 "onboardingQuizzesDescription" = "Test your knowledge with fun quizzes that will not only teach you something new but also provide a great time! Don't worry if you make a mistake—it stays between us, and you can always try again.";
 "onboardingSettingsTitle" = "Settings";
 "onboardingSettingsDescription" = "Customize the app to your preferences to make exploring Polesia even more comfortable and engaging.";
+"onboardingPlacesTitle" = "Places";
+"onboardingPlacesDescription" = "Discover the places of Polesia — a journey through its most memorable natural and historical landmarks.";
 
 // Buttons
 "startJuorney" = "Start Journey";
@@ -37,7 +39,7 @@
 "historyButtonTitle" = "History";
 "traditionsButtonTitle" = "Traditions";
 "quizzesButtonTitle" = "Quizzes";
-"mapButtonTitle" = "Map";
+"placesButtonTitle" = "Places";
 
 // Settings
 "settingsThemeTitle" = "Theme";

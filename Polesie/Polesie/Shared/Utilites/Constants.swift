@@ -136,14 +136,22 @@ enum Constants {
         // Онбординг
         static let onboardingWelcomeTitle = NSLocalizedString("onboardingWelcomeTitle", comment: "")
         static let onboardingWelcomeDescription = NSLocalizedString("onboardingWelcomeDescription", comment: "")
+        
         static let onboardingHistoryTitle = NSLocalizedString("onboardingHistoryTitle", comment: "")
         static let onboardingHistoryDescription = NSLocalizedString("onboardingHistoryDescription", comment: "")
-        static let onboardingTraditionsTitle = NSLocalizedString("onboardingTraditionsTitle", comment: "")
-        static let onboardingTraditionsDescription = NSLocalizedString("onboardingTraditionsDescription", comment: "")
-        static let onboardingQuizzesTitle = NSLocalizedString("onboardingQuizzesTitle", comment: "")
-        static let onboardingQuizzesDescription = NSLocalizedString("onboardingQuizzesDescription", comment: "")
+        
         static let onboardingSettingsTitle = NSLocalizedString("onboardingSettingsTitle", comment: "")
         static let onboardingSettingsDescription = NSLocalizedString("onboardingSettingsDescription", comment: "")
+        
+        static let onboardingTraditionsTitle = NSLocalizedString("onboardingTraditionsTitle", comment: "")
+        static let onboardingTraditionsDescription = NSLocalizedString("onboardingTraditionsDescription", comment: "")
+        
+        static let onboardingQuizzesTitle = NSLocalizedString("onboardingQuizzesTitle", comment: "")
+        static let onboardingQuizzesDescription = NSLocalizedString("onboardingQuizzesDescription", comment: "")
+        
+        static let onboardingPlacesTitle = NSLocalizedString("onboardingPlacesTitle", comment: "")
+        static let onboardingPlacesDescription = NSLocalizedString("onboardingPlacesDescription", comment: "")
+
         
         // Кнопки
         static let startJourney = NSLocalizedString("startJuorney", comment: "")
@@ -158,7 +166,7 @@ enum Constants {
         static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
         static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
         static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
-        static let mapButtonTitle = NSLocalizedString("mapButtonTitle", comment: "")
+        static let placesButtonTitle = NSLocalizedString("placesButtonTitle", comment: "")
         
         // Настройки
         static let settingsThemeTitle = NSLocalizedString("settingsThemeTitle", comment: "")

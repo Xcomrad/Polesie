@@ -12,9 +12,12 @@ struct HistoryView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(\.isTabBarVisible) private var isTabBarVisible
-
+    
     @ObservedObject var vm: HistoryViewModel
+    @StateObject private var settingsVM = SettingsViewModel()
+    
     @State private var isShowing: Bool = true
+    @State private var showSettings: Bool = false
     
     var body: some View {
         ZStack {
@@ -63,6 +66,12 @@ struct HistoryView: View {
         .onAppear {
             Task { await vm.fetchData() }
         }
+        .sheet(isPresented: $showSettings) {
+            SettingsView(vm: settingsVM)
+                .presentationDetents([.fraction(Constants.PaddingSizes.p03), .medium])
+                .presentationDragIndicator(.visible)
+                .preferredColorScheme(colorScheme)
+        }
     }
     
     //MARK: - Components
@@ -89,8 +98,6 @@ struct HistoryView: View {
     }
     
     private func toggleSettiongs() {
-        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
-            isSidebarVisible.wrappedValue.toggle()
-        }
+        showSettings.toggle()
     }
 }

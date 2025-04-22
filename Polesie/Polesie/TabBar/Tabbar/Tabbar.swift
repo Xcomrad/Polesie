@@ -40,11 +40,11 @@ struct TabBar: View {
                 )
                 
                 TabBarButton(
-                    title: Constants.Strings.mapButtonTitle,
+                    title: Constants.Strings.placesButtonTitle,
                     icon: Constants.Images.mapImage,
                     selectedIcon: Constants.Images.mapImageFill,
-                    isSelected: selectedTab == .map,
-                    action: { selectedTab = .map }
+                    isSelected: selectedTab == .places,
+                    action: { selectedTab = .places }
                 )
             }
             .padding(.vertical, Constants.PaddingSizes.p12)

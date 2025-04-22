@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Tab: Hashable {
-    case history, traditions, quizzes, map
+    case history, traditions, quizzes, places
 }
 
 class TabCoordinator: ObservableObject {
