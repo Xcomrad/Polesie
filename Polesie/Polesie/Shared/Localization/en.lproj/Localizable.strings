@@ -37,7 +37,7 @@
 "historyButtonTitle" = "History";
 "traditionsButtonTitle" = "Traditions";
 "quizzesButtonTitle" = "Quizzes";
-"settingsButtonTitle" = "Settings";
+"mapButtonTitle" = "Map";
 
 // Settings
 "settingsThemeTitle" = "Theme";

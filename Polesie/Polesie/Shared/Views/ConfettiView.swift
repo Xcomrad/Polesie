@@ -26,8 +26,8 @@ struct ConfettiView: UIViewRepresentable {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 emitter.particleBirthRate = 0
             }
-
         }
+        
         view.presentScene(scene)
         return view
     }

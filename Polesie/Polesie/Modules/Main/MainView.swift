@@ -28,7 +28,7 @@ struct MainView: View {
                     case .history: HistoryView(vm: historyViewModel)
                     case .traditions: TraditionsView(vm: traditionsViewModel)
                     case .quizzes: QuizzesView(vm: quizViewModel)
-                    case .settings: SettingsView(vm: settingsViewModel)
+                    case .map: SettingsView(vm: settingsViewModel)
                     }
                 }
                 .environment(\.isTabBarVisible, $isTabBarVisible)
