@@ -25,7 +25,7 @@ struct HistoryInfoView: View {
                             .padding(.horizontal, Constants.PaddingSizes.p24)
                         
                         descriptionSection
-                            .padding(.top, Constants.PaddingSizes.p12)
+                            .padding(.top, Constants.PaddingSizes.p24)
                         
                         SubthemesSection(subthemes: history.subthemes,
                                          expandSubtheme: vm.expandSubtheme,

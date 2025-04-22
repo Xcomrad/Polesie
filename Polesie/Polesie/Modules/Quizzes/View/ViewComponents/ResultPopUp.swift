@@ -7,156 +7,108 @@
 
 import SwiftUI
 
-//struct ResultPopUp: View {
-//    @Environment(\.dismiss) var dismiss
-//    
-//    private var vm: QuizViewModel
-//    
-//    init(vm: QuizViewModel) {
-//        self.vm = vm
-//    }
-//    
-//    var body: some View {
-//        ZStack {
-//            Constants.Colors.background
-//                .opacity(Constants.PaddingSizes.p05)
-//                .ignoresSafeArea()
-//            
-//            VStack(spacing: Constants.PaddingSizes.p16) {
-//                Text("Квиз завершен!")
-//                    .font(Constants.BaseFonts.h2Bold)
-//                    .foregroundStyle(Constants.Colors.text)
-//                
-//                VStack(alignment: .leading) {
-//                    Text("Верных ответов: \(vm.correctAnswersCount)")
-//                        .font(Constants.BaseFonts.body)
-//                        .foregroundStyle(Constants.Colors.text)
-//                        .multilineTextAlignment(.center)
-//                    Text("Всего вопросов: \(vm.currentQuestionCount)")
-//                        .font(Constants.BaseFonts.body)
-//                        .foregroundStyle(Constants.Colors.text)
-//                        .multilineTextAlignment(.center)
-//                }
-//                
-//                Divider()
-//                    .background(Constants.Colors.text
-//                        .opacity(0.2))
-//                
-//                HStack(spacing: Constants.PaddingSizes.p16) {
-//                    Button {
-//                        vm.restartQuiz()
-//                    } label: {
-//                        Text("Начать заново")
-//                            .font(Constants.BaseFonts.small)
-//                            .foregroundStyle(Constants.Colors.button)
-//                            .padding()
-//                            .frame(maxWidth: .infinity)
-//                            .background(Constants.Colors.accent)
-//                            .cornerRadius(Constants.PaddingSizes.p12)
-//                    }
-//                    
-//                    Button {
-//                        dismiss()
-//                        vm.isQuizFinished = false
-//                    } label: {
-//                        Text("На главную")
-//                            .font(Constants.BaseFonts.small)
-//                            .foregroundStyle(Constants.Colors.button)
-//                            .padding()
-//                            .frame(maxWidth: .infinity)
-//                            .background(Constants.Colors.earthyBrown)
-//                            .cornerRadius(Constants.PaddingSizes.p12)
-//                    }
-//                }
-//            }
-//            .padding(Constants.PaddingSizes.p16)
-//            .frame(width: Constants.PaddingSizes.p300)
-//            .background(Constants.Colors.background)
-//            .cornerRadius(Constants.PaddingSizes.p12)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-//                    .stroke(Constants.Colors.stoneGray, lineWidth: 1)
-//            )
-//            .adaptiveShadow(colorScheme: colorScheme)
-//        }
-//        .transition(.opacity)
-//        .zIndex(2)
-//    }
-//}
-
 struct ResultPopUp: View {
     var text: String
     var score: String?
-    var questions: String?
-    var description: String
+    var description: String?
     var onRestart: (() -> Void)?
     var onMenu: (() -> Void)?
-  
+    
     @Environment(\.colorScheme) var colorScheme
+    @State private var appearAnimation = false
     
     var body: some View {
         ZStack {
-            Constants.Colors.background
-                .opacity(Constants.PaddingSizes.p05)
-                .ignoresSafeArea()
+            backgroundLayer
             
             VStack(spacing: Constants.PaddingSizes.p16) {
-                Text(text)
-                    .font(Constants.BaseFonts.h2Bold)
-                    .foregroundStyle(Constants.Colors.text)
-                
-                VStack(alignment: .leading) {
-                    Text(score ?? "")
-                        .font(Constants.BaseFonts.body)
-                        .foregroundStyle(Constants.Colors.text)
-                        .multilineTextAlignment(.center)
-                    Text(questions ?? "")
-                        .font(Constants.BaseFonts.body)
-                        .foregroundStyle(Constants.Colors.text)
-                        .multilineTextAlignment(.center)
-                }
-                
-                Divider()
-                    .background(Constants.Colors.text
-                        .opacity(Constants.PaddingSizes.p03))
-                
-                HStack(spacing: Constants.PaddingSizes.p16) {
-                    Button {
-                        onRestart?()
-                    } label: {
-                        Text("Начать заново")
-                            .font(Constants.BaseFonts.small)
-                            .foregroundStyle(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Constants.Colors.accent)
-                            .cornerRadius(Constants.PaddingSizes.p12)
-                    }
-                    
-                    Button {
-                        onMenu?()
-                    } label: {
-                        Text("На главную")
-                            .font(Constants.BaseFonts.small)
-                            .foregroundStyle(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Constants.Colors.accent)
-                            .cornerRadius(Constants.PaddingSizes.p12)
-                    }
-                }
+                descriptionLayer
+                divider
+                buttons
             }
             .padding(Constants.PaddingSizes.p16)
-            .frame(width: Constants.PaddingSizes.p300)
+            .frame(maxWidth: Constants.PaddingSizes.p300)
             .background(Constants.Colors.background)
             .cornerRadius(Constants.PaddingSizes.p12)
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                    .stroke(Constants.Colors.stoneGray, lineWidth: 1)
+                    .stroke(Constants.Colors.stoneGray, lineWidth: 0.5)
             )
             .adaptiveShadow(colorScheme: colorScheme)
+            .scaleEffect(appearAnimation ? 1 : 0.9)
+            .opacity(appearAnimation ? 1 : 0)
+            .onAppear {
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                    appearAnimation = true
+                }
+            }
         }
-        .transition(.opacity)
         .zIndex(2)
+    }
+    
+    // MARK: - Components
+    private var backgroundLayer: some View {
+        BlurView(style: .systemUltraThinMaterial)
+            .ignoresSafeArea(.all)
+            .opacity(appearAnimation ? 1 : 0)
+            .animation(.easeInOut(duration: 0.3), value: appearAnimation)
+    }
+    
+    private var descriptionLayer: some View {
+        VStack(alignment: .center) {
+            makeText(text, font: Constants.BaseFonts.h2Bold,
+                     color: Constants.Colors.text)
+            .padding(.bottom, Constants.PaddingSizes.p16)
+            
+            VStack(alignment: .leading) {
+                if let score, !score.isEmpty {
+                    makeText(score, font: Constants.BaseFonts.body,
+                             color: Constants.Colors.text)
+                }
+                
+                if let description, !description.isEmpty {
+                    makeText(description, font: Constants.BaseFonts.secondaryBold,
+                             color: Constants.Colors.text)
+                }
+            }
+        }
+    }
+    
+    private var divider: some View {
+        Divider()
+            .background(Constants.Colors.text
+                .opacity(Constants.PaddingSizes.p03))
+    }
+    
+    private var buttons: some View {
+        HStack(spacing: Constants.PaddingSizes.p16) {
+            
+            if let onRestart {
+                submitButtons("Начать заново", onRestart)
+            }
+            
+            if let onMenu {
+                submitButtons("К тестам", onMenu)
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    private func makeText(_ text: String, font: Font, color: Color) -> some View {
+        Text(text)
+            .font(font)
+            .foregroundStyle(color)
+    }
+    
+    private func submitButtons(_ text: String, _ closure: @escaping () -> Void) -> some View {
+        Button(action: closure) {
+            Text(text)
+                .font(Constants.BaseFonts.small)
+                .foregroundStyle(Constants.Colors.button)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Constants.Colors.accent)
+                .cornerRadius(Constants.PaddingSizes.p12)
+        }
     }
 }
