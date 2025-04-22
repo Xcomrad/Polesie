@@ -21,29 +21,37 @@ struct ResultPopUp: View {
         ZStack {
             backgroundLayer
             
-            VStack(spacing: Constants.PaddingSizes.p16) {
-                descriptionLayer
-                divider
-                buttons
-            }
-            .padding(Constants.PaddingSizes.p16)
-            .frame(maxWidth: Constants.PaddingSizes.p300)
-            .background(Constants.Colors.background)
-            .cornerRadius(Constants.PaddingSizes.p12)
-            .overlay(
-                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                    .stroke(Constants.Colors.stoneGray, lineWidth: 0.5)
-            )
-            .adaptiveShadow(colorScheme: colorScheme)
-            .scaleEffect(appearAnimation ? 1 : 0.9)
-            .opacity(appearAnimation ? 1 : 0)
-            .onAppear {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-                    appearAnimation = true
+            ZStack {
+                ConfettiView()
+                    .ignoresSafeArea(.all)
+                
+                VStack(spacing: Constants.PaddingSizes.p16) {
+                    descriptionLayer
+                    divider
+                    buttons
+                }
+                .padding(Constants.PaddingSizes.p16)
+                .frame(maxWidth: Constants.PaddingSizes.p300)
+                .background(Constants.Colors.background)
+                .cornerRadius(Constants.PaddingSizes.p12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                        .stroke(Constants.Colors.stoneGray, lineWidth: 0.5)
+                )
+                .adaptiveShadow(colorScheme: colorScheme)
+                .scaleEffect(appearAnimation ? 1 : 0.9)
+                .opacity(appearAnimation ? 1 : 0)
+                .onAppear {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                        appearAnimation = true
+                        triggerExplosion()
+                    }
                 }
             }
+            .zIndex(1)
         }
-        .zIndex(2)
+        .transition(.opacity)
+        .zIndex(1)
     }
     
     // MARK: - Components
@@ -109,6 +117,18 @@ struct ResultPopUp: View {
                 .frame(maxWidth: .infinity)
                 .background(Constants.Colors.accent)
                 .cornerRadius(Constants.PaddingSizes.p12)
+        }
+    }
+    
+    private func triggerExplosion() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.prepare()
+        generator.impactOccurred()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            generator.impactOccurred()
         }
     }
 }

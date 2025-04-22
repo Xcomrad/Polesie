@@ -49,25 +49,23 @@ struct DetailQuizCardView: View {
             .padding(.all, Constants.PaddingSizes.p24)
             
             if vm.isQuizFinished {
+                
                 ResultPopUp(
                     text: vm.correctAnswersCount == vm.currentQuestionCount ?
                     "🎉 Тест пройден! 🎉" :
-                    "Тест не пройден 😢",
+                        "Тест не пройден 😢",
                     score: "Верных ответов: \(vm.correctAnswersCount) из \(vm.currentQuestionCount)",
                     description: vm.correctAnswersCount == vm.currentQuestionCount ?
                     "Попробуйте следующий.":
-                    "Вы можете попробовать снова...",
+                        "Вы можете попробовать снова...",
                     onRestart: vm.restartQuiz,
                     onMenu: {
                         dismiss()
                         vm.isQuizFinished = false
                     }
                 )
-                .transition(.asymmetric(
-                    insertion: .opacity.combined(with: .scale(scale: 0.9)),
-                    removal: .opacity
-                ))
-                .zIndex(1)
+                .transition(.asymmetric(insertion: .opacity.combined(with: .scale(scale: 0.9)),
+                                        removal: .opacity))
             }
         }
         .animation(
