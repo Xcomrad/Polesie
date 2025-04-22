@@ -11,11 +11,24 @@ enum Constants {
     
     enum Images {
         static let splashImage = "splash"
-        static let educationImage = "graduationcap.fill"
-        static let historyImage = "books.vertical.fill"
-        static let traditionsImage = "scroll.fill"
-        static let questsImage = "questionmark.bubble.fill"
-        static let settingsImage = "gearshape.fill"
+        
+        static let educationImage = "graduationcap"
+        static let educationImageFill = "graduationcap.fill"
+        
+        static let historyImage = "books.vertical"
+        static let historyImageFill = "books.vertical.fill"
+        
+        static let sideBarImage = "line.3.horizontal"
+        static let settingsImage = "gearshape"
+        
+        static let traditionsImage = "scroll"
+        static let traditionsImageFill = "scroll.fill"
+        
+        static let questsImage = "questionmark.bubble"
+        static let questsImageFill = "questionmark.bubble.fill"
+        
+        static let mapImage = "map"
+        static let mapImageFill = "map.fill"
     }
     
     enum Colors {
@@ -145,7 +158,7 @@ enum Constants {
         static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
         static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
         static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
-        static let settingsButtonTitle = NSLocalizedString("settingsButtonTitle", comment: "")
+        static let mapButtonTitle = NSLocalizedString("mapButtonTitle", comment: "")
         
         // Настройки
         static let settingsThemeTitle = NSLocalizedString("settingsThemeTitle", comment: "")

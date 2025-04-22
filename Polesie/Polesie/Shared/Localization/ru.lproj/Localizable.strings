@@ -37,7 +37,7 @@
 "historyButtonTitle" = "История";
 "traditionsButtonTitle" = "Традиции";
 "quizzesButtonTitle" = "Квизы";
-"settingsButtonTitle" = "Настройки";
+"mapButtonTitle" = "Карта";
 
 // Настройки
 "settingsThemeTitle" = "Тема";

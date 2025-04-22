@@ -17,34 +17,34 @@ struct TabBar: View {
             HStack {
                 TabBarButton(
                     title: Constants.Strings.historyButtonTitle,
-                    icon: "books.vertical",
-                    selectedIcon: "books.vertical.fill",
+                    icon: Constants.Images.educationImage,
+                    selectedIcon: Constants.Images.educationImageFill,
                     isSelected: selectedTab == .history,
                     action: { selectedTab = .history }
                 )
                 
                 TabBarButton(
                     title: Constants.Strings.traditionsButtonTitle,
-                    icon: "scroll",
-                    selectedIcon: "scroll.fill",
+                    icon: Constants.Images.traditionsImage,
+                    selectedIcon: Constants.Images.traditionsImageFill,
                     isSelected: selectedTab == .traditions,
                     action: { selectedTab = .traditions }
                 )
                 
                 TabBarButton(
                     title: Constants.Strings.quizzesButtonTitle,
-                    icon: "questionmark.bubble",
-                    selectedIcon: "questionmark.bubble.fill",
+                    icon: Constants.Images.questsImage,
+                    selectedIcon: Constants.Images.questsImageFill,
                     isSelected: selectedTab == .quizzes,
                     action: { selectedTab = .quizzes }
                 )
                 
                 TabBarButton(
-                    title: Constants.Strings.settingsButtonTitle,
-                    icon: "gearshape",
-                    selectedIcon: "gearshape.fill",
-                    isSelected: selectedTab == .settings,
-                    action: { selectedTab = .settings }
+                    title: Constants.Strings.mapButtonTitle,
+                    icon: Constants.Images.mapImage,
+                    selectedIcon: Constants.Images.mapImageFill,
+                    isSelected: selectedTab == .map,
+                    action: { selectedTab = .map }
                 )
             }
             .padding(.vertical, Constants.PaddingSizes.p12)

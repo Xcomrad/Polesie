@@ -18,9 +18,7 @@ struct HistoryView: View {
     
     var body: some View {
         ZStack {
-            Constants.Colors.background
-                .opacity(Constants.PaddingSizes.p05)
-                .ignoresSafeArea(.all)
+            backgroundLayer
             
             // MARK: - If no data
             if let toastMessage = vm.toastMessage {
@@ -28,7 +26,11 @@ struct HistoryView: View {
             }
             
             VStack {
-                burgerButton
+                HStack {
+                    makeButtos(Constants.Images.sideBarImage, toggleSidebar)
+                    Spacer()
+                    makeButtos(Constants.Images.settingsImage, toggleSettiongs)
+                }
                 
                 if let selectedHistory = vm.selectedHistory {
                     HistoryInfoView(vm: vm, history: selectedHistory)
@@ -64,20 +66,29 @@ struct HistoryView: View {
     }
     
     //MARK: - Components
-    private var burgerButton: some View {
-        Button(action: {
-            toggleSidebar()
-        }) {
-            Image(systemName: "line.horizontal.3")
+    private var backgroundLayer: some View {
+        Constants.Colors.background
+            .opacity(Constants.PaddingSizes.p05)
+            .ignoresSafeArea(.all)
+    }
+    
+    private func makeButtos(_ icon: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: icon)
                 .font(.title)
                 .foregroundStyle(Constants.Colors.accent)
                 .padding()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     //MARK: - Actions
     private func toggleSidebar() {
+        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
+            isSidebarVisible.wrappedValue.toggle()
+        }
+    }
+    
+    private func toggleSettiongs() {
         withAnimation(.easeInOut(duration: Constants.PaddingSizes.p03)) {
             isSidebarVisible.wrappedValue.toggle()
         }

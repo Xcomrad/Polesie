@@ -26,7 +26,6 @@ struct ToastView: View {
         case .failure:
             return Image(systemName: "xmark.circle.fill")
                 .foregroundStyle(Constants.Colors.darkRed)
-            
         }
     }
     
