@@ -18,25 +18,28 @@ struct PlaceCardView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            backgroundLayer
             
-            VStack(spacing: Constants.PaddingSizes.p8) {
-                content
+            ZStack(alignment: .bottom) {
+                VStack(spacing: Constants.PaddingSizes.p8) {
+                    content
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                        .fill(Constants.Colors.background)
+                )
+                .padding(Constants.PaddingSizes.p24)
+                
                 buttonsGroup
+                    .padding(Constants.PaddingSizes.p05)
+                    .padding(.horizontal, Constants.PaddingSizes.p24)
             }
-            .padding(Constants.PaddingSizes.p24)
-            
-            closeButton
-                .padding(Constants.PaddingSizes.p16)
-        }
+           
+                closeButton
+                    .padding(Constants.PaddingSizes.p16)
+            }
     }
     
     // MARK: - Components
-    private var backgroundLayer: some View {
-        Constants.Colors.background
-            .opacity(Constants.PaddingSizes.p05)
-            .edgesIgnoringSafeArea(.all)
-    }
     
     private var content: some View {
         VStack(spacing: Constants.PaddingSizes.p8) {
@@ -51,18 +54,15 @@ struct PlaceCardView: View {
                 .lineLimit(5)
                 .truncationMode(.tail)
         }
-        .background(
-            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                .fill(Constants.Colors.background
-                    .opacity(Constants.PaddingSizes.p05))
-        )
         .padding(Constants.PaddingSizes.p24)
     }
     
     private var buttonsGroup: some View {
         HStack(spacing: Constants.PaddingSizes.p8) {
             buttons(title: "Проложить маршрут", action: onNavigate)
+                .adaptiveShadow(colorScheme: colorScheme)
             buttons(title: "Обзор", action: onDetail)
+                .adaptiveShadow(colorScheme: colorScheme)
         }
     }
     

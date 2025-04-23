@@ -14,26 +14,39 @@ struct PlacesMapView: View {
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 52.111406, longitude: 26.102473),
-            span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2)))
+            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 6)
+        )
+    )
     
     @State private var selectedPlace: PlaceModel?
     @State private var showCard = false
-    @State private var visibleRegion: MKCoordinateRegion?
-    
-    init(vm: PlacesViewModel) {
-        self.vm = vm
-    }
     
     var body: some View {
         ZStack {
-            Map(position: $cameraPosition) {
+            Map(position: $cameraPosition, interactionModes: [.all]) {
                 UserAnnotation()
                 ForEach(vm.places, id: \.id) { place in
                     Annotation(place.name, coordinate: place.coordinate) {
-                        MapAnnotationView(imageName: place.icon,
-                                          title: place.description) {
-                            selectedPlace = place
-                            showCard = true
+                        MapAnnotationView(imageName: place.icon, title: place.description) {
+                            
+                            withAnimation(.easeInOut(duration:  Constants.PaddingSizes.p05)) {
+                                cameraPosition = .camera(
+                                    MapCamera(
+                                        centerCoordinate: CLLocationCoordinate2D(
+                                            latitude: place.coordinate.latitude - 0.005,
+                                            longitude: place.coordinate.longitude
+                                        ),
+                                        distance: 6000,
+                                        heading: 0,
+                                        pitch: 45
+                                    )
+                                )
+                            }
+                            
+                            withAnimation(.easeInOut(duration:  Constants.PaddingSizes.p05)) {
+                                selectedPlace = place
+                                    showCard = true
+                            }
                         }
                     }
                 }
@@ -42,10 +55,25 @@ struct PlacesMapView: View {
                 MapUserLocationButton()
                 MapCompass()
             }
+            .controlSize(.large)
+            .mapStyle(.hybrid)
+            .ignoresSafeArea()
+            
+            if showCard, let selectedPlace {
+                VStack() {
+                    Spacer()
+                    PlaceCardView(place: selectedPlace) {
+                        withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
+                            showCard = false
+                        }
+                    } onDetail: {
+                        // детали
+                    } onNavigate: {
+                        // маршрут
+                    }
+                }
+                .padding(.bottom,  Constants.PaddingSizes.p200)
+            }
         }
     }
-}
-
-#Preview {
-    PlacesMapView(vm: PlacesViewModel())
 }
