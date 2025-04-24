@@ -13,7 +13,7 @@ struct SubthemesSection: View {
     
     let subthemes: [HistorySubthemeModel]
     let expandSubtheme: Set<Int>
-    let onTap: ((Int) -> Void)
+    let onTap: (Int) -> Void
     
     var body: some View {
         ScrollViewReader { proxy in

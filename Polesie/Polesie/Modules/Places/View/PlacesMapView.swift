@@ -10,10 +10,12 @@ import MapKit
 
 struct PlacesMapView: View {
     @ObservedObject var vm: PlacesViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var centerCoordinate: CLLocationCoordinate2D?
     @State private var selectedPlace: PlaceModel?
     @State private var showCard = false
+    @State private var showDetail = false
     
     var body: some View {
         ZStack {
@@ -49,13 +51,19 @@ struct PlacesMapView: View {
                         }
                     },
                                   onDetail: {
-                        
+                        showDetail = true
                     },
                                   onNavigate: {
                         
                     })
                 }
                 .padding(.bottom, Constants.PaddingSizes.p120)
+                .fullScreenCover(isPresented: $showDetail) {
+                    DetailPlaceView(place: place, onClose: {
+                        showDetail = false
+                    })
+                    .preferredColorScheme(colorScheme)
+                }
             }
         }
     }
