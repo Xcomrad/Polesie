@@ -10,8 +10,8 @@ import SwiftUI
 extension View {
     func adaptiveShadow(colorScheme: ColorScheme) -> some View {
         self.shadow(
-            color: colorScheme == .dark ? .white.opacity(0.2) : .black.opacity(0.2),
-            radius: 3, x: 0, y: 3
+            color: colorScheme == .dark ? .white.opacity(0.15) : .black.opacity(0.15),
+            radius: 20, x: 3, y: 3
         )
     }
 }

@@ -26,17 +26,17 @@ struct PlaceCardView: View {
                 .background(
                     RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                         .fill(Constants.Colors.background)
+                        .stroke(.accent)
                 )
                 .padding(Constants.PaddingSizes.p24)
                 
                 buttonsGroup
-                    .padding(Constants.PaddingSizes.p05)
-                    .padding(.horizontal, Constants.PaddingSizes.p24)
+                    .offset(y: Constants.PaddingSizes.p12)
             }
-           
-                closeButton
-                    .padding(Constants.PaddingSizes.p16)
-            }
+            
+            closeButton
+                .padding(Constants.PaddingSizes.p16)
+        }
     }
     
     // MARK: - Components
@@ -54,15 +54,14 @@ struct PlaceCardView: View {
                 .lineLimit(5)
                 .truncationMode(.tail)
         }
+        .adaptiveShadow(colorScheme: colorScheme)
         .padding(Constants.PaddingSizes.p24)
     }
     
     private var buttonsGroup: some View {
-        HStack(spacing: Constants.PaddingSizes.p8) {
+        HStack(spacing: Constants.PaddingSizes.p12) {
             buttons(title: "Проложить маршрут", action: onNavigate)
-                .adaptiveShadow(colorScheme: colorScheme)
             buttons(title: "Обзор", action: onDetail)
-                .adaptiveShadow(colorScheme: colorScheme)
         }
     }
     
@@ -73,6 +72,8 @@ struct PlaceCardView: View {
                 .frame(width: Constants.PaddingSizes.p35,
                        height: Constants.PaddingSizes.p35)
                 .foregroundColor(Constants.Colors.accent)
+                .background(Constants.Colors.background)
+                .clipShape(Circle())
         }
         .adaptiveShadow(colorScheme: colorScheme)
     }
@@ -80,14 +81,15 @@ struct PlaceCardView: View {
     private func buttons(title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
-                .font(Constants.BaseFonts.small)
+                .font(Constants.BaseFonts.button)
                 .foregroundStyle(Constants.Colors.button)
-                .padding(Constants.PaddingSizes.p8)
-                .frame(maxWidth: .infinity)
+                .padding()
                 .background(
                     RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                         .fill(Constants.Colors.accent)
+                        .stroke(Constants.Colors.background)
                 )
         }
+        .adaptiveShadow(colorScheme: colorScheme)
     }
 }
