@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MapAnnotationView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var isSelected = false
-    @State private var isPressed = false
     
     let imageName: String
     let title: String
@@ -25,29 +23,19 @@ struct MapAnnotationView: View {
         Button(action: {
             withAnimation(.bouncy(duration: Constants.PaddingSizes.p03,
                                   extraBounce: Constants.PaddingSizes.p03)) {
-                isSelected.toggle()
                 action()
             }
         }) {
             VStack(spacing: Constants.PaddingSizes.p8) {
                 imageContent
-                selectionIndicator
             }
         }
-        .buttonStyle(ScaleButtonStyle(isPressed: $isPressed))
+        .buttonStyle(ScaleButtonStyle())
     }
     
     // MARK: - Components
     private var imageContent: some View {
         ZStack {
-            if isSelected {
-                Circle()
-                    .fill(Constants.Colors.accent
-                        .opacity(Constants.PaddingSizes.p03))
-                    .frame(width: Constants.PaddingSizes.p100, height: Constants.PaddingSizes.p100)
-                    .blur(radius: 6)
-            }
-            
             Image(imageName)
                 .resizable()
                 .scaledToFill()
@@ -62,44 +50,27 @@ struct MapAnnotationView: View {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: isSelected ? 3 : 2
+                            lineWidth: 2
                         )
                 )
                 .background(
                     Circle()
                         .fill(Material.ultraThinMaterial)
                 )
-                .scaleEffect(isPressed ? 0.9 : isSelected ? 1.1 : 1.0)
                 .shadow(
                     color: shadowColor,
-                    radius: isSelected ? 10 : 5,
+                    radius: 5,
                     x: 0,
-                    y: isSelected ? 5 : 2
+                    y: 2
                 )
         }
-    }
-    
-    private var selectionIndicator: some View {
-        Image(systemName: "arrowtriangle.down.fill")
-            .font(.system(size: Constants.PaddingSizes.p12))
-            .foregroundColor(Constants.Colors.accent)
-            .scaleEffect(isSelected ? 1.5 : 1.0)
-            .opacity(isSelected ? 1 : 0)
-            .animation(.easeInOut(duration: Constants.PaddingSizes.p03),
-                       value: isSelected)
     }
 }
 
 struct ScaleButtonStyle: ButtonStyle {
-    @Binding var isPressed: Bool
-    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.5 : 1.0)
             .animation(.easeOut(duration: Constants.PaddingSizes.p03), value: configuration.isPressed)
-    
     }
-}
-#Preview {
-    MapAnnotationView(imageName: "pinsk", title: "Пинск", action: {  })
 }
