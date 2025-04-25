@@ -15,20 +15,11 @@ struct DetailPlaceView: View {
     var onClose: () -> Void
     
     var body: some View {
-        ZStack {
-            Constants.Colors.background
-                .ignoresSafeArea(.all)
-            
+        ZStack(alignment: .topTrailing) {
+            backgroundLayer
+          
             ScrollView {
-                VStack(alignment: .center, spacing: Constants.PaddingSizes.p24) {
-                    
-                    HStack {
-                        Spacer()
-                        closeButton
-                    }
-                    .padding(.top, Constants.PaddingSizes.p16)
-                    .padding(.horizontal)
-                    
+                VStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
                     image
                     title
                     
@@ -44,9 +35,8 @@ struct DetailPlaceView: View {
                             .font(Constants.BaseFonts.body)
                             .foregroundStyle(.text)
                     }
-                    .padding(.horizontal, Constants.PaddingSizes.p24)
                     
-                    Spacer(minLength: Constants.PaddingSizes.p24)
+                    Spacer(minLength: Constants.PaddingSizes.p12)
                     
                     VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
                         Text("Интересные места:")
@@ -54,21 +44,30 @@ struct DetailPlaceView: View {
                             .foregroundStyle(.text)
                         
                         ScrollView(.horizontal) {
-                            HStack(spacing: Constants.PaddingSizes.p8) {
+                            HStack(spacing: Constants.PaddingSizes.p12) {
                                 ForEach(place.collageModels ?? [], id: (\.id)) { collage in
                                     DetailCell(cellData: collage)
                                 }
                             }
                         }
+                        .scrollIndicators(.hidden)
                     }
-                    .padding(.horizontal, Constants.PaddingSizes.p24)
                 }
-                .scrollIndicators(.hidden)
             }
+            .padding(.horizontal, Constants.PaddingSizes.p24)
+            .scrollIndicators(.hidden)
+            
+            closeButton
+                .padding(.trailing, Constants.PaddingSizes.p24)
         }
     }
     
     //MARK: - Components
+    private var backgroundLayer: some View {
+        Constants.Colors.background
+            .ignoresSafeArea(.all)
+    }
+    
     private var image: some View {
         Image(place.image ?? "")
             .resizable()
