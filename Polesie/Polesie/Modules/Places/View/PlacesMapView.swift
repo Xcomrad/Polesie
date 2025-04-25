@@ -9,16 +9,21 @@ import SwiftUI
 import MapKit
 
 struct PlacesMapView: View {
-    @ObservedObject var vm: PlacesViewModel
     @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var vm: PlacesViewModel
     
     @State private var centerCoordinate: CLLocationCoordinate2D?
     @State private var selectedPlace: PlaceModel?
     @State private var showCard = false
     @State private var showDetail = false
+    @State private var showToast = false
     
     var body: some View {
         ZStack {
+            if let toastMessage = vm.toastMessage {
+                ToastView(isShowing: $showToast, message: toastMessage, type: vm.toastError)
+            }
+                
             UIKitMapView(centerCoordinate: $centerCoordinate,
                          vm: vm,
                          onSelectPlace: { place in
@@ -66,10 +71,13 @@ struct PlacesMapView: View {
                 }
             }
         }
+        .onAppear {
+            Task { await vm.fetchData() }
+        }
     }
 }
 
 
 #Preview {
-    PlacesMapView(vm: PlacesViewModel())
+    PlacesMapView(vm: .init())
 }
