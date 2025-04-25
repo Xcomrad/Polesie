@@ -55,7 +55,7 @@ struct DetailPlaceView: View {
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: Constants.PaddingSizes.p8) {
-                                ForEach(place.collageModels, id: (\.id)) { collage in
+                                ForEach(place.collageModels ?? [], id: (\.id)) { collage in
                                     DetailCell(cellData: collage)
                                 }
                             }
@@ -70,7 +70,7 @@ struct DetailPlaceView: View {
     
     //MARK: - Components
     private var image: some View {
-        Image(place.image)
+        Image(place.image ?? "")
             .resizable()
             .frame(width: Constants.PaddingSizes.p300,
                    height: Constants.PaddingSizes.p250)
