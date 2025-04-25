@@ -45,7 +45,7 @@ struct UIKitMapView: UIViewRepresentable {
             annotationView?.isUserInteractionEnabled = true
             
             let swiftUIView = MapAnnotationView(
-                imageName: place.icon,
+                imageName: place.image,
                 title: place.name,
                 action: { self.parent.onSelectPlace(place) }
             )
@@ -85,7 +85,7 @@ struct UIKitMapView: UIViewRepresentable {
         for place in vm.places {
             let annotation = MKPointAnnotation()
             annotation.title = place.name
-            annotation.coordinate = place.coordinate
+            annotation.coordinate = place.placeCoordinates
             mapView.addAnnotation(annotation)
         }
         

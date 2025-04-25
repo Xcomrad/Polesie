@@ -30,7 +30,7 @@ struct PlacesMapView: View {
                     } else {
                         selectedPlace = place
                         showCard = true
-                        centerCoordinate = place.coordinate
+                        centerCoordinate = place.placeCoordinates
                     }
                 }
             }, isInteractionEnabled: !showCard)

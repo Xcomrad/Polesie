@@ -30,7 +30,6 @@ struct DetailPlaceView: View {
                     .padding(.horizontal)
                     
                     image
-                    
                     title
                     
                     Divider()
@@ -48,17 +47,33 @@ struct DetailPlaceView: View {
                     .padding(.horizontal, Constants.PaddingSizes.p24)
                     
                     Spacer(minLength: Constants.PaddingSizes.p24)
+                    
+                    VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
+                        Text("Интересные места:")
+                            .font(Constants.BaseFonts.h2Bold)
+                            .foregroundStyle(.text)
+                        
+                        ScrollView(.horizontal) {
+                            HStack(spacing: Constants.PaddingSizes.p8) {
+                                ForEach(place.collageModels, id: (\.id)) { collage in
+                                    DetailCell(cellData: collage)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, Constants.PaddingSizes.p24)
                 }
+                .scrollIndicators(.hidden)
             }
         }
     }
     
     //MARK: - Components
     private var image: some View {
-        Image(place.icon)
+        Image(place.image)
             .resizable()
-            .frame(width: Constants.PaddingSizes.p250,
-                   height: Constants.PaddingSizes.p200)
+            .frame(width: Constants.PaddingSizes.p300,
+                   height: Constants.PaddingSizes.p250)
             .clipShape(Circle())
             .overlay {
                 Circle()
@@ -72,7 +87,7 @@ struct DetailPlaceView: View {
             Text(place.name)
                 .font(Constants.BaseFonts.h1Bold)
                 .foregroundStyle(.text)
-            Text(place.subtitle ?? "")
+            Text(place.subtitle)
                 .font(Constants.BaseFonts.small)
                 .foregroundStyle(.secondary)
             
@@ -91,11 +106,4 @@ struct DetailPlaceView: View {
         }
         .adaptiveShadow(colorScheme: colorScheme)
     }
-}
-
-#Preview {
-    DetailPlaceView(place: PlaceModel(id: 2, icon: "pinsk",
-                                      name: "Пинск", subtitle: "Город над пиной",
-                                      description: "Пинск — столица белорусского Полесья, город-музей под открытым небом и один из древних городов Беларуси. А еще по некоторым подсчетам второй (после Гродно) в стране по количеству достопримечательностей и сохранившихся памятников архитектуры. Это город трех религий, или как его еще называют «Полесский Иерусалим».",
-                                      coordinate: CLLocationCoordinate2D(latitude: 52.111406, longitude: 26.102473)), onClose: {})
 }
