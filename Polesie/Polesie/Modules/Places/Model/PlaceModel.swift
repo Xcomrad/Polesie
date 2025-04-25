@@ -16,11 +16,11 @@ struct Coordinates: Hashable, Codable {
 
 struct PlaceModel: Hashable, Codable, Identifiable {
     let id: Int
-    let image: String
+    let image: String?
     let name: String
     let subtitle: String
     let description: String
-    let collageModels: [CollageModel]
+    let collageModels: [CollageModel]?
     
     
     
