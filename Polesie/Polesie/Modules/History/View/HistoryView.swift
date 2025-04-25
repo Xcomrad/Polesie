@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HistoryView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.isSidebarVisible) private var isSidebarVisible
     @Environment(\.isTabBarVisible) private var isTabBarVisible
@@ -16,7 +15,7 @@ struct HistoryView: View {
     @ObservedObject var vm: HistoryViewModel
     @StateObject private var settingsVM = SettingsViewModel()
     
-    @State private var isShowing: Bool = true
+    @State private var showToast: Bool = true
     @State private var showSettings: Bool = false
     
     var body: some View {
@@ -25,7 +24,7 @@ struct HistoryView: View {
             
             // MARK: - If no data
             if let toastMessage = vm.toastMessage {
-                ToastView(isShowing: $isShowing, message: toastMessage, type: vm.toastError)
+                ToastView(isShowing: $showToast, message: toastMessage, type: vm.toastError)
             }
             
             VStack {

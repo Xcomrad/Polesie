@@ -45,7 +45,7 @@ struct UIKitMapView: UIViewRepresentable {
             annotationView?.isUserInteractionEnabled = true
             
             let swiftUIView = MapAnnotationView(
-                imageName: place.icon,
+                imageName: place.image ?? "",
                 title: place.name,
                 action: { self.parent.onSelectPlace(place) }
             )
@@ -85,7 +85,7 @@ struct UIKitMapView: UIViewRepresentable {
         for place in vm.places {
             let annotation = MKPointAnnotation()
             annotation.title = place.name
-            annotation.coordinate = place.coordinate
+            annotation.coordinate = place.placeCoordinates
             mapView.addAnnotation(annotation)
         }
         
@@ -101,12 +101,14 @@ struct UIKitMapView: UIViewRepresentable {
         }
         
         uiView.isUserInteractionEnabled = isInteractionEnabled
+        uiView.removeAnnotations(uiView.annotations)
         
-        // Триггер обновления отображения аннотаций
-        for annotation in uiView.annotations {
-            if let view = uiView.view(for: annotation) {
-                view.setNeedsLayout()
-            }
+        for place in vm.places {
+            let annotation = MKPointAnnotation()
+            annotation.title = place.name
+            annotation.coordinate = place.placeCoordinates
+            uiView.addAnnotation(annotation)
         }
     }
 }
+
