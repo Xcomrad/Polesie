@@ -15,10 +15,11 @@ struct MainView: View {
     @StateObject private var historyViewModel: HistoryViewModel = HistoryViewModel(dataManager: DataManager())
     @StateObject private var traditionsViewModel = TraditionsViewModel(dataManager: DataManager())
     @StateObject private var quizViewModel = QuizViewModel(dataManager: DataManager())
-    @StateObject private var placesViewModel = PlacesViewModel()
+    @StateObject private var placesViewModel = PlacesViewModel(dataManager: DataManager())
     
     @EnvironmentObject var darkModeManager: DarkModeManager
     @EnvironmentObject var fontSizeManager: FontSizeManager
+    @StateObject var mapManager = MapManager()
     
     var body: some View {
         NavigationStack {
@@ -28,7 +29,7 @@ struct MainView: View {
                     case .history: HistoryView(vm: historyViewModel)
                     case .traditions: TraditionsView(vm: traditionsViewModel)
                     case .quizzes: QuizzesView(vm: quizViewModel)
-                    case .places: PlacesMapView(vm: placesViewModel)
+                    case .places: MapView(vm: placesViewModel, mapManager: mapManager)
                     }
                 }
                 .environment(\.isTabBarVisible, $isTabBarVisible)
