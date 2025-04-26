@@ -17,7 +17,7 @@ struct DetailPlaceView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             backgroundLayer
-          
+            
             ScrollView {
                 VStack(alignment: .center, spacing: Constants.PaddingSizes.p16) {
                     image
@@ -26,32 +26,11 @@ struct DetailPlaceView: View {
                     Divider()
                         .padding(.horizontal)
                     
-                    VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
-                        Text("Подробнее:")
-                            .font(Constants.BaseFonts.h2Bold)
-                            .foregroundStyle(.text)
-                        
-                        Text(place.description)
-                            .font(Constants.BaseFonts.body)
-                            .foregroundStyle(.text)
-                    }
+                    moreLayer
                     
                     Spacer(minLength: Constants.PaddingSizes.p12)
                     
-                    VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
-                        Text("Интересные места:")
-                            .font(Constants.BaseFonts.h2Bold)
-                            .foregroundStyle(.text)
-                        
-                        ScrollView(.horizontal) {
-                            HStack(spacing: Constants.PaddingSizes.p12) {
-                                ForEach(place.collageModels ?? [], id: (\.id)) { collage in
-                                    DetailCell(cellData: collage)
-                                }
-                            }
-                        }
-                        .scrollIndicators(.hidden)
-                    }
+                    interastingPlaces
                 }
             }
             .padding(.horizontal, Constants.PaddingSizes.p24)
@@ -71,14 +50,14 @@ struct DetailPlaceView: View {
     private var image: some View {
         Image(place.image ?? "")
             .resizable()
-            .frame(width: Constants.PaddingSizes.p300,
-                   height: Constants.PaddingSizes.p250)
+            .frame(maxWidth: Constants.PaddingSizes.p300,
+                   maxHeight: Constants.PaddingSizes.p250)
             .clipShape(Circle())
             .overlay {
                 Circle()
                     .stroke(.white, lineWidth: 4)
             }
-            .shadow(color: .text, radius: 7)
+            .shadow(color: .text, radius: Constants.PaddingSizes.p8)
     }
     
     private var title: some View {
@@ -89,7 +68,6 @@ struct DetailPlaceView: View {
             Text(place.subtitle)
                 .font(Constants.BaseFonts.small)
                 .foregroundStyle(.secondary)
-            
         }
     }
     
@@ -104,5 +82,31 @@ struct DetailPlaceView: View {
                 .clipShape(Circle())
         }
         .adaptiveShadow(colorScheme: colorScheme)
+    }
+    
+    private var moreLayer: some View {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
+            Text("Подробнее:")
+                .font(Constants.BaseFonts.h2Bold)
+                .foregroundStyle(.text)
+            
+            Text(place.description)
+                .font(Constants.BaseFonts.body)
+                .foregroundStyle(.text)
+        }
+    }
+    
+    private var interastingPlaces: some View {
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
+            Text("Интересные места:")
+                .font(Constants.BaseFonts.h2Bold)
+                .foregroundStyle(.text)
+            
+            VStack(spacing: Constants.PaddingSizes.p12) {
+                ForEach(Array((place.collageModels ?? []).enumerated()), id: \.element.id) { index, collage in
+                    DetailCell(cellData: collage, delayIndex: index)
+                }
+            }
+        }
     }
 }
