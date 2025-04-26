@@ -25,7 +25,6 @@ final class PlacesViewModel: ObservableObject {
         do {
             let placesData = try await dataManager.loadDataFromBundle(file: "places", type: [PlaceModel].self)
             places = placesData
-            print(placesData)
         } catch {
             self.toastMessage = (error as? AppError)?.localizedDescription
             self.toastError = .failure

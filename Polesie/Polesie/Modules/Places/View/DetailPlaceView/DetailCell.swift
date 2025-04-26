@@ -9,8 +9,12 @@ import SwiftUI
 
 struct DetailCell: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var showDetailDescription: Bool = false
+    
+    @State private var showDetailDescription = false
+    @State private var animate = false
+    
     let cellData: CollageModel
+    let delayIndex: Int
     
     var body: some View {
         Button {
@@ -19,6 +23,16 @@ struct DetailCell: View {
             ZStack(alignment: .bottomLeading) {
                 icon
                 content
+            }
+            .opacity(animate ? 1 : 0)
+            .scaleEffect(animate ? 1 : 0.9)
+            .onAppear {
+                withAnimation(
+                    .easeInOut(duration: Constants.PaddingSizes.p05)
+                    .delay(Double(delayIndex) * Constants.PaddingSizes.p05))
+                {
+                    animate = true
+                }
             }
         }
         .fullScreenCover(isPresented: $showDetailDescription) {
@@ -29,35 +43,35 @@ struct DetailCell: View {
         .preferredColorScheme(colorScheme)
     }
     
-
-// MARK: - Components
-private var icon: some View {
-    Image(cellData.image)
-        .resizable()
-        .scaledToFill()
-        .frame(width: Constants.PaddingSizes.p300,
-               height: Constants.PaddingSizes.p200)
-        .overlay(
-            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
-                .stroke(Constants.Colors.background, lineWidth: 3)
-        )
-        .overlay(
-            LinearGradient(colors: [.clear, .background],
-                           startPoint: .top,
-                           endPoint: .bottom)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
-}
-
-private var content: some View {
-    VStack(alignment: .leading) {
-        Text(cellData.name)
-            .font(Constants.BaseFonts.captionBold)
-            .foregroundColor(.text)
-        Text(cellData.subtitle)
-            .font(Constants.BaseFonts.caption)
-            .foregroundColor(.secondary)
+    
+    // MARK: - Components
+    private var icon: some View {
+        Image(cellData.image)
+            .resizable()
+            .scaledToFill()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(1.5, contentMode: .fit)
+            .overlay(
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
+                    .stroke(Constants.Colors.background, lineWidth: 3)
+            )
+            .overlay(
+                LinearGradient(colors: [.clear, .background],
+                               startPoint: .top,
+                               endPoint: .bottom)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
     }
-    .padding(Constants.PaddingSizes.p8)
-}
+    
+    private var content: some View {
+        VStack(alignment: .leading) {
+            Text(cellData.name)
+                .font(Constants.BaseFonts.captionBold)
+                .foregroundColor(.text)
+            Text(cellData.subtitle)
+                .font(Constants.BaseFonts.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding(Constants.PaddingSizes.p8)
+    }
 }
