@@ -35,10 +35,12 @@ struct SettingsView: View {
     
     private var themeSection: some View {
         Section(header: sectionHeader(Constants.Strings.settingsThemeTitle)) {
-            Toggle(Constants.Strings.settingsThemeToggle, isOn: $darkModeManager.isDarkMode)
-                .font(Constants.BaseFonts.captionBold)
-                .tint(Constants.Colors.accent)
-                .animation(.easeInOut, value: darkModeManager.isDarkMode)
+            HStack {
+                Text(Constants.Strings.settingsThemeToggle)
+                    .font(Constants.BaseFonts.captionBold)
+                Spacer()
+                ThemeToggleButton(isOn: $darkModeManager.isDarkMode)
+            }
         }
     }
     
