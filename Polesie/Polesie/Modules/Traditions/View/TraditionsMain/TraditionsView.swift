@@ -39,7 +39,7 @@ struct TraditionsView: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .navigationTitle("Традиции")
+            .navigationTitle(Constants.Strings.traditionsButtonTitle)
             .navigationDestination(item: $selectedTradition) { item in
                 TraditionListView(vm: vm,
                                   title: item.title,

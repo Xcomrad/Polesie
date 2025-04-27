@@ -44,7 +44,7 @@ struct QuizzesView: View {
             Task { await vm.fetchData() }
         }
         
-        .navigationTitle("Квизы")
+        .navigationTitle(Constants.Strings.quizzesButtonTitle)
         .fullScreenCover(item: $selectedTheme) { theme in
             DetailQuizCardView(vm: vm)
                 .preferredColorScheme(colorScheme)

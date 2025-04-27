@@ -21,9 +21,9 @@ struct AnswerButton: View {
     }
     
     private var iconImage: String {
-        if isCorrect { return "checkmark.circle.fill" }
-        if isWrong { return "xmark.circle.fill" }
-        return isSelected ? "circle.fill" : "circle"
+        if isCorrect { return Constants.Images.checkmarkImageFill }
+        if isWrong { return Constants.Images.xMarkImageFill }
+        return isSelected ? Constants.Images.circleImageFill : Constants.Images.circleImage
     }
     
     private var backgroundColor: Color {
@@ -75,6 +75,7 @@ struct AnswerButton: View {
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isSelected)
         .sensoryFeedback(.success, trigger: isCorrect)
         .sensoryFeedback(.error, trigger: isWrong)
-        .accessibilityHint(isCorrect ? "Правильный ответ" : isWrong ? "Неправильный ответ" : "")
+        .accessibilityHint(isCorrect ? Constants.Strings.correctAnswer :
+                            isWrong ? Constants.Strings.wrongAnswer : "")
     }
 }

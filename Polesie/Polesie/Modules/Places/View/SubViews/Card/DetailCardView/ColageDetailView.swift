@@ -81,7 +81,7 @@ struct CollageDetailView: View {
     
     private var closeButton: some View {
         Button(action: onClose) {
-            Image(systemName: "xmark.circle.fill")
+            Image(systemName: Constants.Images.xMarkImageFill)
                 .resizable()
                 .frame(width: Constants.PaddingSizes.p35,
                        height: Constants.PaddingSizes.p35)
@@ -95,8 +95,8 @@ struct CollageDetailView: View {
     private var toNavigationButton: some View {
         Button(action: toMap) {
             HStack {
-                Image(systemName: "mappin")
-                Text("Проложить маршрут")
+                Image(systemName: Constants.Images.mapPinImage)
+                Text(Constants.Strings.navigateButtonTitle)
             }
             .padding()
             .frame(maxWidth: .infinity)

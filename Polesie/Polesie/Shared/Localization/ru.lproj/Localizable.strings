@@ -37,9 +37,30 @@
 
 // Таббар
 "historyButtonTitle" = "История";
+"themesLabelTitle" = "Tемы";
+
 "traditionsButtonTitle" = "Традиции";
+
 "quizzesButtonTitle" = "Квизы";
+"correctAnswer" = "Правильный ответ";
+"wrongAnswer" = "Неправильный ответ";
+"completed" = "ПРОЙДЕН";
+"restart" = "Начать заново";
+"toTests" = "К тестам";
+"nextQuestion" = "Следующий вопрос";
+"confirmAnswer" = "Подтвердить ответ";
+"testPassed" = "Тест пройден!";
+"testFailed" = "Тест не пройден";
+"correctAnswers" = "Верных ответов";
+"outOf" = "из";
+"tryNext" = "Попробуйте следующий.";
+"tryAgain" = "Вы можете попробовать снова...";
+
 "placesButtonTitle" = "Места";
+"navigateButtonTitle" = "Проложить маршрут";
+"overviewTitle" = "Обзор";
+"moreDetailsTitle" = "Подробнее:";
+"interestingPlacesTitle" = "Интересные места:";
 
 // Настройки
 "settingsThemeTitle" = "Тема";

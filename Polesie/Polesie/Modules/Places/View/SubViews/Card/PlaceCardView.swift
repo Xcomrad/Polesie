@@ -60,14 +60,14 @@ struct PlaceCardView: View {
     
     private var buttonsGroup: some View {
         HStack(spacing: Constants.PaddingSizes.p12) {
-            buttons(title: "Проложить маршрут", action: onNavigate)
-            buttons(title: "Обзор", action: onDetail)
+            buttons(title: Constants.Strings.navigateButtonTitle, action: onNavigate)
+            buttons(title: Constants.Strings.overviewTitle, action: onDetail)
         }
     }
     
     private var closeButton: some View {
         Button(action: onClose) {
-            Image(systemName: "xmark.circle.fill")
+            Image(systemName: Constants.Images.xMarkImageFill)
                 .resizable()
                 .frame(width: Constants.PaddingSizes.p35,
                        height: Constants.PaddingSizes.p35)

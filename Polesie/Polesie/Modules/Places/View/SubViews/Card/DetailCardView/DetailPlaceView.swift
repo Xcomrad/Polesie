@@ -74,7 +74,7 @@ struct DetailPlaceView: View {
     
     private var closeButton: some View {
         Button(action: onClose) {
-            Image(systemName: "xmark.circle.fill")
+            Image(systemName: Constants.Images.xMarkImageFill)
                 .resizable()
                 .frame(width: Constants.PaddingSizes.p35,
                        height: Constants.PaddingSizes.p35)
@@ -87,7 +87,7 @@ struct DetailPlaceView: View {
     
     private var moreLayer: some View {
         VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
-            Text("Подробнее:")
+            Text(Constants.Strings.moreDetailsTitle)
                 .font(Constants.BaseFonts.h2Bold)
                 .foregroundStyle(.text)
             
@@ -99,7 +99,7 @@ struct DetailPlaceView: View {
     
     private var interastingPlaces: some View {
         VStack(alignment: .leading, spacing: Constants.PaddingSizes.p12) {
-            Text("Интересные места:")
+            Text(Constants.Strings.interestingPlacesTitle)
                 .font(Constants.BaseFonts.h2Bold)
                 .foregroundStyle(.text)
             
