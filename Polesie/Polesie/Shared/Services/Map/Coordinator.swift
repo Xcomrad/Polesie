@@ -11,10 +11,13 @@ import SwiftUI
 final class Coordinator: NSObject, MKMapViewDelegate {
     private let parent: MapManagerProtocol
     private let onSelectPlace: (PlaceModel) -> Void
+    private let onSelectLocation: (CollageModel) -> Void
     
-    init(parent: MapManagerProtocol, onSelectPlace: @escaping (PlaceModel) -> Void) {
+    init(parent: MapManagerProtocol, onSelectPlace: @escaping (PlaceModel) -> Void,
+         onSelectLocation: @escaping (CollageModel) -> Void) {
         self.parent = parent
         self.onSelectPlace = onSelectPlace
+        self.onSelectLocation = onSelectLocation
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

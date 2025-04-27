@@ -11,6 +11,7 @@ struct CollageDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     var collage: CollageModel
     var onClose: () -> Void
+    var toMap: () -> Void
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -92,9 +93,7 @@ struct CollageDetailView: View {
     }
     
     private var toNavigationButton: some View {
-        Button {
-            // to map
-        } label: {
+        Button(action: toMap) {
             HStack {
                 Image(systemName: "mappin")
                 Text("Проложить маршрут")
@@ -115,5 +114,6 @@ struct CollageDetailView: View {
                                                 description: "8 мая 1965 года Брестской крепости за её героическую оборону в июне-июле 1941 года присвоено звание «Крепость-герой» — высшая степень отличия, которой удостоены единственная крепость и двенадцать городов Советского Союза, прославившихся своей героической обороной во время Великой Отечественной войны 1941—1945 годов.",
                                                 coordinates: Coordinates(latitude: 52.085202,
                                                                          longitude: 23.668053)),
-                          onClose: { })
+                          onClose: { },
+                          toMap: { })
     }

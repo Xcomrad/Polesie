@@ -12,6 +12,7 @@ struct DetailCell: View {
     
     @State private var showDetailDescription = false
     @State private var animate = false
+    var onNavigate: (CollageModel) -> Void
     
     let cellData: CollageModel
     let delayIndex: Int
@@ -38,6 +39,8 @@ struct DetailCell: View {
         .fullScreenCover(isPresented: $showDetailDescription) {
             CollageDetailView(collage: cellData) {
                 showDetailDescription = false
+            } toMap: {
+                onNavigate(cellData)
             }
         }
         .preferredColorScheme(colorScheme)

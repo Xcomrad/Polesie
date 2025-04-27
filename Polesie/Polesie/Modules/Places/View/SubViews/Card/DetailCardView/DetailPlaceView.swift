@@ -13,6 +13,7 @@ struct DetailPlaceView: View {
     
     var place: PlaceModel
     var onClose: () -> Void
+    var onNavigate: (CollageModel) -> Void
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -104,7 +105,10 @@ struct DetailPlaceView: View {
             
             VStack(spacing: Constants.PaddingSizes.p12) {
                 ForEach(Array((place.collageModels ?? []).enumerated()), id: \.element.id) { index, collage in
-                    DetailCell(cellData: collage, delayIndex: index)
+                    
+                    DetailCell(onNavigate: { collage in
+                        onNavigate(collage)
+                    }, cellData: collage, delayIndex: index)
                 }
             }
         }
