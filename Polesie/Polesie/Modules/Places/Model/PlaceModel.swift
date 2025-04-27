@@ -22,8 +22,6 @@ struct PlaceModel: Hashable, Codable, Identifiable {
     let description: String
     let collageModels: [CollageModel]?
     
-    
-    
     var coordinates: Coordinates
     var placeCoordinates: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: coordinates.latitude,

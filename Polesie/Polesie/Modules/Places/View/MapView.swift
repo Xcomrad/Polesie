@@ -25,11 +25,12 @@ struct MapView: View {
                 .onAppear {
                     mapManager.setupCoordinator { place in
                         vm.selectPlace(place)
+                    } onSelectLocation: { location in
+                        vm.selectLocation(location)
                     }
-                    Task {
-                        await vm.fetchData()
-                    }
+                    Task { await vm.fetchData() }
                 }
+            
                 .onChange(of: vm.places) { _, new in
                     mapManager.addAnnotations(for: new)
                     mapManager.zoomCenter()
@@ -57,9 +58,9 @@ struct MapView: View {
                         },
                         onNavigate: {
                             if let userLocation = mapManager.findUserLocation(),
-                                  let destinationCoordinate = vm.selectedPlace?.placeCoordinates {
-                                   mapManager.startNavigation(from: userLocation, to: destinationCoordinate)
-                               }
+                               let destinationCoordinate = vm.selectedPlace?.placeCoordinates {
+                                mapManager.startNavigation(from: userLocation, to: destinationCoordinate)
+                            }
                         }
                     )
                     .padding(.bottom, Constants.PaddingSizes.p120)
@@ -69,6 +70,10 @@ struct MapView: View {
                 .fullScreenCover(isPresented: $vm.showDetail) {
                     DetailPlaceView(place: place, onClose: {
                         vm.showDetail = false
+                    }, onNavigate: { collage in
+                        if let userLocation = mapManager.findUserLocation() {
+                                mapManager.startNavigation(from: userLocation, to: collage.locationCoordinates)
+                            }
                     })
                     .preferredColorScheme(colorScheme)
                 }
@@ -79,15 +84,16 @@ struct MapView: View {
             
         }
     }
-    
-    // MARK: - Components
-    private func mapButtons(_ name: String, _ action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: name)
-                .resizable()
-                .frame(width: Constants.PaddingSizes.p35,
-                       height: Constants.PaddingSizes.p35)
-                .foregroundColor(Constants.Colors.background)
-        }
+}
+
+
+// MARK: - Components
+private func mapButtons(_ name: String, _ action: @escaping () -> Void) -> some View {
+    Button(action: action) {
+        Image(systemName: name)
+            .resizable()
+            .frame(width: Constants.PaddingSizes.p35,
+                   height: Constants.PaddingSizes.p35)
+            .foregroundColor(Constants.Colors.background)
     }
 }

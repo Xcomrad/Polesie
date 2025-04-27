@@ -12,6 +12,7 @@ import MapKit
 final class PlacesViewModel: ObservableObject {
     @Published var places: [PlaceModel] = []
     @Published var selectedPlace: PlaceModel?
+    @Published var selectedLocationPlace: CollageModel?
     
     @Published var toastMessage: String?
     @Published var toastError: ToastType = .success
@@ -41,6 +42,10 @@ final class PlacesViewModel: ObservableObject {
     func selectPlace(_ place: PlaceModel) {
         selectedPlace = place
         showCard = true
+    }
+    
+    func selectLocation(_ location: CollageModel) {
+        selectedLocationPlace = location
     }
     
     func closeCard() {

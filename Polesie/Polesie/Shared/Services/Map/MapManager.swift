@@ -11,7 +11,8 @@ import SwiftUI
 
 protocol MapManagerProtocol {
     var mapView: MKMapView { get }
-    func setupCoordinator(onSelectPlace: @escaping (PlaceModel) -> Void)
+    func setupCoordinator(onSelectPlace: @escaping (PlaceModel) -> Void,
+                          onSelectLocation: @escaping (CollageModel) -> Void)
     func addAnnotations(for places: [PlaceModel])
     func startNavigation(from sourceCoordinate: CLLocationCoordinate2D, to destinationCoordinate: CLLocationCoordinate2D)
     func findUserLocation() -> CLLocationCoordinate2D?
@@ -30,8 +31,11 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
         configureMap()
     }
     
-    func setupCoordinator(onSelectPlace: @escaping (PlaceModel) -> Void) {
-        self.coordinator = Coordinator(parent: self, onSelectPlace: onSelectPlace)
+    func setupCoordinator(onSelectPlace: @escaping (PlaceModel) -> Void,
+                          onSelectLocation: @escaping (CollageModel) -> Void) {
+        self.coordinator = Coordinator(parent: self,
+                                       onSelectPlace: onSelectPlace,
+                                       onSelectLocation: onSelectLocation)
         self.mapView.delegate = coordinator
     }
     
