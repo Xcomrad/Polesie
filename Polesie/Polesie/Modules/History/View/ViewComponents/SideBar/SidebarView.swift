@@ -27,7 +27,7 @@ struct SidebarView: View {
         }
         .adaptiveShadow(colorScheme: colorScheme)
         .frame(width: sidebarWidh)
-        .offset(x: isVisible ? -UIScreen.main.bounds.width * 0.3 : -UIScreen.main.bounds.width)
+        .offset(x: isVisible ? -UIScreen.main.bounds.width * Constants.PaddingSizes.p03 : -UIScreen.main.bounds.width)
     }
     
     //MARK: - Components
@@ -41,10 +41,13 @@ struct SidebarView: View {
     }
     
     private var themeTitle: some View {
-        Text("Темы")
-            .font(Constants.BaseFonts.h2Bold)
-            .foregroundStyle(Constants.Colors.text)
-            .padding(.horizontal)
+        VStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
+            Text("Темы")
+                .font(Constants.BaseFonts.h2Bold)
+                .foregroundStyle(Constants.Colors.text)
+                .padding(.horizontal)
+            Divider()
+        }
     }
     
     private var scrollView: some View {
