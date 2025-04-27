@@ -166,8 +166,12 @@ enum Constants {
         
         // Таббар
         static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
+        static let themsLabelTitle = NSLocalizedString("themsLabelTitle", comment: "")
+        
         static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
+        
         static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
+        
         static let placesButtonTitle = NSLocalizedString("placesButtonTitle", comment: "")
         
         // Настройки

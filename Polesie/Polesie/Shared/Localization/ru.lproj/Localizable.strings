@@ -37,8 +37,12 @@
 
 // Таббар
 "historyButtonTitle" = "История";
+"themsLabelTitle" = "Темы";
+
 "traditionsButtonTitle" = "Традиции";
+
 "quizzesButtonTitle" = "Квизы";
+
 "placesButtonTitle" = "Места";
 
 // Настройки

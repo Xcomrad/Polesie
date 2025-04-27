@@ -37,8 +37,12 @@
 
 // Tab Bar
 "historyButtonTitle" = "History";
+"themsLabelTitle" = "Themes";
+
 "traditionsButtonTitle" = "Traditions";
+
 "quizzesButtonTitle" = "Quizzes";
+
 "placesButtonTitle" = "Places";
 
 // Settings
