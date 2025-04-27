@@ -78,7 +78,7 @@ struct CardsView: View {
     }
     
     private var successBage: some View {
-        Text("ПРОЙДЕН")
+        Text(Constants.Strings.completed)
             .font(Constants.BaseFonts.bodyBold)
             .foregroundColor(Constants.Colors.darkGreen)
             .padding(.vertical, Constants.PaddingSizes.p05)

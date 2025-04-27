@@ -33,7 +33,7 @@ struct SidebarView: View {
     //MARK: - Components
     private var clouseButton: some View {
         Button(action: toggleSidebar) {
-            Image(systemName: "xmark")
+            Image(systemName: Constants.Images.xMarkImage)
                 .font(.title)
                 .foregroundStyle(Constants.Colors.accent)
                 .padding()
@@ -42,7 +42,7 @@ struct SidebarView: View {
     
     private var themeTitle: some View {
         VStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
-            Text("Темы")
+            Text(Constants.Strings.themesLabelTitle)
                 .font(Constants.BaseFonts.h2Bold)
                 .foregroundStyle(Constants.Colors.text)
                 .padding(.horizontal)

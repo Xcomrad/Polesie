@@ -52,12 +52,12 @@ struct DetailQuizCardView: View {
                 
                 ResultPopUp(
                     text: vm.correctAnswersCount == vm.currentQuestionCount ?
-                    "🎉 Тест пройден! 🎉" :
-                        "Тест не пройден 😢",
-                    score: "Верных ответов: \(vm.correctAnswersCount) из \(vm.currentQuestionCount)",
+                    "\(Constants.Strings.testPassed) 🎉" :
+                        "\(Constants.Strings.testFailed) 😢",
+                    score: "\(Constants.Strings.correctAnswers) \(vm.correctAnswersCount) \(Constants.Strings.outOf) \(vm.currentQuestionCount)",
                     description: vm.correctAnswersCount == vm.currentQuestionCount ?
-                    "Попробуйте следующий.":
-                        "Вы можете попробовать снова...",
+                    "\(Constants.Strings.tryNext)":
+                        Constants.Strings.tryAgain,
                     onRestart: vm.restartQuiz,
                     onMenu: {
                         dismiss()
@@ -84,7 +84,7 @@ struct DetailQuizCardView: View {
         Button {
             dismiss()
         } label: {
-            Image(systemName:"xmark.app.fill")
+            Image(systemName:Constants.Images.xMarkImageFill)
                 .resizable()
                 .scaledToFill()
                 .frame(width: Constants.PaddingSizes.p24, height: Constants.PaddingSizes.p24)
@@ -172,7 +172,7 @@ struct DetailQuizCardView: View {
                 vm.showResult ? vm.moveToNextQuestion() : vm.checkAnswer()
             }
         }) {
-            Text(vm.showResult ? "Следующий вопрос" : "Подтвердить ответ")
+            Text(vm.showResult ? Constants.Strings.nextQuestion : Constants.Strings.confirmAnswer)
                 .font(Constants.BaseFonts.button)
                 .foregroundColor(.white)
                 .padding()

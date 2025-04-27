@@ -29,6 +29,14 @@ enum Constants {
         
         static let mapImage = "map"
         static let mapImageFill = "map.fill"
+        
+        static let xMarkImage = "xmark"
+        static let xMarkImageFill = "xmark.circle.fill"
+        static let mapPinImage = "mappin"
+        
+        static let checkmarkImageFill = "checkmark.circle.fill"
+        static let circleImageFill = "circle.fill"
+        static let circleImage = "circle"
     }
     
     enum Colors {
@@ -153,7 +161,7 @@ enum Constants {
         
         static let onboardingPlacesTitle = NSLocalizedString("onboardingPlacesTitle", comment: "")
         static let onboardingPlacesDescription = NSLocalizedString("onboardingPlacesDescription", comment: "")
-
+        
         
         // Кнопки
         static let startJourney = NSLocalizedString("startJuorney", comment: "")
@@ -166,9 +174,30 @@ enum Constants {
         
         // Таббар
         static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
+        static let themesLabelTitle = NSLocalizedString("themesLabelTitle", comment: "")
         static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
+        
         static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
+        static let correctAnswer = NSLocalizedString("correctAnswer", comment: "")
+        static let wrongAnswer = NSLocalizedString("wrongAnswer", comment: "")
+        static let completed = NSLocalizedString("completed", comment: "")
+        static let restart = NSLocalizedString("restart", comment: "")
+        static let toTests = NSLocalizedString("toTests", comment: "")
+        static let nextQuestion = NSLocalizedString("nextQuestion", comment: "")
+        static let confirmAnswer = NSLocalizedString("confirmAnswer", comment: "")
+        static let testPassed = NSLocalizedString("testPassed", comment: "")
+        static let testFailed = NSLocalizedString("testFailed", comment: "")
+        static let correctAnswers = NSLocalizedString("correctAnswers", comment: "")
+        static let outOf = NSLocalizedString("outOf", comment: "")
+        static let tryNext = NSLocalizedString("tryNext", comment: "")
+        static let tryAgain = NSLocalizedString("tryAgain", comment: "")
+        
         static let placesButtonTitle = NSLocalizedString("placesButtonTitle", comment: "")
+        static let navigateButtonTitle = NSLocalizedString("navigateButtonTitle", comment: "")
+        static let overviewTitle = NSLocalizedString("overviewTitle", comment: "")
+        static let moreDetailsTitle = NSLocalizedString("moreDetailsTitle", comment: "")
+        static let interestingPlacesTitle = NSLocalizedString("interestingPlacesTitle", comment: "")
+        
         
         // Настройки
         static let settingsThemeTitle = NSLocalizedString("settingsThemeTitle", comment: "")

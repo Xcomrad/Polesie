@@ -37,9 +37,29 @@
 
 // Tab Bar
 "historyButtonTitle" = "History";
+"themesLabelTitle" = "Themes";
 "traditionsButtonTitle" = "Traditions";
+
 "quizzesButtonTitle" = "Quizzes";
+"correctAnswer" = "Correct Answer";
+"wrongAnswer" = "Wrong Answer";
+"completed" = "COMPLETED";
+"restart" = "Restart";
+"toTests" = "To Tests";
+"nextQuestion" = "Next Question";
+"confirmAnswer" = "Confirm Answer";
+"testPassed" = "Test Passed!";
+"testFailed" = "Test Failed";
+"correctAnswers" = "Correct answers";
+"outOf" = "out of";
+"tryNext" = "Try the next one.";
+"tryAgain" = "You can try again...";
+
 "placesButtonTitle" = "Places";
+"navigateButtonTitle" = "Get Directions";
+"overviewTitle" = "Overview";
+"moreDetailsTitle" = "More details:";
+"interestingPlacesTitle" = "Interesting places:";
 
 // Settings
 "settingsThemeTitle" = "Theme";

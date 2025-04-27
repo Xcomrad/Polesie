@@ -92,11 +92,11 @@ struct ResultPopUp: View {
         HStack(spacing: Constants.PaddingSizes.p16) {
             
             if let onRestart {
-                submitButtons("Начать заново", onRestart)
+                submitButtons(Constants.Strings.restart, onRestart)
             }
             
             if let onMenu {
-                submitButtons("К тестам", onMenu)
+                submitButtons(Constants.Strings.toTests, onMenu)
             }
         }
     }
@@ -125,7 +125,7 @@ struct ResultPopUp: View {
         generator.prepare()
         generator.impactOccurred()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.PaddingSizes.p05) {
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.prepare()
             generator.impactOccurred()
