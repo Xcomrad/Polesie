@@ -20,6 +20,7 @@ struct PlaceModel: Hashable, Codable, Identifiable {
     let name: String
     let subtitle: String
     let description: String
+    var website: String?
     let collageModels: [CollageModel]?
     
     var coordinates: Coordinates
@@ -32,9 +33,10 @@ struct PlaceModel: Hashable, Codable, Identifiable {
 struct CollageModel: Hashable, Codable, Identifiable {
     let id: Int
     let name: String
-    let image: String
+    let images: [String]
     let subtitle: String
     let description: String
+    var website: String?
     
     var coordinates: Coordinates
     var locationCoordinates: CLLocationCoordinate2D {
