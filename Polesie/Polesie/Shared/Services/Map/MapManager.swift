@@ -22,7 +22,6 @@ protocol MapManagerProtocol {
 }
 
 final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
-    
     @Published var mapView = MKMapView()
     private var coordinator: Coordinator?
     
@@ -47,7 +46,7 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
         mapView.showsScale = true
         
         let startCenter = CLLocationCoordinate2D(latitude: 52.111406, longitude: 26.102473)
-        let startSpan = MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 6)
+        let startSpan = MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 5)
         let startRegion = MKCoordinateRegion(center: startCenter, span: startSpan)
         mapView.setRegion(startRegion, animated: false)
     }
@@ -55,11 +54,9 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
     func addAnnotations(for places: [PlaceModel]) {
         mapView.removeAnnotations(mapView.annotations)
         
-        for (index, place) in places.enumerated() {
-            let annotation = PlaceAnnotation(place: place)
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
+        for place in places.enumerated() {
+            let annotation = PlaceAnnotation(place: place.element)
                 self.mapView.addAnnotation(annotation)
-            }
         }
     }
     
@@ -75,7 +72,7 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
         destinationMapItem.openInMaps(launchOptions: options)
     }
     
-    // MARK: - Camera
+    // MARK: - Camera moved
     func focusCamera(on place: PlaceModel) {
         let camera = MKMapCamera()
         camera.centerCoordinate = place.placeCoordinates
@@ -115,6 +112,20 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
                 zoomRect,
                 edgePadding: UIEdgeInsets(top: 60, left: 60, bottom: 180, right: 60),
                 animated: true)
+        }
+    }
+    
+    func cetnerMapOnUser() {
+        if let userLocation = findUserLocation() {
+            let region = MKCoordinateRegion(
+                center: userLocation,
+                span: MKCoordinateSpan(
+                    latitudeDelta: 1000,
+                    longitudeDelta: 1000))
+            
+            UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseInOut]) {
+                self.mapView.setRegion(region, animated: true)
+            }
         }
     }
 }

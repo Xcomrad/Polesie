@@ -52,9 +52,9 @@ struct TabBar: View {
             
             .background(
                 Constants.Colors.background
-                    .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24))
+                    .clipShape(RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12))
                     .overlay(
-                        RoundedRectangle(cornerRadius: Constants.PaddingSizes.p24)
+                        RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                             .strokeBorder(Constants.Colors.accent.opacity(0.05), lineWidth: 1)))
             
             .padding(.horizontal, Constants.PaddingSizes.p12)
