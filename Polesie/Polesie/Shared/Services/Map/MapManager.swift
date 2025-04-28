@@ -115,17 +115,19 @@ final class MapManager: NSObject, ObservableObject, MapManagerProtocol {
         }
     }
     
-    func cetnerMapOnUser() {
+    func centerMapOnUser() {
         if let userLocation = findUserLocation() {
             let region = MKCoordinateRegion(
                 center: userLocation,
                 span: MKCoordinateSpan(
-                    latitudeDelta: 1000,
-                    longitudeDelta: 1000))
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.05))
             
             UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseInOut]) {
                 self.mapView.setRegion(region, animated: true)
             }
+        } else {
+            print("Не удалось получить местоположение пользователя")
         }
     }
 }
