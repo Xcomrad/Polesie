@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import Combine
 
 @MainActor
 final class PlacesViewModel: ObservableObject {
@@ -21,10 +22,23 @@ final class PlacesViewModel: ObservableObject {
     @Published var showDetail = false
     @Published var showToast = false
     
+    @Published var userLocalization: CLLocationCoordinate2D?
+    
     private let dataManager: DataManagerProtocol
+    private var localizationManager = LocationManager()
     
     init(dataManager: DataManagerProtocol = DataManager()) {
         self.dataManager = dataManager
+        setupLocationBinding()
+    }
+    
+    private func setupLocationBinding() {
+        localizationManager.$userLocation
+            .compactMap { $0 }
+            .sink { [weak self] location in
+                self?.userLocalization = location
+            }
+            .store(in: &cancellables)
     }
     
     // MARK: - Fetch Data
@@ -52,4 +66,7 @@ final class PlacesViewModel: ObservableObject {
         selectedPlace = nil
         showCard = false
     }
+    
+    // MARK: - Private
+    private var cancellables = Set<AnyCancellable>()
 }

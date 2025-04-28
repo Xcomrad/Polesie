@@ -82,7 +82,7 @@ struct MapView: View {
             HStack {
                 mapButtons(Constants.Images.squareArrowtriangle, mapManager.zoomCenter)
                 Spacer()
-                mapButtons(Constants.Images.locationSquare, mapManager.cetnerMapOnUser)
+                mapButtons(Constants.Images.locationSquare, mapManager.centerMapOnUser)
             }
             .padding(.horizontal, Constants.PaddingSizes.p12)
             .padding(.vertical, Constants.PaddingSizes.p100)
