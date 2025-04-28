@@ -106,9 +106,11 @@ struct DetailPlaceView: View {
             VStack(spacing: Constants.PaddingSizes.p12) {
                 ForEach(Array((place.collageModels ?? []).enumerated()), id: \.element.id) { index, collage in
                     
-                    DetailCell(onNavigate: { collage in
+                    DetailCell(colorScheme: colorScheme,
+                               cellData: collage,
+                               delayIndex: index) { collage in
                         onNavigate(collage)
-                    }, cellData: collage, delayIndex: index)
+                    }
                 }
             }
         }

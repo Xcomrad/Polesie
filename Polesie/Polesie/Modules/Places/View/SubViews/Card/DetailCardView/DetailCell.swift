@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct DetailCell: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     @State private var showDetailDescription = false
     @State private var animate = false
-    var onNavigate: (CollageModel) -> Void
-    
+   
+    var colorScheme: ColorScheme
     let cellData: CollageModel
     let delayIndex: Int
+    var onNavigate: (CollageModel) -> Void
     
     var body: some View {
         Button {
@@ -37,19 +36,18 @@ struct DetailCell: View {
             }
         }
         .fullScreenCover(isPresented: $showDetailDescription) {
-            CollageDetailView(collage: cellData) {
+            CollageDetailView(colorScheme: colorScheme, collage: cellData) {
                 showDetailDescription = false
             } toMap: {
                 onNavigate(cellData)
             }
         }
-        .preferredColorScheme(colorScheme)
     }
     
     
     // MARK: - Components
     private var icon: some View {
-        Image(cellData.image)
+        Image(cellData.images.first ?? "")
             .resizable()
             .scaledToFill()
             .frame(maxWidth: .infinity)

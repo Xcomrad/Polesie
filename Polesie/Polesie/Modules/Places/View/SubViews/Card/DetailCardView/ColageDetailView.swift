@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CollageDetailView: View {
-    @Environment(\.colorScheme) var colorScheme
+    var colorScheme: ColorScheme
     var collage: CollageModel
     var onClose: () -> Void
     var toMap: () -> Void
@@ -19,17 +19,18 @@ struct CollageDetailView: View {
             
             ScrollView {
                 VStack(spacing: Constants.PaddingSizes.p16) {
-    
-                    ZStack(alignment: .bottomLeading) {
-                        image
-                        content
-                            .padding(.horizontal, Constants.PaddingSizes.p16)
-                    }
+                    
+                    images
+                    content
+                        .padding(.horizontal, Constants.PaddingSizes.p16)
                     
                     VStack(alignment: .leading, spacing: Constants.PaddingSizes.p16) {
                         Text(collage.description)
                             .font(Constants.BaseFonts.body)
                             .foregroundColor(.text)
+                            .padding(.horizontal)
+                        
+                        contacsContainer
                             .padding(.horizontal)
                         
                         Divider()
@@ -40,6 +41,7 @@ struct CollageDetailView: View {
                 }
             }
             .scrollContentBackground(.hidden)
+            .preferredColorScheme(colorScheme)
             
             closeButton
                 .padding(.trailing, Constants.PaddingSizes.p24)
@@ -52,19 +54,25 @@ struct CollageDetailView: View {
             .ignoresSafeArea()
     }
     
-    private var image: some View {
-            Image(collage.image)
-                .resizable()
-                .scaledToFill()
-                .frame(maxWidth: UIScreen.main.bounds.width,
-                       maxHeight: Constants.PaddingSizes.p300)
-                .clipped()
-                .overlay(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Constants.Colors.background, .clear, Constants.Colors.background]),
-                        startPoint: .top,
-                        endPoint: .bottom)
-                )
+    private var images: some View {
+        TabView {
+            ForEach(collage.images, id: \.self) { image in
+                Image(image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity,
+                           maxHeight: Constants.PaddingSizes.p300)
+                    .clipped()
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Constants.Colors.background, .clear, Constants.Colors.background]),
+                            startPoint: .top,
+                            endPoint: .bottom)
+                    )
+            }
+        }
+        .tabViewStyle(.page)
+        .frame(height: Constants.PaddingSizes.p300)
     }
     
     private var content: some View {
@@ -79,6 +87,23 @@ struct CollageDetailView: View {
         .shadow(radius: Constants.PaddingSizes.p8)
     }
     
+    private var contacsContainer: some View {
+        VStack {
+            if let website = collage.website,
+                let url = URL(string: website) {
+                Link(destination: url) {
+                    Text("Переход на сайт: \(website)")
+                        .font(Constants.BaseFonts.small)
+                        .foregroundStyle(.secondary)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: Constants.PaddingSizes.p8)
+                                .stroke(Constants.Colors.accent, lineWidth: 1))
+                }
+            }
+        }
+    }
+
     private var closeButton: some View {
         Button(action: onClose) {
             Image(systemName: Constants.Images.xMarkImageFill)
@@ -105,15 +130,3 @@ struct CollageDetailView: View {
         }
     }
 }
-    
-    #Preview {
-        CollageDetailView(collage: CollageModel(id: 1,
-                                                name: "Брестская крепость",
-                                                image: "brestKrepost",
-                                                subtitle: "Крепость - герой",
-                                                description: "8 мая 1965 года Брестской крепости за её героическую оборону в июне-июле 1941 года присвоено звание «Крепость-герой» — высшая степень отличия, которой удостоены единственная крепость и двенадцать городов Советского Союза, прославившихся своей героической обороной во время Великой Отечественной войны 1941—1945 годов.",
-                                                coordinates: Coordinates(latitude: 52.085202,
-                                                                         longitude: 23.668053)),
-                          onClose: { },
-                          toMap: { })
-    }
