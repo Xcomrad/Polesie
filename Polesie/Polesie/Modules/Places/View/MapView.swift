@@ -12,10 +12,10 @@ struct MapView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var vm: PlacesViewModel
     
-    var mapManager: MapManager
+    @ObservedObject var mapManager: MapManager
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .bottom) {
             if vm.showToast, let toastMessage = vm.toastMessage {
                 ToastView(isShowing: $vm.showToast, message: toastMessage, type: vm.toastError)
             }
@@ -72,28 +72,38 @@ struct MapView: View {
                         vm.showDetail = false
                     }, onNavigate: { collage in
                         if let userLocation = mapManager.findUserLocation() {
-                                mapManager.startNavigation(from: userLocation, to: collage.locationCoordinates)
-                            }
+                            mapManager.startNavigation(from: userLocation, to: collage.locationCoordinates)
+                        }
                     })
                     .preferredColorScheme(colorScheme)
                 }
             }
             
-            mapButtons("square.arrowtriangle.4.outward", mapManager.zoomCenter)
-                .padding(Constants.PaddingSizes.p16)
-            
+            HStack {
+                mapButtons(Constants.Images.squareArrowtriangle, mapManager.zoomCenter)
+                Spacer()
+                mapButtons(Constants.Images.locationSquare, mapManager.cetnerMapOnUser)
+            }
+            .padding(.horizontal, Constants.PaddingSizes.p12)
+            .padding(.vertical, Constants.PaddingSizes.p100)
         }
     }
-}
-
-
-// MARK: - Components
-private func mapButtons(_ name: String, _ action: @escaping () -> Void) -> some View {
-    Button(action: action) {
-        Image(systemName: name)
-            .resizable()
+    
+    
+    // MARK: - Components
+    private func mapButtons(_ name: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            ZStack {
+                RoundedRectangle(cornerRadius: Constants.PaddingSizes.p8)
+                    .fill(Constants.Colors.background)
+                    .adaptiveShadow(colorScheme: colorScheme)
+                
+                Image(systemName: name)
+                    .font(.system(size: Constants.PaddingSizes.p24))
+                    .foregroundColor(Constants.Colors.accent)
+            }
             .frame(width: Constants.PaddingSizes.p35,
                    height: Constants.PaddingSizes.p35)
-            .foregroundColor(Constants.Colors.background)
+        }
     }
 }

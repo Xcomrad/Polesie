@@ -11,7 +11,6 @@ struct MapAnnotationView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let imageName: String
-    let title: String
     let action: () -> Void
     
     private var shadowColor: Color {
@@ -39,8 +38,8 @@ struct MapAnnotationView: View {
             Image(imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: Constants.PaddingSizes.p80,
-                       height: Constants.PaddingSizes.p80)
+                .frame(width: Constants.PaddingSizes.p50,
+                       height: Constants.PaddingSizes.p50)
                 .clipShape(Circle())
                 .overlay(
                     Circle()
@@ -60,7 +59,7 @@ struct MapAnnotationView: View {
                 .shadow(
                     color: shadowColor,
                     radius: 5,
-                    x: 0,
+                    x: 2,
                     y: 2
                 )
         }

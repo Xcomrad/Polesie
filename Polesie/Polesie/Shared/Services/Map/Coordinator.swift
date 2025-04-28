@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 final class Coordinator: NSObject, MKMapViewDelegate {
-    private let parent: MapManagerProtocol
+    private var parent: MapManagerProtocol
     private let onSelectPlace: (PlaceModel) -> Void
     private let onSelectLocation: (CollageModel) -> Void
     
@@ -43,7 +43,6 @@ final class Coordinator: NSObject, MKMapViewDelegate {
         
         let swiftUIView = MapAnnotationView(
             imageName: placeAnnotation.place.image ?? "",
-            title: placeAnnotation.place.name,
             action: {
                 withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
                     self.onSelectPlace(placeAnnotation.place)

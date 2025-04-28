@@ -37,6 +37,9 @@ enum Constants {
         static let checkmarkImageFill = "checkmark.circle.fill"
         static let circleImageFill = "circle.fill"
         static let circleImage = "circle"
+        
+        static let locationSquare = "location.square"
+        static let squareArrowtriangle = "square.arrowtriangle.4.outward"
     }
     
     enum Colors {
