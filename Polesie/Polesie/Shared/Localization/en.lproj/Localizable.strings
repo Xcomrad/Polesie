@@ -37,7 +37,6 @@
 
 // Tab Bar
 "historyButtonTitle" = "History";
-<<<<<<< .merge_file_ua1HYF
 "themesLabelTitle" = "Themes";
 "traditionsButtonTitle" = "Traditions";
 
@@ -55,13 +54,6 @@
 "outOf" = "out of";
 "tryNext" = "Try the next one.";
 "tryAgain" = "You can try again...";
-=======
-"themsLabelTitle" = "Themes";
-
-"traditionsButtonTitle" = "Traditions";
-
-"quizzesButtonTitle" = "Quizzes";
->>>>>>> .merge_file_RemgXu
 
 "placesButtonTitle" = "Places";
 "navigateButtonTitle" = "Get Directions";

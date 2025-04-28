@@ -37,16 +37,11 @@
 
 // Таббар
 "historyButtonTitle" = "История";
-<<<<<<< .merge_file_n7Y3FF
 "themesLabelTitle" = "Tемы";
-=======
-"themsLabelTitle" = "Темы";
->>>>>>> .merge_file_aNbIQP
 
 "traditionsButtonTitle" = "Традиции";
 
 "quizzesButtonTitle" = "Квизы";
-<<<<<<< .merge_file_n7Y3FF
 "correctAnswer" = "Правильный ответ";
 "wrongAnswer" = "Неправильный ответ";
 "completed" = "ПРОЙДЕН";
@@ -60,8 +55,6 @@
 "outOf" = "из";
 "tryNext" = "Попробуйте следующий.";
 "tryAgain" = "Вы можете попробовать снова...";
-=======
->>>>>>> .merge_file_aNbIQP
 
 "placesButtonTitle" = "Места";
 "navigateButtonTitle" = "Проложить маршрут";
