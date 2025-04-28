@@ -42,7 +42,11 @@ struct SidebarView: View {
     
     private var themeTitle: some View {
         VStack(alignment: .leading, spacing: Constants.PaddingSizes.p8) {
+<<<<<<< .merge_file_bMfgvd
             Text(Constants.Strings.themesLabelTitle)
+=======
+            Text(Constants.Strings.themsLabelTitle)
+>>>>>>> .merge_file_v1W7ak
                 .font(Constants.BaseFonts.h2Bold)
                 .foregroundStyle(Constants.Colors.text)
                 .padding(.horizontal)

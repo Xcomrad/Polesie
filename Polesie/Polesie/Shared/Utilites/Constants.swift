@@ -177,6 +177,7 @@ enum Constants {
         
         // Таббар
         static let historyButtonTitle = NSLocalizedString("historyButtonTitle", comment: "")
+<<<<<<< .merge_file_ObTZhB
         static let themesLabelTitle = NSLocalizedString("themesLabelTitle", comment: "")
         static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
         
@@ -194,6 +195,13 @@ enum Constants {
         static let outOf = NSLocalizedString("outOf", comment: "")
         static let tryNext = NSLocalizedString("tryNext", comment: "")
         static let tryAgain = NSLocalizedString("tryAgain", comment: "")
+=======
+        static let themsLabelTitle = NSLocalizedString("themsLabelTitle", comment: "")
+        
+        static let traditionsButtonTitle = NSLocalizedString("traditionsButtonTitle", comment: "")
+        
+        static let quizzesButtonTitle = NSLocalizedString("quizzesButtonTitle", comment: "")
+>>>>>>> .merge_file_IRtR8W
         
         static let placesButtonTitle = NSLocalizedString("placesButtonTitle", comment: "")
         static let navigateButtonTitle = NSLocalizedString("navigateButtonTitle", comment: "")
