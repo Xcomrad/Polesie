@@ -25,6 +25,9 @@ struct SidebarView: View {
             .frame(width: sidebarWidh)
             .background(Constants.Colors.background)
         }
+        .onAppear {
+            AnalyticsManager.trackEvent(.sidebarOpened)
+        }
         .adaptiveShadow(colorScheme: colorScheme)
         .frame(width: sidebarWidh)
         .offset(x: isVisible ? -UIScreen.main.bounds.width * Constants.PaddingSizes.p03 : -UIScreen.main.bounds.width)
@@ -57,6 +60,10 @@ struct SidebarView: View {
                     SidebarButton(
                         title: theme.title,
                         isSelected: theme.id == vm.selectedHistory?.id) {
+                            
+                            AnalyticsManager.trackEvent(.themeSelected, parameters: ["theme_id": theme.id,
+                                                                                     "theme_title": theme.title])
+                            
                         vm.selectedHistory = theme
                         toggleSidebar()
                     }

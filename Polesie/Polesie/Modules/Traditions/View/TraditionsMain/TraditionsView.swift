@@ -27,7 +27,7 @@ struct TraditionsView: View {
                 }
                 
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.PaddingSizes.p200))]) {
                         ForEach(vm.traditions, id: \.self) { item in
                             TraditionCardView(imageName: item.icon, text: item.title) {
                                 selectedTradition = item
@@ -47,7 +47,10 @@ struct TraditionsView: View {
             }
         }
         .onAppear {
-            Task { await vm.fetchData() }
+            Task {
+                AnalyticsManager.trackEvent(.traditionOpened)
+                await vm.fetchData()
+            }
         }
     }
 }

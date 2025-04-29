@@ -19,6 +19,9 @@ struct SettingsView: View {
                 .ignoresSafeArea(.all)
             settingsList
         }
+        .onAppear {
+            AnalyticsManager.trackEvent(.settingsOpened)
+        }
     }
     
     // MARK: - Methods

@@ -60,8 +60,8 @@ struct PlaceCardView: View {
     
     private var buttonsGroup: some View {
         HStack(spacing: Constants.PaddingSizes.p12) {
-            buttons(title: Constants.Strings.navigateButtonTitle, action: onNavigate)
-            buttons(title: Constants.Strings.overviewTitle, action: onDetail)
+            buttons(title: Constants.Strings.navigateButtonTitle, action: onNavigate, .navigationStarted)
+            buttons(title: Constants.Strings.overviewTitle, action: onDetail, .placeOpened)
         }
     }
     
@@ -78,8 +78,11 @@ struct PlaceCardView: View {
         .adaptiveShadow(colorScheme: colorScheme)
     }
     
-    private func buttons(title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+    private func buttons(title: String, action: @escaping () -> Void, _ eventType: AnalyticsManager.AnalyticEvent) -> some View {
+        Button(action: {
+            AnalyticsManager.trackEvent(eventType)
+            action()
+        }) {
             Text(title)
                 .font(Constants.BaseFonts.button)
                 .foregroundStyle(Constants.Colors.button)
