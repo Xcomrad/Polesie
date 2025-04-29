@@ -98,7 +98,7 @@ struct SubthemesSection: View {
                 .font(fontSizeManager.font(.body))
                 .foregroundStyle(Constants.Colors.text)
                 .multilineTextAlignment(.leading)
-                .lineSpacing(8)
+                .lineSpacing(Constants.PaddingSizes.p8)
                 .tracking(0.4)
                 .frame(idealWidth: 320, maxWidth: 480, alignment: .leading)
                 .fixedSize(horizontal: false, vertical: true)

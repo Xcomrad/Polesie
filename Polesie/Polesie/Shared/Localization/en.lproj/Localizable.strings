@@ -60,6 +60,7 @@
 "overviewTitle" = "Overview";
 "moreDetailsTitle" = "More details:";
 "interestingPlacesTitle" = "Interesting places:";
+"goToWebsite" = "Go to website";
 
 // Settings
 "settingsThemeTitle" = "Theme";

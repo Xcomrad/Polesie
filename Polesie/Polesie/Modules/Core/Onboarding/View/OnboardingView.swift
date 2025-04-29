@@ -57,7 +57,7 @@ struct OnboardingView: View {
                     Circle()
                         .frame(width: 10, height: 10)
                         .scaleEffect(index == vm.currentStep ? 1.5 : 1)
-                        .animation(.easeInOut(duration: 0.3), value: vm.currentStep)
+                        .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: vm.currentStep)
                         .foregroundStyle(index == vm.currentStep ? Constants.Colors.accent : Constants.Colors.stoneGray)
                 }
             }
@@ -81,7 +81,8 @@ struct OnboardingView: View {
                         .background(
                             RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                                 .fill(Constants.Colors.background)
-                                .stroke(Constants.Colors.accent, lineWidth: 1))
+                                .stroke(Constants.Colors.accent
+                                    .opacity(Constants.PaddingSizes.p05), lineWidth: 1))
                 }
                 .padding(.top, Constants.PaddingSizes.p24)
                 .padding(.trailing, Constants.PaddingSizes.p24)

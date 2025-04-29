@@ -17,9 +17,7 @@ struct TraditionsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Constants.Colors.background
-                    .opacity(Constants.PaddingSizes.p05)
-                    .ignoresSafeArea()
+                backgroundLayer
                 
                 // MARK: - If no data
                 if let toastMessage = vm.toastMessage {
@@ -52,5 +50,12 @@ struct TraditionsView: View {
                 await vm.fetchData()
             }
         }
+    }
+    
+    // MARK: - Components
+    private var backgroundLayer: some View {
+        Constants.Colors.background
+            .opacity(Constants.PaddingSizes.p05)
+            .ignoresSafeArea()
     }
 }

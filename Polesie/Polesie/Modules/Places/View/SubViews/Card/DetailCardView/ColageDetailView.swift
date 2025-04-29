@@ -92,7 +92,7 @@ struct CollageDetailView: View {
             if let website = collage.website,
                 let url = URL(string: website) {
                 Link(destination: url) {
-                    Text("Переход на сайт: \(website)")
+                    Text("\(Constants.Strings.goToWebsite): \(website)")
                         .font(Constants.BaseFonts.small)
                         .foregroundStyle(.secondary)
                         .padding()

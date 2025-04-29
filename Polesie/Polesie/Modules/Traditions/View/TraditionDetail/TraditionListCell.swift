@@ -39,7 +39,7 @@ struct TraditionListCell: View {
     }
     
     private var chevronImage: some View {
-        Image(systemName: "chevron.forward")
+        Image(systemName: Constants.Images.chevronForward)
             .resizable()
             .scaledToFill()
             .foregroundStyle(Constants.Colors.accent)

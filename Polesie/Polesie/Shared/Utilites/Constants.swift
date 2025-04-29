@@ -25,6 +25,7 @@ enum Constants {
         static let traditionsImageFill = "scroll.fill"
         
         static let chevronLeft = "chevron.left"
+        static let chevronForward = "chevron.orward"
         
         static let heartFill = "heart.fill"
         static let heart = "heart"
@@ -205,6 +206,7 @@ enum Constants {
         static let overviewTitle = NSLocalizedString("overviewTitle", comment: "")
         static let moreDetailsTitle = NSLocalizedString("moreDetailsTitle", comment: "")
         static let interestingPlacesTitle = NSLocalizedString("interestingPlacesTitle", comment: "")
+        static let goToWebsite = NSLocalizedString("goToWebsite", comment: "")
         
         
         // Настройки

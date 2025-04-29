@@ -27,6 +27,7 @@ enum AnalyticsManager {
         
         // Tradition
         case traditionOpened = "tradition_opened"
+        case traditionSelected = "traditionSelected"
         case subthemesButtonTapped = "subthemes_button_tapped"
         case traditionFavorited = "tradition_favorited"
         

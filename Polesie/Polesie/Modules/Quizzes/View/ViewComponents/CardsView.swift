@@ -91,6 +91,6 @@ struct CardsView: View {
                     .stroke(Constants.Colors.darkGreen, lineWidth: 2)
             )
             .rotationEffect(.degrees(Constants.PaddingSizes.p12))
-            .offset(x: 16, y: -16)
+            .offset(x: 10, y: -16)
     }
 }
