@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct TraditionCardView: View {
-    let imageName: String
-    let text: String
-    var onTap: (() -> Void)?
-    
     @Environment(\.colorScheme) var colorScheme
     @State private var isPressed = false
     @State private var isVisible = false
     
+    let imageName: String
+    let text: String
+    var onTap: (() -> Void)?
+    
     var body: some View {
         ZStack(alignment: .leading) {
             traditionImage
+            
             VStack {
                 Spacer()
                 traditionText
@@ -32,9 +33,10 @@ struct TraditionCardView: View {
         .onAppear {
             isVisible = true
         }
-        .gesture(
-            TapGesture()
-                .onEnded { _ in onTap?() })
+        .onTapGesture {
+            AnalyticsManager.trackEvent(.traditionSelected)
+            onTap?()
+        }
     }
     
     // MARK: - Components

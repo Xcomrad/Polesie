@@ -30,7 +30,7 @@ struct TraditionDetailView: View {
                     
                     GeometryReader { geometry in
                         traditionHeaderImage
-                            .offset(y: scrollOffset > 0 ? -scrollOffset/3 : 0)
+                            .offset(y: scrollOffset > 0 ? -scrollOffset / 3 : 0)
                             .onAppear {
                                 scrollOffset = geometry.frame(in: .global).minY
                             }

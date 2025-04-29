@@ -42,7 +42,7 @@ struct ResultPopUp: View {
                 .scaleEffect(appearAnimation ? 1 : 0.9)
                 .opacity(appearAnimation ? 1 : 0)
                 .onAppear {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                    withAnimation(.spring(response: Constants.PaddingSizes.p03, dampingFraction: 0.6)) {
                         appearAnimation = true
                         triggerExplosion()
                     }

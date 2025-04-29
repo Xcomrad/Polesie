@@ -31,16 +31,16 @@ struct QuizzesView: View {
                         ZStack {
                             CardsView(theme: theme, selectedTheme: $selectedTheme)
                                 .adaptiveShadow(colorScheme: colorScheme)
-                                .onTapGesture {
-                                    AnalyticsManager.trackEvent(.themeSelected, parameters: [
-                                        "theme_id": theme.id,
-                                        "theme_name": theme.name
-                                    ])
-                                }
                         }
-                        .padding()
-                        .padding(.bottom, Constants.PaddingSizes.p80)
+                        .onTapGesture {
+                            AnalyticsManager.trackEvent(.themeSelected, parameters: [
+                                "theme_id": theme.id,
+                                "theme_name": theme.name
+                            ])
+                        }
                     }
+                    .padding(.horizontal, Constants.PaddingSizes.p12)
+                    .padding(.bottom, Constants.PaddingSizes.p100)
                 }
             }
             .onAppear {

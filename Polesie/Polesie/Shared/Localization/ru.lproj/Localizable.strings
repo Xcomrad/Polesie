@@ -61,6 +61,7 @@
 "overviewTitle" = "Обзор";
 "moreDetailsTitle" = "Подробнее:";
 "interestingPlacesTitle" = "Интересные места:";
+"goToWebsite" = "Переход на сайт";
 
 // Настройки
 "settingsThemeTitle" = "Тема";
