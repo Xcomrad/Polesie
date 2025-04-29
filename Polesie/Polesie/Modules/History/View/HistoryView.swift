@@ -29,9 +29,9 @@ struct HistoryView: View {
             
             VStack {
                 HStack {
-                    makeButtos(Constants.Images.sideBarImage, toggleSidebar)
+                    makeButtos(Constants.Images.sideBarImage, toggleSidebar, .sidebarOpened)
                     Spacer()
-                    makeButtos(Constants.Images.settingsImage, toggleSettiongs)
+                    makeButtos(Constants.Images.settingsImage, toggleSettiongs, .settingsOpened)
                 }
                 
                 if let selectedHistory = vm.selectedHistory {
@@ -63,7 +63,10 @@ struct HistoryView: View {
             }
         }
         .onAppear {
-            Task { await vm.fetchData() }
+            Task {
+                AnalyticsManager.trackEvent(.mainOpened)
+                await vm.fetchData()
+            }
         }
         .sheet(isPresented: $showSettings) {
             SettingsView(vm: settingsVM)
@@ -80,8 +83,11 @@ struct HistoryView: View {
             .ignoresSafeArea(.all)
     }
     
-    private func makeButtos(_ icon: String, _ action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+    private func makeButtos(_ icon: String, _ action: @escaping () -> Void, _ eventType: AnalyticsManager.AnalyticEvent) -> some View {
+        Button(action: {
+            AnalyticsManager.trackEvent(eventType)
+            action()
+        }) {
             Image(systemName: icon)
                 .font(.title)
                 .foregroundStyle(Constants.Colors.accent)

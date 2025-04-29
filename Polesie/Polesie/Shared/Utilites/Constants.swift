@@ -24,6 +24,11 @@ enum Constants {
         static let traditionsImage = "scroll"
         static let traditionsImageFill = "scroll.fill"
         
+        static let chevronLeft = "chevron.left"
+        
+        static let heartFill = "heart.fill"
+        static let heart = "heart"
+        
         static let questsImage = "questionmark.bubble"
         static let questsImageFill = "questionmark.bubble.fill"
         

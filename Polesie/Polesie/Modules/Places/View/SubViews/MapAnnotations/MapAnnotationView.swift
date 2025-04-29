@@ -22,6 +22,7 @@ struct MapAnnotationView: View {
         Button(action: {
             withAnimation(.bouncy(duration: Constants.PaddingSizes.p03,
                                   extraBounce: Constants.PaddingSizes.p03)) {
+                AnalyticsManager.trackEvent(.annotationTapped)
                 action()
             }
         }) {

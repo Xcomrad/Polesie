@@ -14,9 +14,7 @@ struct DetailQuizCardView: View {
     
     var body: some View {
         ZStack {
-            Constants.Colors.background
-                .opacity(Constants.PaddingSizes.p05)
-                .ignoresSafeArea(.all)
+           backgroundLayer
             
             VStack {
                 HStack {
@@ -64,9 +62,15 @@ struct DetailQuizCardView: View {
                         vm.isQuizFinished = false
                     }
                 )
+                .onAppear {
+                    AnalyticsManager.trackEvent(.quizFinished)
+                }
                 .transition(.asymmetric(insertion: .opacity.combined(with: .scale(scale: 0.9)),
                                         removal: .opacity))
             }
+        }
+        .onAppear {
+            AnalyticsManager.trackEvent(.quizStarted)
         }
         .animation(
             .spring(response: 0.4, dampingFraction: 0.8)
@@ -80,6 +84,12 @@ struct DetailQuizCardView: View {
     }
     
     // MARK: - View Components
+    private var backgroundLayer: some View {
+        Constants.Colors.background
+            .opacity(Constants.PaddingSizes.p05)
+            .ignoresSafeArea(.all)
+    }
+    
     private var dismissButton: some View {
         Button {
             dismiss()

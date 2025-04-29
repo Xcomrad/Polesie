@@ -70,7 +70,10 @@ struct OnboardingView: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: vm.skipOnboarding) {
+                Button(action:  {
+                    AnalyticsManager.trackEvent(.onboardingSkipped)
+                    vm.skipOnboarding()
+                }) {
                     Text(Constants.Strings.skipButtonTitle)
                         .font(Constants.BaseFonts.button)
                         .foregroundColor(Constants.Colors.text)
@@ -78,7 +81,7 @@ struct OnboardingView: View {
                         .background(
                             RoundedRectangle(cornerRadius: Constants.PaddingSizes.p12)
                                 .fill(Constants.Colors.background)
-                        )
+                                .stroke(Constants.Colors.accent, lineWidth: 1))
                 }
                 .padding(.top, Constants.PaddingSizes.p24)
                 .padding(.trailing, Constants.PaddingSizes.p24)

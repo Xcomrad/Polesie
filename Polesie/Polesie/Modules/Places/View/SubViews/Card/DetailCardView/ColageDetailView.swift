@@ -102,6 +102,9 @@ struct CollageDetailView: View {
                 }
             }
         }
+        .onTapGesture {
+            AnalyticsManager.trackEvent(.toSiteButtonTapped)
+        }
     }
 
     private var closeButton: some View {
@@ -118,7 +121,10 @@ struct CollageDetailView: View {
     }
     
     private var toNavigationButton: some View {
-        Button(action: toMap) {
+        Button(action: {
+            AnalyticsManager.trackEvent(.navigationStarted)
+            toMap()
+        }) {
             HStack {
                 Image(systemName: Constants.Images.mapPinImage)
                 Text(Constants.Strings.navigateButtonTitle)

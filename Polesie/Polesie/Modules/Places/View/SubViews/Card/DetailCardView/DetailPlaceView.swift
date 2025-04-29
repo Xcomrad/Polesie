@@ -40,6 +40,9 @@ struct DetailPlaceView: View {
             closeButton
                 .padding(.trailing, Constants.PaddingSizes.p24)
         }
+        .onAppear {
+            AnalyticsManager.trackEvent(.placeOpened)
+        }
     }
     
     //MARK: - Components

@@ -52,6 +52,8 @@ struct SubthemesSection: View {
     
     private func subthemeButton(item: HistorySubthemeModel, proxy: ScrollViewProxy) -> some View {
         Button {
+            AnalyticsManager.trackEvent(.subthemesButtonTapped, parameters: ["subtheme_title": item.title])
+            
             let isExpanded = expandSubtheme.contains(item.id)
             withAnimation(.easeInOut(duration: Constants.PaddingSizes.p05)) {
                 onTap(item.id)

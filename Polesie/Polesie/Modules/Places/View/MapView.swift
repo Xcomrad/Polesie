@@ -23,6 +23,7 @@ struct MapView: View {
             UIKitMapView(mapView: mapManager.mapView)
                 .ignoresSafeArea()
                 .onAppear {
+                    AnalyticsManager.trackEvent(.placeOpened)
                     mapManager.setupCoordinator { place in
                         vm.selectPlace(place)
                     } onSelectLocation: { location in
@@ -54,9 +55,11 @@ struct MapView: View {
                             }
                         },
                         onDetail: {
+                            AnalyticsManager.trackEvent(.annotationOverview)
                             vm.showDetail = true
                         },
                         onNavigate: {
+                            AnalyticsManager.trackEvent(.navigationStarted)
                             if let userLocation = mapManager.findUserLocation(),
                                let destinationCoordinate = vm.selectedPlace?.placeCoordinates {
                                 mapManager.startNavigation(from: userLocation, to: destinationCoordinate)
