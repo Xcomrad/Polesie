@@ -62,7 +62,10 @@ struct OnboardingStepView: View {
     
     // MARK: - Action
     private var startButton: some View {
-        Button(action: completeOnboarding) {
+        Button(action: {
+            AnalyticsManager.trackEvent(.onboardingFinished)
+            completeOnboarding()
+        }) {
             Text(Constants.Strings.startButtonTitle)
                 .font(Constants.BaseFonts.button)
                 .foregroundColor(.white)

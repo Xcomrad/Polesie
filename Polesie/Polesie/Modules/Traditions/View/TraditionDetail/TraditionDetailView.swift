@@ -23,9 +23,7 @@ struct TraditionDetailView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            Constants.Colors.background
-                .opacity(Constants.PaddingSizes.p05)
-                .ignoresSafeArea(.all)
+           backgroundLayer
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
@@ -63,6 +61,12 @@ struct TraditionDetailView: View {
     }
     
     // MARK: - Сomponents
+    private var backgroundLayer: some View {
+        Constants.Colors.background
+            .opacity(Constants.PaddingSizes.p05)
+            .ignoresSafeArea(.all)
+    }
+    
     private var traditionHeaderImage: some View {
         Image(icon)
             .resizable()
@@ -92,7 +96,7 @@ struct TraditionDetailView: View {
             Text(description)
                 .font(Constants.BaseFonts.body)
                 .foregroundColor(Constants.Colors.text)
-                .lineSpacing(8)
+                .lineSpacing(Constants.PaddingSizes.p8)
                 .padding(.horizontal)
         }
         .padding(.bottom, Constants.PaddingSizes.p50)
@@ -120,7 +124,7 @@ struct TraditionDetailView: View {
                 .frame(width: Constants.PaddingSizes.p50,
                        height:  Constants.PaddingSizes.p50)
                 .overlay(
-                    Image(systemName: "chevron.left")
+                    Image(systemName: Constants.Images.chevronLeft)
                         .frame(width: Constants.PaddingSizes.p35,
                                height: Constants.PaddingSizes.p35)
                         .foregroundColor(Constants.Colors.accent)
@@ -133,7 +137,10 @@ struct TraditionDetailView: View {
         Button {
             Task {
                 withAnimation(.spring()) {
-                    Task { await vm.toggleFavorite(id: id) }
+                    Task {
+                        AnalyticsManager.trackEvent(.traditionFavorited, parameters: ["tradition_favorited": id])
+                        await vm.toggleFavorite(id: id)
+                    }
                 }
             }
         } label: {
@@ -143,7 +150,7 @@ struct TraditionDetailView: View {
                 .frame(width: Constants.PaddingSizes.p50,
                        height: Constants.PaddingSizes.p50)
                 .overlay(
-                    Image(systemName: vm.isFavorite(id: id) ? "heart.fill" : "heart")
+                    Image(systemName: vm.isFavorite(id: id) ? Constants.Images.heartFill : Constants.Images.heart)
                         .frame(width: Constants.PaddingSizes.p35,
                                height:  Constants.PaddingSizes.p35)
                         .foregroundColor(vm.isFavorite(id: id) ? .red : Constants.Colors.accent)

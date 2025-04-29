@@ -59,7 +59,7 @@ struct ResultPopUp: View {
         BlurView(style: .systemUltraThinMaterial)
             .ignoresSafeArea(.all)
             .opacity(appearAnimation ? 1 : 0)
-            .animation(.easeInOut(duration: 0.3), value: appearAnimation)
+            .animation(.easeInOut(duration: Constants.PaddingSizes.p03), value: appearAnimation)
     }
     
     private var descriptionLayer: some View {
@@ -92,11 +92,11 @@ struct ResultPopUp: View {
         HStack(spacing: Constants.PaddingSizes.p16) {
             
             if let onRestart {
-                submitButtons(Constants.Strings.restart, onRestart)
+                submitButtons(Constants.Strings.restart, onRestart, .quizeRestart)
             }
             
             if let onMenu {
-                submitButtons(Constants.Strings.toTests, onMenu)
+                submitButtons(Constants.Strings.toTests, onMenu, .quizeOnMenu)
             }
         }
     }
@@ -108,8 +108,11 @@ struct ResultPopUp: View {
             .foregroundStyle(color)
     }
     
-    private func submitButtons(_ text: String, _ closure: @escaping () -> Void) -> some View {
-        Button(action: closure) {
+    private func submitButtons(_ text: String, _ closure: @escaping () -> Void, _ buttonType: AnalyticsManager.AnalyticEvent) -> some View {
+        Button(action:  {
+            AnalyticsManager.trackEvent(buttonType)
+            closure()
+        }) {
             Text(text)
                 .font(Constants.BaseFonts.small)
                 .foregroundStyle(Constants.Colors.button)

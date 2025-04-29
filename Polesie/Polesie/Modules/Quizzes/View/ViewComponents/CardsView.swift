@@ -92,6 +92,5 @@ struct CardsView: View {
             )
             .rotationEffect(.degrees(Constants.PaddingSizes.p12))
             .offset(x: 16, y: -16)
-        
     }
 }
